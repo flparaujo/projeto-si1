@@ -1,0 +1,22 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" type="text/css" media="screen"
+        	href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen"
+        	href="@routes.Assets.at("stylesheets/xom.css")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <!-- bootstrap javascript -->
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script> <body>
+    	<div class="container">
+        	@content
+        </div>
+    </body>
+</html>
