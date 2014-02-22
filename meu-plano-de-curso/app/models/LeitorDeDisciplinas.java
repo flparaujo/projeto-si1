@@ -18,8 +18,8 @@ import org.xml.sax.SAXException;
 /**
  * Classe responsavel por carregar disciplinas contidas em um arquivo.
  * 
- * 
- * @version 1.0
+ * @author Franklin Bastos/Felipe Araujo.
+ * @version 1.1
  */
 public class LeitorDeDisciplinas {
 	
@@ -67,7 +67,8 @@ public class LeitorDeDisciplinas {
 		Disciplina disciplina = new Disciplina(cadeira.getAttribute("nome"), 
 				Integer.parseInt(cadeira.getElementsByTagName("creditos").item(0).getTextContent()),
 				requisitos,
-				Integer.parseInt(cadeira.getElementsByTagName("dificuldade").item(0).getTextContent()));
+				Integer.parseInt(cadeira.getElementsByTagName("dificuldade").item(0).getTextContent()),
+				Integer.parseInt(cadeira.getElementsByTagName("periodo").item(0).getTextContent()));
 		disciplinas.put(Integer.parseInt(cadeira.getAttribute("id")), disciplina);
 	}
 	

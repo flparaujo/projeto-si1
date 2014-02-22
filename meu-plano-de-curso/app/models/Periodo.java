@@ -8,22 +8,15 @@ import exceptions.LimiteDeCreditosExcedidoException;
 /**
  * Classe que representa um periodo de curso.
  * 
- * 
+ * @author Felipe Araujo de Andrade
  * @version 1.1
  */
 public class Periodo {
 
 	private List<Disciplina> disciplinas;
 	
-	/**
-	 * Constante que representa o numero minimo de creditos que um periodo deve conter.
-	 */
-	public static final int MINIMO_DE_CREDITOS = 14;
-	
-	/**
-	 * Constante que representa o numermo maximo de creditos que um periodo pode conter.
-	 */
-	public static final int MAXIMO_DE_CREDITOS = 28;
+	private final int MINIMO_DE_CREDITOS = 14;
+	private final int MAXIMO_DE_CREDITOS = 28;
 	
 	/**
 	 * Construtor de Periodo.
@@ -76,7 +69,7 @@ public class Periodo {
 	 * @return true se esta abaixo do limite minimo de creditos, false caso contrario.
 	 */
 	public boolean abaixoDoLimiteMinimoDeCreditos() {
-		return getNumeroDeCreditosDoPeriodo() < Periodo.MINIMO_DE_CREDITOS;
+		return getNumeroDeCreditosDoPeriodo() < MINIMO_DE_CREDITOS;
 	}
 
 	/**

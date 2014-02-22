@@ -1,31 +1,38 @@
-package controllers;
+package models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import exceptions.*;
-import models.*;
 
 /**
- * Classe que representa o sistema de planejamento de curso.
+ * Classe que representa o planejamento de curso.
  *
  */
-public class SistemaDePlanejamentoDeCurso {
-	
-	private final int MAXIMO_DE_PERIODOS = 14;
+public class PlanejamentoDeCurso {
 	
 	private List<Periodo> periodos;
 	private GradeCurricular grade;
 	private List<Disciplina> handlerDisciplinas;
 	
 	/**
-	 * Constroi um sistema de planejamento de curso, com o primeiro periodo predefinido.
+	 * Constante que representa o numero maximo de periodos do curso.
 	 */
-	public SistemaDePlanejamentoDeCurso() {
+	public static final int MAXIMO_DE_PERIODOS = 14;
+	
+	
+	/**
+	 * Constante que representa o numero minimo de periodos do curso.
+	 */
+	public static final int MINIMO_DE_PERIODOS = 8;
+	
+	/**
+	 * Constroi um planejamento de curso, com o primeiro periodo predefinido.
+	 */
+	public PlanejamentoDeCurso() {
 		periodos = new ArrayList <Periodo>();
 		grade = new GradeCurricular();
 		try {
-			primeiroPeriodo();
+			realizaBlocagemPadrao();
 		} catch (LimiteDeCreditosExcedidoException e) {
 			e.printStackTrace();
 		} 
@@ -92,9 +99,8 @@ public class SistemaDePlanejamentoDeCurso {
 	 * @throws LimiteDePeriodosException 
 	 */
 	public void adicionaPeriodo() throws LimiteDePeriodosException {
-		if (periodos.size() == MAXIMO_DE_PERIODOS) {
+		if(periodos.size() == MAXIMO_DE_PERIODOS)
 			throw new LimiteDePeriodosException();
-		}
 		periodos.add(new Periodo());
 	}
 	
@@ -103,13 +109,12 @@ public class SistemaDePlanejamentoDeCurso {
 	 * @param indicePeriodo O indice do periodo.
 	 * @param nome O nome da disciplina.
 	 * @param numeroDeCreditos O numero de creditos da disciplina.
-	 * @throws AlocacaoInvalidaException 
 	 * @throws LimiteDeCreditosExcedidoException
 	 */
 	public void adicionaDisciplinaAoPeriodo(int indicePeriodo, String nome) 
-			throws AlocacaoInvalidaException, LimiteDeCreditosExcedidoException {
+			throws LimiteDeCreditosExcedidoException {
 		if(getDisciplinaDaGrade(nome) != null) {
-			adicionarDisciplinaSePreRequisitosSatisfeitos(indicePeriodo, getDisciplinaDaGrade(nome));
+			getPeriodo(indicePeriodo).adicionaDisciplina(getDisciplinaDaGrade(nome));
 			grade.retiraDisciplina(nome);
 		}
 	}
@@ -186,14 +191,6 @@ public class SistemaDePlanejamentoDeCurso {
 		return alocadas;
 	}
 	
-	private void adicionarDisciplinaSePreRequisitosSatisfeitos(int indicePeriodo, Disciplina disciplina) 
-			throws AlocacaoInvalidaException, LimiteDeCreditosExcedidoException {
-		if (!preRequisitosSatisfeitos(indicePeriodo, disciplina.getPreRequisitos())) {	
-			throw new AlocacaoInvalidaException();
-		}
-		getPeriodo(indicePeriodo).adicionaDisciplina(disciplina);
-	}
-	
 	private void removeDisciplina(String nomeDaDisciplina) {
 		for(int i = 0; i < periodos.size(); i++)
 			for(Disciplina disciplina : getPeriodo(i).disciplinasAlocadas())
@@ -204,35 +201,71 @@ public class SistemaDePlanejamentoDeCurso {
 		
 	}
 	
-	private void primeiroPeriodo() throws LimiteDeCreditosExcedidoException {
-		getPeriodos().add(new Periodo());
-		alocaDisciplinasDoPrimeiroPeriodo();
-		for(Disciplina disciplina : getDisciplinasDoPeriodo(0)) {
-			grade.retiraDisciplina(disciplina);
-		}
+	private void realizaBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
+		for(int i = 0; i < MINIMO_DE_PERIODOS-1; i++)
+			periodos.add(new Periodo());
+		periodos.add(new PeriodoSemMaximoCreditos());
+		alocaDisciplinasBlocagemPadrao();
 	}
 	
-	private void alocaDisciplinasDoPrimeiroPeriodo() throws LimiteDeCreditosExcedidoException {
-		final int TOTAL_DISCIPLINAS_PRIMEIRO_PERIODO = 6;
-		for(int i = 0; i < TOTAL_DISCIPLINAS_PRIMEIRO_PERIODO; i++) {
-			getPeriodo(0).adicionaDisciplina(grade.getDisciplina(i));
-		}
-	}
-	
-	private boolean preRequisitosSatisfeitos(int indicePeriodo, List<Disciplina> preRequisitos) {
-		int contPreRequisitos = 0;
-		if (!preRequisitos.isEmpty()) {
-			for(int i = 0; i < indicePeriodo; i++) {
-				for(Disciplina disciplinaPreRequisito : preRequisitos) {
-					if(getPeriodo(i).disciplinasAlocadas().contains(disciplinaPreRequisito)) {
-						contPreRequisitos ++;
-					}
-				}
+	private void alocaDisciplinasBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
+		List<Disciplina> aux = new ArrayList<Disciplina>();
+		aux.addAll(grade.getDisciplinas());
+		for(Disciplina disciplina : aux) {
+			if(disciplina.getPeriodoSugerido() > 0) {
+				periodos.get(disciplina.getPeriodoSugerido()-1).adicionaDisciplina(grade.retiraDisciplina(disciplina));
 			}
-		} else {
-			return true;
 		}
-		return contPreRequisitos == preRequisitos.size();
+	}
+
+	/**
+	 * Move uma disciplina de um periodo para outro.
+	 * @param nome O nome da disciplina a ser remanejada.
+	 * @param idOutroPeriodo O id do periodo
+	 * @throws LimiteDeCreditosExcedidoException 
+	 */
+	public void moveDisciplina(String nome, int idOutroPeriodo) throws LimiteDeCreditosExcedidoException {
+		int idPeriodoEmQueFoiAlocada = indicePeriodoDeDisciplina(nome);
+		if(idPeriodoEmQueFoiAlocada > 0) {
+			Disciplina disciplina = desalocaDisciplinaDePeriodo(idPeriodoEmQueFoiAlocada, nome);
+			getPeriodo(idOutroPeriodo).adicionaDisciplina(disciplina);
+		}
+		
+	}
+	
+	/**
+	 * Pesquisa uma disciplina pelo nome.
+	 * @param nome O nome da disciplina.
+	 * @return a disciplina se estiver alocada em periodo, null caso contrario.
+	 */
+	public Disciplina pesquisaDisciplina(String nome) {
+		for(Disciplina disciplina : getDisciplinasAlocadas()) {
+			if(disciplina.getNome().equals(nome)) {
+				return disciplina;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Pesquisa uma disciplina em determinado periodo.
+	 * @param nome O nome da disciplina.
+	 * @param idPeriodo O indice do periodo.
+	 * @return a disciplina, se ela estiver alocada no periodo, ou null.
+	 */
+	public Disciplina pesquisaDisciplinaEmPeriodo(int idPeriodo, String nome) {
+		for(Disciplina disciplina : getDisciplinasDoPeriodo(idPeriodo)) {
+			if(disciplina.getNome().equals(nome)) {
+				return disciplina;
+			}
+		}
+		return null;
+	}
+	
+	private Disciplina desalocaDisciplinaDePeriodo(int idPeriodo, String nome) {
+		Disciplina disciplina = pesquisaDisciplinaEmPeriodo(idPeriodo, nome);
+		getDisciplinasDoPeriodo(idPeriodo).remove(disciplina);
+		return disciplina;
 	}
 	
 }

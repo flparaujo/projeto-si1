@@ -1,6 +1,6 @@
 package controllers;
 
-import exceptions.AlocacaoInvalidaException;
+import models.PlanejamentoDeCurso;
 import exceptions.LimiteDeCreditosExcedidoException;
 import exceptions.LimiteDePeriodosException;
 import form.FormHandler;
@@ -9,7 +9,7 @@ import play.mvc.*;
 
 public class Application extends Controller {
 	
-	static SistemaDePlanejamentoDeCurso sistema = new SistemaDePlanejamentoDeCurso();
+	static PlanejamentoDeCurso sistema = new PlanejamentoDeCurso();
 	static Form<FormHandler> formHandler = Form.form(FormHandler.class);
 	static String message = "";
 
@@ -38,7 +38,7 @@ public class Application extends Controller {
     	try {
     		sistema.adicionaDisciplinaAoPeriodo(idPeriodo, form.get().getInputNameDisciplina());
     	}
-    	catch(AlocacaoInvalidaException | LimiteDeCreditosExcedidoException e) {
+    	catch(LimiteDeCreditosExcedidoException e) {
     		 message = e.getMessage();
     	}
     	return redirect(routes.Application.planejamentoDeCurso());

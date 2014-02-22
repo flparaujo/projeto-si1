@@ -2,13 +2,11 @@ package exceptions;
 
 import javax.naming.LimitExceededException;
 
-import models.Periodo;
-
 /**
  * Essa excecao eh lancada quando se tenta adcionar uma disciplina ultrapassando o limite 
  * maximo de creditos por periodo.
  * 
- * 
+ * @author Felipe Araujo de Andrade
  *
  */
 public class LimiteDeCreditosExcedidoException extends LimitExceededException {
@@ -22,8 +20,8 @@ public class LimiteDeCreditosExcedidoException extends LimitExceededException {
 	 * Construtor de LimiteDeCreditosExcedido
 	 */
 	public LimiteDeCreditosExcedidoException() {
-		super("Nao foi possivel alocar a disciplina. Limite maximo eh " +
-				"de "+ Periodo.MAXIMO_DE_CREDITOS +" creditos!");
+		super("Nao foi possivel alocar a disciplina. Limite maximo de " +
+				"creditos foi atingido!");
 	}
 
 }

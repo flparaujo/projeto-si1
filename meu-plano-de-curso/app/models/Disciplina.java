@@ -13,6 +13,8 @@ public class Disciplina implements Comparable<Disciplina> {
 	private int dificuldade;
 	private String nome;
 	private int numeroDeCreditos;
+	private int periodoSugerido;
+
 	// INFORMATION EXPERT: Disciplinas tem a responsabilidade de saber seus pre-requisitos.	
 	private List<Disciplina> preRequisitos;
 
@@ -22,14 +24,17 @@ public class Disciplina implements Comparable<Disciplina> {
 	 * @param numeroDeCreditos O numero de creditos da disciplina.
 	 * @param preRequisitos A lista de disciplinas pre-requisitos da disciplina.
 	 * @param dificuldade A dificuldade da disciplina.
+	 * @param periodo O periodo sugerido para alocar esta disciplina.
 	 */
 	public Disciplina(String nome, int numeroDeCreditos, List<Disciplina> preRequisitos, 
-			int dificuldade) {
+			int dificuldade, int periodo) {
 		this.nome = nome;
 		this.numeroDeCreditos = numeroDeCreditos;
 		this.preRequisitos =  preRequisitos;
 		this.dificuldade = dificuldade;
+		this.periodoSugerido = periodo;
 	}
+	
 
 	/**
 	 * Recupera a dificuldade da disciplina.
@@ -61,6 +66,14 @@ public class Disciplina implements Comparable<Disciplina> {
 	 */
 	public List<Disciplina> getPreRequisitos() {
 		return this.preRequisitos;
+	}
+	
+	/**
+	 * Obtem o id do periodo sugerido para alocar a disciplina.
+	 * @return o id do periodo.
+	 */
+	public int getPeriodoSugerido() {
+		return periodoSugerido;
 	}
 	
 	/**
