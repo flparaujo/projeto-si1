@@ -202,11 +202,12 @@ public class PlanejamentoDeCurso {
 	}
 	
 	private void realizaBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
-		for(int i = 0; i < MINIMO_DE_PERIODOS-1; i++)
+		for(int i = 0; i < MINIMO_DE_PERIODOS-1; i++) {
 			periodos.add(new Periodo());
+		}
 		periodos.add(new PeriodoSemMaximoCreditos());
 		alocaDisciplinasBlocagemPadrao();
-	}
+		}
 	
 	private void alocaDisciplinasBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
 		List<Disciplina> aux = new ArrayList<Disciplina>();
