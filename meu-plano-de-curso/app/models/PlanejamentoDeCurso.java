@@ -2,13 +2,19 @@ package models;
 
 import java.util.*;
 
+import play.db.ebean.Model;
 import exceptions.*;
 
 /**
  * Classe que representa o planejamento de curso.
  *
  */
-public class PlanejamentoDeCurso {
+public class PlanejamentoDeCurso extends Model{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private List<Periodo> periodos;
 	private GradeCurricular grade;
@@ -29,14 +35,16 @@ public class PlanejamentoDeCurso {
 	 * Constroi um planejamento de curso, com o primeiro periodo predefinido.
 	 */
 	public PlanejamentoDeCurso() {
-		periodos = new ArrayList <Periodo>();
-		grade = new GradeCurricular();
-		try {
-			realizaBlocagemPadrao();
-		} catch (LimiteDeCreditosExcedidoException e) {
-			e.printStackTrace();
-		} 
-		handlerDisciplinas = new ArrayList<Disciplina>();
+		periodos = Periodo.find.all();
+		handlerDisciplinas = Disciplina.find.all();
+		grade = GradeCurricular.find.all();
+		if (handlerDisciplinas.size() == 0) {
+			try {
+				realizaBlocagemPadrao();
+			} catch (LimiteDeCreditosExcedidoException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**

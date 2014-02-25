@@ -64,7 +64,8 @@ public class LeitorDeDisciplinas {
 			requisitos.add(disciplinas.get(Integer.parseInt(preRequisitos.item(i).getTextContent())));
 		}
 		//CREATOR: A classe LeitorDeDisciplina possui os dados para inicialização de objetos do tipo Disciplina.
-		Disciplina disciplina = new Disciplina(cadeira.getAttribute("nome"), 
+		Disciplina disciplina = new Disciplina(Integer.parseInt(cadeira.getAttribute("id")),
+				cadeira.getAttribute("nome"), 
 				Integer.parseInt(cadeira.getElementsByTagName("creditos").item(0).getTextContent()),
 				requisitos,
 				Integer.parseInt(cadeira.getElementsByTagName("dificuldade").item(0).getTextContent()),
