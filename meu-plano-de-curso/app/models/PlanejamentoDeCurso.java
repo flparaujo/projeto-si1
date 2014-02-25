@@ -35,15 +35,13 @@ public class PlanejamentoDeCurso extends Model{
 	 * Constroi um planejamento de curso, com o primeiro periodo predefinido.
 	 */
 	public PlanejamentoDeCurso() {
-		periodos = Periodo.find.all();
-		handlerDisciplinas = Disciplina.find.all();
-		grade = GradeCurricular.find.all();
-		if (handlerDisciplinas.size() == 0) {
-			try {
-				realizaBlocagemPadrao();
-			} catch (LimiteDeCreditosExcedidoException e) {
-				e.printStackTrace();
-			}
+		periodos = new ArrayList<Periodo>();
+		handlerDisciplinas = new ArrayList<Disciplina>();
+		grade = new GradeCurricular();
+		try {
+			realizaBlocagemPadrao();
+		} catch (LimiteDeCreditosExcedidoException e) {
+			e.printStackTrace();
 		}
 	}
 	
