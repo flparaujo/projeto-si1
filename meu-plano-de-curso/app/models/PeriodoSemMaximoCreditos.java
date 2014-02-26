@@ -7,11 +7,6 @@ package models;
 public class PeriodoSemMaximoCreditos extends Periodo {
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
 	 * Adiciona uma disciplina.
 	 * @param disciplina A disciplina a ser adicionada.
 	 */

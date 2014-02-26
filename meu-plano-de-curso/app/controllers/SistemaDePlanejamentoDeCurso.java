@@ -211,7 +211,7 @@ public class SistemaDePlanejamentoDeCurso {
 		}
 		periodos.add(new PeriodoSemMaximoCreditos());
 		alocaDisciplinasBlocagemPadrao();
-		}
+	}
 	
 	private void alocaDisciplinasBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
 		List<Disciplina> aux = new ArrayList<Disciplina>();
