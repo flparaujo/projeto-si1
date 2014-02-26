@@ -1,5 +1,6 @@
 package controllers;
 
+import models.PlanejamentoDeCurso;
 import exceptions.LimiteDeCreditosExcedidoException;
 import exceptions.LimiteDePeriodosException;
 import form.FormHandler;
@@ -8,7 +9,7 @@ import play.mvc.*;
 
 public class Application extends Controller {
 	
-	static SistemaDePlanejamentoDeCurso sistema = new SistemaDePlanejamentoDeCurso();
+	static PlanejamentoDeCurso sistema = new PlanejamentoDeCurso();
 	static Form<FormHandler> formHandler = Form.form(FormHandler.class);
 	static String message = "";
 

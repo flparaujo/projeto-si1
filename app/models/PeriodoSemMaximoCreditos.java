@@ -2,6 +2,7 @@ package models;
 
 /**
  * Classe que representa um periodo sem limite maximo de creditos.
+ * @author Franklin Bastos
  *
  */
 public class PeriodoSemMaximoCreditos extends Periodo {
