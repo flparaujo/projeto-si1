@@ -1,4 +1,4 @@
-@(sistema: PlanejamentoDeCurso, formHandler: Form[form.FormHandler], message: String)
+@(sistema: SistemaDePlanejamentoDeCurso, formHandler: Form[form.FormHandler], message: String)
 
 @import helper._
 
@@ -62,6 +62,7 @@
 			 							<div class="disciplina" name="inputNameDisciplina">
 											<nome>@disciplina.getNome() </nome>
 											<descricao> ---- @disciplina.getNumeroDeCreditos() creditos</descricao>
+											<dificuldade> --- dificuldade: @disciplina.getDificuldade()</dificuldade>
 			 							</div>
 				 					</div>
 			  					}	
@@ -113,7 +114,24 @@
     	    					}
 							}
 						</div>
-						
+						<div id="desalocarDisciplina">
+							@form(routes.Application.desalocarDisciplinaDePeriodo()){
+								@if(sistema.getPeriodos.size() > 1 && !sistema.getDisciplinasAlocadas().isEmpty()) {
+			    					<nome> --------------------------- </nome>
+			    					<br>
+			  	  					<nome> Desalocar Disciplina de Periodo</nome>
+									<br>
+									<select class="selectpicker" name="inputNameDisciplina" >
+										@for(disciplina <- sistema.getDisciplinasAlocadas()) { 
+											@if(sistema.indicePeriodoDeDisciplina(disciplina.getNome()) != 0) {
+					    						<option value="@disciplina.getNome()" name="inputNameDisciplina" >@disciplina.getNome() ---- periodo : @(sistema.indicePeriodoDeDisciplina(disciplina.getNome())+1)º</option> 
+				    						}
+										}
+									</select> 
+									<button type="submit" class="btn btn-primary" type="button">Desalocar</button>
+        						}
+							}	
+						</div>
 						<br>
 						<div id="addperiodos">
 							@form(routes.Application.novoPeriodo()) {

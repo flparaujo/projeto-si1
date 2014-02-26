@@ -29,7 +29,7 @@
 <periodo>1</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
-<cadeira nome="Lab. de Programacao I" id="6">
+<cadeira nome="Lab. de Programação I" id="6">
 <dificuldade>4</dificuldade>
 <creditos>4</creditos>
 <periodo>1</periodo>
@@ -103,7 +103,7 @@
 <id>11</id>
 </requisitos>
 </cadeira>
-<cadeira nome="Lab. de Estruturas de Dados" id="15">
+<cadeira nome="Lab. de Estrutura de Dados" id="15">
 <dificuldade>7</dificuldade>
 <creditos>4</creditos>
 <periodo>3</periodo>
@@ -121,7 +121,7 @@
 <id>4</id>
 </requisitos>
 </cadeira>
-<cadeira nome="Probabilidade e Estatistica" id="17">
+<cadeira nome="Probabilidade e Estatistica." id="17">
 <dificuldade>9</dificuldade>
 <creditos>4</creditos>
 <periodo>3</periodo>
@@ -163,7 +163,7 @@
 <id>17</id>
 </requisitos>
 </cadeira>
-<cadeira nome="Paradigmas de Linguagens de Programacao" id="22">
+<cadeira nome="Paradigmas de Linguagens de Programaçao" id="22">
 <dificuldade>5</dificuldade>
 <creditos>2</creditos>
 <periodo>4</periodo>
@@ -366,37 +366,37 @@
 <cadeira nome="Administracao" id="45">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>7</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Sociologia Industrial" id="46">
 <dificuldade>5</dificuldade>
 <creditos>3</creditos>
-<periodo>7</periodo>
+<periodo>2</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Economia" id="47">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>7</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Futsal" id="48">
 <dificuldade>5</dificuldade>
 <creditos>2</creditos>
-<periodo>6</periodo>
+<periodo>2</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Basquete" id="49">
 <dificuldade>5</dificuldade>
 <creditos>2</creditos>
-<periodo>6</periodo>
+<periodo>2</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Calculo III" id="50">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>0</periodo>
+<periodo>5</periodo>
 <requisitos quantidade="2">
 <id>13</id>
 <id>4</id>
@@ -405,7 +405,7 @@
 <cadeira nome="Equacoes Diferenciais" id="51">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>0</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="1">
 <id>16</id>
 </requisitos>
@@ -413,49 +413,49 @@
 <cadeira nome="Ingles" id="52">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>7</periodo>
+<periodo>4</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Expressao Grafica" id="53">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>8</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Realidade Virtual" id="54">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>8</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Empreendedorismo I" id="55">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>0</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Administracao Financeira" id="56">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>0</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Administracao de Sistemas" id="57">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>8</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Analise de dados I" id="58">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>0</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="0"></requisitos>
 </cadeira>
 <cadeira nome="Arquitetura de Software" id="59">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>8</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="2">
 <id>26</id>
 <id>27</id>
@@ -464,7 +464,7 @@
 <cadeira nome="Desenvolvimento Dirigido a Modelos" id="60">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>6</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="1">
 <id>27</id>
 </requisitos>
@@ -472,7 +472,7 @@
 <cadeira nome="Desenvolvimento de Aplicacoes Corporativas Avancadas" id="61">
 <dificuldade>5</dificuldade>
 <creditos>4</creditos>
-<periodo>8</periodo>
+<periodo>3</periodo>
 <requisitos quantidade="1">
 <id>31</id>
 </requisitos>

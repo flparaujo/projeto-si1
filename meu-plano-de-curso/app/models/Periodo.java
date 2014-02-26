@@ -3,7 +3,6 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import play.db.ebean.Model;
 import exceptions.LimiteDeCreditosExcedidoException;
 
 /**
@@ -12,12 +11,7 @@ import exceptions.LimiteDeCreditosExcedidoException;
  * @author Felipe Araujo de Andrade
  * @version 1.1
  */
-public class Periodo extends Model{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Periodo {
 
 	private List<Disciplina> disciplinas;
 	

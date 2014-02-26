@@ -2,10 +2,14 @@ package models;
 
 /**
  * Classe que representa um periodo sem limite maximo de creditos.
- * @author Franklin Bastos
  *
  */
 public class PeriodoSemMaximoCreditos extends Periodo {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Adiciona uma disciplina.

@@ -2,25 +2,14 @@ package models;
 
 import java.util.List;
 
-import javax.persistence.Id;
-
-import play.db.ebean.Model;
-
 /**
  * Classe que representa uma disciplina.
  * 
  * 
  * @version 1.0
  */
-public class Disciplina extends Model implements Comparable<Disciplina> {
+public class Disciplina implements Comparable<Disciplina> {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	private int id;
 	private int dificuldade;
 	private String nome;
 	private int numeroDeCreditos;
@@ -37,9 +26,8 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 	 * @param dificuldade A dificuldade da disciplina.
 	 * @param periodo O periodo sugerido para alocar esta disciplina.
 	 */
-	public Disciplina(int id, String nome, int numeroDeCreditos, List<Disciplina> preRequisitos, 
+	public Disciplina(String nome, int numeroDeCreditos, List<Disciplina> preRequisitos, 
 			int dificuldade, int periodo) {
-		this.id = id;
 		this.nome = nome;
 		this.numeroDeCreditos = numeroDeCreditos;
 		this.preRequisitos =  preRequisitos;

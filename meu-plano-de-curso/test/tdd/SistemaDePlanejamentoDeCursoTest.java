@@ -14,7 +14,7 @@ import exceptions.LimiteDePeriodosException;
  * Testes para a classe PlanejamentoDeCurso
  *
  */
-public class PlanejamentoDeCursoTest {
+public class SistemaDePlanejamentoDeCursoTest {
 
 	private SistemaDePlanejamentoDeCurso sistema;
 
