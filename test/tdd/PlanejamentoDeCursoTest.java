@@ -119,6 +119,7 @@ public class PlanejamentoDeCursoTest {
 	public void deveMoverDisciplina() throws LimiteDeCreditosExcedidoException {
 		assertTrue(sistema.pesquisaDisciplinaEmPeriodo(0, "Matematica Discreta") == null);
 		assertFalse(sistema.pesquisaDisciplinaEmPeriodo(1, "Matematica Discreta") == null);
+		
 		assertEquals(24, sistema.numeroDeCreditosDoPeriodo(0));
 		assertEquals(26, sistema.numeroDeCreditosDoPeriodo(1));
 		
