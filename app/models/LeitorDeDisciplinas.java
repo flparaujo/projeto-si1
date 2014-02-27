@@ -1,7 +1,9 @@
 package models;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -32,7 +34,13 @@ public class LeitorDeDisciplinas {
 	}
 	
 	private void lerArquivo () {
-		File fXmlFile = new File("disciplinas-do-curso.xml");
+		InputStream fXmlFile = null;
+		try {
+			fXmlFile = new FileInputStream("target/universal/stage/disciplinas-do-curso.xml");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
 		try {
