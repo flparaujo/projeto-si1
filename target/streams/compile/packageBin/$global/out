@@ -52,10 +52,8 @@
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/javascripts[0m
 [0m[[0mdebug[0m] [0m	views/html/main$$anonfun$f$1$$anonfun$apply$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/views/html/main$$anonfun$f$1$$anonfun$apply$1.class[0m
-[0m[[0mdebug[0m] [0m	Routes$$anonfun$routes$1$$anonfun$applyOrElse$6$$anonfun$apply$6.class[0m
-[0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/Routes$$anonfun$routes$1$$anonfun$applyOrElse$6$$anonfun$apply$6.class[0m
-[0m[[0mdebug[0m] [0m	controllers/ref/ReverseApplication$$anonfun$adicionaDisciplinaEmPeriodo$1.class[0m
-[0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/controllers/ref/ReverseApplication$$anonfun$adicionaDisciplinaEmPeriodo$1.class[0m
+[0m[[0mdebug[0m] [0m	controllers/ref/ReverseApplication$$anonfun$moveDisciplinaParaPeriodo$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/controllers/ref/ReverseApplication$$anonfun$moveDisciplinaParaPeriodo$1.class[0m
 [0m[[0mdebug[0m] [0m	exceptions/LimiteDeCreditosExcedidoException.class[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/exceptions/LimiteDeCreditosExcedidoException.class[0m
 [0m[[0mdebug[0m] [0m	views[0m
@@ -114,8 +112,6 @@
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/exceptions/LimiteDePeriodosException.class[0m
 [0m[[0mdebug[0m] [0m	controllers/ReverseApplication.class[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/controllers/ReverseApplication.class[0m
-[0m[[0mdebug[0m] [0m	disciplinas-do-curso.xml[0m
-[0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/disciplinas-do-curso.xml[0m
 [0m[[0mdebug[0m] [0m	controllers/SistemaDePlanejamentoDeCurso.class[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/controllers/SistemaDePlanejamentoDeCurso.class[0m
 [0m[[0mdebug[0m] [0m	public[0m
@@ -138,8 +134,6 @@
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/form[0m
 [0m[[0mdebug[0m] [0m	routes[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/routes[0m
-[0m[[0mdebug[0m] [0m	Routes$$anonfun$routes$1$$anonfun$applyOrElse$6.class[0m
-[0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/Routes$$anonfun$routes$1$$anonfun$applyOrElse$6.class[0m
 [0m[[0mdebug[0m] [0m	controllers/ReverseAssets.class[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/controllers/ReverseAssets.class[0m
 [0m[[0mdebug[0m] [0m	public/images/bg.jpg[0m
@@ -148,8 +142,6 @@
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/Routes$$anonfun$routes$1$$anonfun$applyOrElse$2$$anonfun$apply$2.class[0m
 [0m[[0mdebug[0m] [0m	Routes$$anonfun$routes$1$$anonfun$applyOrElse$5$$anonfun$apply$5.class[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/Routes$$anonfun$routes$1$$anonfun$applyOrElse$5$$anonfun$apply$5.class[0m
-[0m[[0mdebug[0m] [0m	controllers/ref/ReverseApplication$$anonfun$desalocarDisciplinaDePeriodo$1.class[0m
-[0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/controllers/ref/ReverseApplication$$anonfun$desalocarDisciplinaDePeriodo$1.class[0m
 [0m[[0mdebug[0m] [0m	public/javascripts/bootstrap.js[0m
 [0m[[0mdebug[0m] [0m	  /home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/javascripts/bootstrap.js[0m
 [0m[[0mdebug[0m] [0m	public/stylesheets/bootstrap.min.css[0m

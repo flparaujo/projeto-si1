@@ -1,47 +1,38 @@
-2014-02-26 22:01:00,365 - [INFO] - from play in pool-4-thread-3 
+2014-02-27 11:56:01,991 - [INFO] - from play in pool-5-thread-1 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-02-26 22:01:30,832 - [INFO] - from play in play-internal-execution-context-1 
+2014-02-27 11:56:09,303 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-02-26 22:16:47,352 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-02-26 22:17:16,203 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-02-26 22:18:57,797 - [ERROR] - from application in New I/O worker #2 
-
-
-! @6hcl99c1m - Internal server error, for (GET) [/planejamentoDeCurso] ->
-
-play.PlayExceptions$CompilationException: Compilation error[illegal start of simple expression]
-	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
-	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14$$anonfun$apply$16.apply(PlayReloader.scala:304) ~[na:na]
-	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
-	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:304) ~[na:na]
-	at play.PlayReloader$$anon$1$$anonfun$reload$2$$anonfun$apply$14.apply(PlayReloader.scala:298) ~[na:na]
-	at scala.Option.map(Option.scala:145) ~[scala-library.jar:na]
-	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:298) ~[na:na]
-	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:296) ~[na:na]
-	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library.jar:na]
-	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:296) ~[na:na]
-	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:104) ~[play_2.10.jar:2.2.1]
-	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102) ~[play_2.10.jar:2.2.1]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library.jar:na]
-
-2014-02-26 22:19:21,077 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-02-26 22:19:59,916 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-02-26 22:21:00,165 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
+2014-02-27 11:56:09,617 - [ERROR] - from akka.actor.ActorSystemImpl in play-akka.actor.default-dispatcher-2 
+Uncaught error from thread [play-akka.actor.default-dispatcher-4] shutting down JVM since 'akka.jvm-exit-on-fatal-error' is enabled
+java.lang.ExceptionInInitializerError: null
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$1$$anonfun$apply$1.apply(routes_routing.scala:61) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$1$$anonfun$apply$1.apply(routes_routing.scala:61) ~[classes/:na]
+	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183) ~[play_2.10.jar:2.2.1]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91) ~[play_2.10.jar:2.2.1]
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90) ~[play_2.10.jar:2.2.1]
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82) ~[play_2.10.jar:2.2.1]
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82) ~[play_2.10.jar:2.2.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:278) ~[scala-library.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:274) ~[scala-library.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:29) ~[scala-library.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37) ~[play_2.10.jar:2.2.1]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42) ~[akka-actor_2.10.jar:2.2.0]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386) [akka-actor_2.10.jar:2.2.0]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library.jar:na]
+Caused by: java.lang.IllegalArgumentException: InputStream cannot be null
+	at javax.xml.parsers.DocumentBuilder.parse(DocumentBuilder.java:117) ~[na:1.7.0_21]
+	at models.LeitorDeDisciplinas.lerArquivo(LeitorDeDisciplinas.java:54) ~[classes/:na]
+	at models.LeitorDeDisciplinas.<init>(LeitorDeDisciplinas.java:34) ~[classes/:na]
+	at models.LeitorDeDisciplinas.getInstance(LeitorDeDisciplinas.java:91) ~[classes/:na]
+	at models.GradeCurricular.<init>(GradeCurricular.java:20) ~[classes/:na]
+	at models.PlanejamentoDeCurso.<init>(PlanejamentoDeCurso.java:33) ~[classes/:na]
+	at controllers.Application.<clinit>(Application.java:12) ~[classes/:na]
+	... 19 common frames omitted
 

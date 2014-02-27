@@ -5,3 +5,7 @@ run
 clean
 run
 exit
+stage
+run
+universal
+exit
