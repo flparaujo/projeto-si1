@@ -9,3 +9,11 @@ stage
 run
 universal
 exit
+clean
+eclipse
+run
+stage
+eclipse
+stage
+eclipse
+stage
