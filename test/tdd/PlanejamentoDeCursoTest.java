@@ -128,6 +128,10 @@ public class PlanejamentoDeCursoTest {
 		assertFalse(sistema.pesquisaDisciplinaEmPeriodo(0, "Matematica Discreta") == null);
 		assertEquals(28, sistema.numeroDeCreditosDoPeriodo(0));
 		assertEquals(22, sistema.numeroDeCreditosDoPeriodo(1));
+		
+		assertEquals(6, sistema.numeroDeCreditosDoPeriodo(7));
+		sistema.moveDisciplina("Algebra Vetorial", 7);
+		assertEquals(10, sistema.numeroDeCreditosDoPeriodo(7));
 	}
 	
 	@Test
@@ -143,6 +147,17 @@ public class PlanejamentoDeCursoTest {
 			assertEquals("Nao foi possivel alocar a disciplina. Limite maximo de " +
 					"creditos foi atingido!", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void naoSatisfazRequisitosAoColocarDisciplinaAntesDosPreRequisitos() throws LimiteDeCreditosExcedidoException {
+		assertTrue(sistema.preRequisitosSatisfeitos("Estruturas de Dados"));
+		sistema.moveDisciplina("Estruturas de Dados", 0);
+		assertFalse(sistema.preRequisitosSatisfeitos("Estruturas de Dados"));
+		
+		
+		sistema.moveDisciplina("Calculo I", 7);
+		assertFalse(sistema.preRequisitosSatisfeitos("Calculo II"));
 	}
 	
 	@Test

@@ -2,7 +2,6 @@ package models;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -33,7 +32,7 @@ public class LeitorDeDisciplinas {
 	}
 	
 	private void lerArquivo () {
-		InputStream fXmlFile = getClass().getResourceAsStream("disciplinas-do-curso.xml");
+		File fXmlFile = new File("disciplinas-do-curso.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
 		try {

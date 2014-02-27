@@ -32,22 +32,15 @@ public class Application extends Controller {
     	return redirect(routes.Application.planejamentoDeCurso());
     }
     
-    public static Result adicionaDisciplinaEmPeriodo() {
+    public static Result moveDisciplinaParaPeriodo() {
     	Form<FormHandler> form = formHandler.bindFromRequest();
     	int idPeriodo = form.get().getIdPeriodo()-1;
     	try {
-    		sistema.adicionaDisciplinaAoPeriodo(idPeriodo, form.get().getInputNameDisciplina());
+    		sistema.moveDisciplina(form.get().getInputNameDisciplina(), idPeriodo);
     	}
     	catch(LimiteDeCreditosExcedidoException e) {
     		 message = e.getMessage();
     	}
-    	return redirect(routes.Application.planejamentoDeCurso());
-    }
-    
-    public static Result desalocarDisciplinaDePeriodo() {
-    	Form<FormHandler> form = formHandler.bindFromRequest();
-    	sistema.devolveDisciplinaParaGrade(form.get().getInputNameDisciplina());
-    	sistema.removeDisciplinasDesalocadas();
     	return redirect(routes.Application.planejamentoDeCurso());
     }
 

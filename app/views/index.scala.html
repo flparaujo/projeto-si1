@@ -60,8 +60,14 @@
 		  						@for(disciplina <- sistema.getDisciplinasDoPeriodo(sistema.getPeriodos.indexOf(periodo))){
 			 						<div id="c1" class="coluna">
 			 							<div class="disciplina" name="inputNameDisciplina">
-											<nome>@disciplina.getNome() </nome>
-											<descricao> ---- @disciplina.getNumeroDeCreditos() creditos</descricao>
+											<font @if(!sistema.preRequisitosSatisfeitos(disciplina.getNome())){color="red"}>
+												<nome>
+
+													@disciplina.getNome()
+												
+												</nome>
+												<descricao> ---- @disciplina.getNumeroDeCreditos() creditos</descricao>
+											</font>
 			 							</div>
 				 					</div>
 			  					}	
@@ -90,26 +96,25 @@
 						}
 						<br>
 						<div id="alocarDisciplina">
-							@form(routes.Application.adicionaDisciplinaEmPeriodo()){
+							@form(routes.Application.moveDisciplinaParaPeriodo()){
 								@if(sistema.getPeriodos.size() > 1) {
 		    						<nome> --------------------------- </nome>
 			   		 				<br>
-			    					<nome> Alocar Disciplina a Periodo</nome>
+			    					<nome> Move disciplina para um periodo </nome>
 									<br>
 									<select class="selectpicker" data-live-search="true" name="inputNameDisciplina" >
-        								@for(disciplina <- sistema.listaDisciplinasDoCurso()) { 
+        								@for(disciplina <- sistema.disciplinasAlocadas()) { 
 											<option value="@disciplina.getNome()" name="inputNameDisciplina" >@disciplina.getNome()</option> 
 										}	
         							</select> 
 	        						<br>
     	    						<select class="selectpicker" data-width="100px" name="idPeriodo" >
         								@for(periodo <- sistema.getPeriodos()) {
-        		   							@if(sistema.getPeriodos().indexOf(periodo) != 0) {
-						 						<option value=@(sistema.getPeriodos().indexOf(periodo)+1) name="idPeriodo" >@(sistema.getPeriodos().indexOf(periodo)+1)</option> 
-			   								}
+        		   							<option value=@(sistema.getPeriodos().indexOf(periodo)+1) name="idPeriodo" >@(sistema.getPeriodos().indexOf(periodo)+1)</option> 
+			   								
 										}
         							</select> 
-	        						<button type="submit" class="btn btn-primary" type="button">Alocar Disciplina</button>		
+	        						<button type="submit" class="btn btn-primary" type="button">mover disciplina</button>		
     	    					}
 							}
 						</div>
@@ -145,7 +150,7 @@
                     	   					<th >Dificuldade</td>
                        						<th >Requisitos</td>
           	     						</tr>
-        								@for(disciplina <- sistema.listaDisciplinasDoCurso()){
+        								@for(disciplina <- sistema.disciplinasDoCurso()){
             								<tr>
                     							<td >@disciplina.getNome()</td>
                     							<td >@disciplina.getNumeroDeCreditos()</td>

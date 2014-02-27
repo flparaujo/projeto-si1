@@ -48,11 +48,15 @@ public class PlanejamentoDeCurso {
 		return getPeriodo(indicePeriodo).getDificuldadeDoPeriodo();
 	}
 	
-	/**
-	 * Obtem uma lista de todas as disciplinas do curso.
-	 * @return uma lista com as disciplinas do curso.
-	 */
-	public List<Disciplina> listaDisciplinasDoCurso() {
+	public List<Disciplina> disciplinasAlocadas() {
+		List<Disciplina> alocadas = new ArrayList<Disciplina>();
+		for(Periodo periodo : periodos) {
+			alocadas.addAll(periodo.disciplinasAlocadas());
+		}
+		return alocadas;
+	}
+	
+	public List<Disciplina> disciplinasDoCurso() {
 		return grade.getDisciplinas();
 	}
 	
@@ -162,9 +166,10 @@ public class PlanejamentoDeCurso {
 	 * nao esta alocada em periodo algum, retorna -1.
 	 */
 	public int indicePeriodoDeDisciplina(String nome) {
-		for(int i = 0; i < periodos.size(); i++)
+		for(int i = 0; i < periodos.size(); i++) {
 			if(getPeriodo(i).getDisciplina(nome) != null)
 				return i;
+		}
 		return -1;
 	}
 	
@@ -226,9 +231,10 @@ public class PlanejamentoDeCurso {
 	 */
 	public void moveDisciplina(String nome, int idOutroPeriodo) throws LimiteDeCreditosExcedidoException {
 		int idPeriodoEmQueFoiAlocada = indicePeriodoDeDisciplina(nome);
-		if(idPeriodoEmQueFoiAlocada > 0) {
-			Disciplina disciplina = desalocaDisciplinaDePeriodo(idPeriodoEmQueFoiAlocada, nome);
+		if(idPeriodoEmQueFoiAlocada >= 0) {
+			Disciplina disciplina = pesquisaDisciplinaEmPeriodo(idPeriodoEmQueFoiAlocada, nome);
 			getPeriodo(idOutroPeriodo).adicionaDisciplina(disciplina);
+			desalocaDisciplinaDePeriodo(idPeriodoEmQueFoiAlocada, nome);
 		}
 		
 	}
@@ -260,6 +266,26 @@ public class PlanejamentoDeCurso {
 			}
 		}
 		return null;
+	}
+	
+	public boolean preRequisitosSatisfeitos(String nomeDaDisciplina) {
+		int contPreRequisitos = 0;
+		int periodoAlocada = indicePeriodoDeDisciplina(nomeDaDisciplina);
+		if(periodoAlocada < 0)
+			return false;
+		Disciplina disciplina = getPeriodo(periodoAlocada).getDisciplina(nomeDaDisciplina);
+		if (!disciplina.getPreRequisitos().isEmpty()) {
+			for(int i = 0; i < periodoAlocada; i++) {
+				for(Disciplina disciplinaPreRequisito : disciplina.getPreRequisitos()) {
+					if(getPeriodo(i).disciplinasAlocadas().contains(disciplinaPreRequisito)) {
+						contPreRequisitos ++;
+					}
+				}
+			}
+		} else {
+			return true;
+		}
+		return contPreRequisitos == disciplina.getPreRequisitos().size();
 	}
 	
 	private Disciplina desalocaDisciplinaDePeriodo(int idPeriodo, String nome) {

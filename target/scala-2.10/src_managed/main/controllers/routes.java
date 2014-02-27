@@ -1,6 +1,6 @@
-// @SOURCE:/home/felipeaa/herokuProjeto/projeto-si1/conf/routes
-// @HASH:a0de833fdf067a52bb866290d0ee916031f78ac1
-// @DATE:Wed Feb 26 14:33:33 BRT 2014
+// @SOURCE:C:/Users/Win 7/si1/meu-plano-de-curso/conf/routes
+// @HASH:e7509f0b490347ac336a2ed26e80801c9d543e5e
+// @DATE:Wed Feb 26 20:42:24 GMT-03:00 2014
 
 package controllers;
 
