@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/computer-database -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} play run -Xmx256M --%prod --http.port=$PORT -Dprecompiled=true
+web: target/universal/stage/bin/computer-database -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL} 
