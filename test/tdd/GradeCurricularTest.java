@@ -25,9 +25,9 @@ public class GradeCurricularTest {
 	@Test
 	public void deveConterDisciplina() {
 		List<Disciplina> requisito1 = new ArrayList<Disciplina>();
-		Disciplina p1 = new Disciplina("Programacao I", 4, requisito1, 4, 1);
-		Disciplina lp1 = new Disciplina("Lab. de Programacao I", 4, requisito1, 4, 1);
-		Disciplina ic = new Disciplina("Int. a Computacao", 4, requisito1, 5, 1);
+		Disciplina p1 = new Disciplina(1L, "Programacao I", 4, requisito1, 4, 1);
+		Disciplina lp1 = new Disciplina(2L, "Lab. de Programacao I", 4, requisito1, 4, 1);
+		Disciplina ic = new Disciplina(3L, "Int. a Computacao", 4, requisito1, 5, 1);
 		List<Disciplina> requisito2 = new ArrayList<Disciplina>();
 		requisito2.add(lp1);
 		requisito2.add(p1);
@@ -35,40 +35,40 @@ public class GradeCurricularTest {
 		requisito3.add(lp1);
 		requisito3.add(p1);
 		requisito3.add(ic);
-		Disciplina tg = new Disciplina("Teoria dos Grafos", 2, requisito2, 3, 2);
-		Disciplina p2 = new Disciplina("Programação II", 4, requisito3, 5, 2);
-		Disciplina lp2 = new Disciplina("Lab. de Programação II", 4, requisito3, 5, 2);
+		Disciplina tg = new Disciplina(4L, "Teoria dos Grafos", 2, requisito2, 3, 2);
+		Disciplina p2 = new Disciplina(5L, "Programação II", 4, requisito3, 5, 2);
+		Disciplina lp2 = new Disciplina(6L, "Lab. de Programação II", 4, requisito3, 5, 2);
 		List<Disciplina> requisito4 = new ArrayList<Disciplina>();
 		requisito4.add(lp2);
 		requisito4.add(p2);
 		requisito4.add(tg);
-		Disciplina eda = new Disciplina("Estruturas" +
+		Disciplina eda = new Disciplina(7L, "Estruturas" +
 				" de Dados", 4, requisito4, 7, 3);
 		assertTrue(gradeCurricular.getDisciplinas().contains(eda));
-		Disciplina gi = new Disciplina("Gerência da Informação", 4, requisito1, 5, 3);
+		Disciplina gi = new Disciplina(8L, "Gerência da Informação", 4, requisito1, 5, 3);
 		List<Disciplina> requisito5 = new ArrayList<Disciplina>();
 		requisito5.add(gi);
-		assertTrue(gradeCurricular.getDisciplinas().contains(new Disciplina("Sistemas de " +
+		assertTrue(gradeCurricular.getDisciplinas().contains(new Disciplina(9L, "Sistemas de " +
 				"Informacao I", 4, requisito5, 5, 4)));
 		List<Disciplina> requisito6 = new ArrayList<Disciplina>();
 		requisito6.add(eda);
-		Disciplina leda = new Disciplina("Lab. de Estrutura de Dados", 4, requisito4, 7, 3);
+		Disciplina leda = new Disciplina(10L, "Lab. de Estrutura de Dados", 4, requisito4, 7, 3);
 		requisito6.add(leda);
 		List<Disciplina> requisito7 = new ArrayList<Disciplina>();
-		Disciplina cal1 = new Disciplina("Cálculo I", 4, requisito1, 7, 1);
+		Disciplina cal1 = new Disciplina(11L, "Cálculo I", 4, requisito1, 7, 1);
 		List<Disciplina> requisito8 = new ArrayList<Disciplina>();
 		requisito8.add(cal1);
-		Disciplina cal2 = new Disciplina("Cálculo II", 4, requisito8, 7, 2);
-		Disciplina vetorial = new Disciplina("Algebra Vetorial", 4, requisito1, 7, 1);
+		Disciplina cal2 = new Disciplina(12L, "Cálculo II", 4, requisito8, 7, 2);
+		Disciplina vetorial = new Disciplina(13L, "Algebra Vetorial", 4, requisito1, 7, 1);
 		requisito7.add(vetorial);
 		requisito7.add(cal2);
-		Disciplina fisicaC = new Disciplina("Fund. de Física Clássica", 4, requisito7, 8, 2);
+		Disciplina fisicaC = new Disciplina(14L, "Fund. de Física Clássica", 4, requisito7, 8, 2);
 		List<Disciplina> requisito9 = new ArrayList<Disciplina>();
 		requisito9.add(cal2);
 		requisito9.add(fisicaC);
-		Disciplina fisicaM = new Disciplina("Fund. de Física Moderna", 4, requisito9, 7, 3);
+		Disciplina fisicaM = new Disciplina(15L, "Fund. de Física Moderna", 4, requisito9, 7, 3);
 		requisito6.add(fisicaM);
-		assertTrue(gradeCurricular.getDisciplinas().contains(new Disciplina("Lab. de Org. " +
+		assertTrue(gradeCurricular.getDisciplinas().contains(new Disciplina(16L, "Lab. de Org. " +
 				"e Arquitetura de Computadores", 4, requisito6, 5, 4)));
 	}
 	
@@ -76,18 +76,18 @@ public class GradeCurricularTest {
 	public void deveFornecerDisciplina() {
 		List<Disciplina> requisitosTc = new ArrayList<Disciplina>();
 		List<Disciplina> requisitosP1 = new ArrayList<Disciplina>();
-		Disciplina ic = new Disciplina("Int. à Computação", 4, requisitosP1, 5, 1);
+		Disciplina ic = new Disciplina(1L, "Int. à Computação", 4, requisitosP1, 5, 1);
 		requisitosTc.add(ic);
-		Disciplina md = new Disciplina("Matemática Discreta", 4, requisitosP1, 5, 2);
+		Disciplina md = new Disciplina(2L, "Matemática Discreta", 4, requisitosP1, 5, 2);
 		requisitosTc.add(md);
-		Disciplina p1 = new Disciplina("Programação I", 4, requisitosP1, 4, 1);
-		Disciplina lp1 = new Disciplina("Lab. de Programação I", 4, requisitosP1, 4, 1);
+		Disciplina p1 = new Disciplina(3L, "Programação I", 4, requisitosP1, 4, 1);
+		Disciplina lp1 = new Disciplina(4L, "Lab. de Programação I", 4, requisitosP1, 4, 1);
 		List<Disciplina> requisitosTg = new ArrayList<Disciplina>();
 		requisitosTg.add(lp1);
 		requisitosTg.add(p1);
-		Disciplina tg = new Disciplina("Teoria dos Grafos", 2, requisitosTg, 3, 2);
+		Disciplina tg = new Disciplina(5L, "Teoria dos Grafos", 2, requisitosTg, 3, 2);
 		requisitosTc.add(tg);
-		assertEquals(new Disciplina("Teoria da Computacao", 4, requisitosTc, 6, 3), gradeCurricular.
+		assertEquals(new Disciplina(6L, "Teoria da Computacao", 4, requisitosTc, 6, 3), gradeCurricular.
 				getDisciplina("Teoria da Computacao"));
 	}
 

@@ -7,7 +7,11 @@
 		revision="1.0-SNAPSHOT"
 		conf="test"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
+<<<<<<< HEAD
+		date="20140228111158"/>
+=======
 		date="20140227134110"/>
+>>>>>>> 750a635dcd05adba9684535e43d0001ed7f956c1
 	<dependencies>
 		<module organisation="com.typesafe.play" name="play-cache_2.10">
 			<revision name="2.2.1" status="release" pubdate="20131030164410" resolver="sbt-chain" artresolver="sbt-chain" downloaded="false" searched="false" default="false" conf="default(compile), compile" position="60">

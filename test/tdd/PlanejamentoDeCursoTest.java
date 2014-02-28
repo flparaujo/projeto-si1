@@ -7,6 +7,7 @@ import models.PlanejamentoDeCurso;
 
 import org.junit.Before;
 import org.junit.Test;
+import static play.test.Helpers.*;
 
 import exceptions.LimiteDeCreditosExcedidoException;
 import exceptions.LimiteDePeriodosException;
@@ -22,6 +23,7 @@ public class PlanejamentoDeCursoTest {
 	@Before
 	public void setUp() {
 	   sistema = new PlanejamentoDeCurso();
+	   start(fakeApplication(inMemoryDatabase()));
 	}
 	
 	@Test

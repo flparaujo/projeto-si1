@@ -4,7 +4,11 @@
 		module="projeto-si1-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
+<<<<<<< HEAD
+		publication="20140228111001"
+=======
 		publication="20140227134103"
+>>>>>>> 750a635dcd05adba9684535e43d0001ed7f956c1
 		e:scalaVersion="2.10" e:sbtVersion="0.13"
 	>
 		<description>

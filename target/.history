@@ -17,3 +17,10 @@ eclipse
 stage
 eclipse
 stage
+run
+clean
+stage
+run
+eclipse
+compile
+test

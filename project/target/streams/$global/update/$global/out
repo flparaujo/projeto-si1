@@ -2938,6 +2938,23 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.0!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.2!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
+<<<<<<< HEAD
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 44070ms :: artifacts dl 117ms[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT compile produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT runtime produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT test produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT provided produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT optional produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT compile-internal produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT runtime-internal produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT test-internal produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT plugin produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT sources produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT docs produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT pom produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT scala-tool produced in C:\Users\Franklin Wesley\si1\projeto-si1\project\target\resolution-cache\reports\default-projeto-si1-build-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (44070ms resolve - 117ms download)[0m
+=======
 [0m[[0mdebug[0m] [0m:: resolution report :: resolve 2919ms :: artifacts dl 297ms[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT compile produced in /home/felipeaa/herokuProjeto/projeto-si1/project/target/resolution-cache/reports/default-projeto-si1-build-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT runtime produced in /home/felipeaa/herokuProjeto/projeto-si1/project/target/resolution-cache/reports/default-projeto-si1-build-runtime.xml[0m
@@ -2953,4 +2970,5 @@
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT pom produced in /home/felipeaa/herokuProjeto/projeto-si1/project/target/resolution-cache/reports/default-projeto-si1-build-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#projeto-si1-build;0.1-SNAPSHOT scala-tool produced in /home/felipeaa/herokuProjeto/projeto-si1/project/target/resolution-cache/reports/default-projeto-si1-build-scala-tool.xml[0m
 [0m[[0mdebug[0m] [0m	resolve done (2919ms resolve - 297ms download)[0m
+>>>>>>> 750a635dcd05adba9684535e43d0001ed7f956c1
 [0m[[0minfo[0m] [0mDone updating.[0m

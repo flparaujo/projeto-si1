@@ -9,7 +9,11 @@
 		extra-scalaVersion="2.10"
 		conf="sources"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
+<<<<<<< HEAD
+		date="20140228111001"/>
+=======
 		date="20140227134103"/>
+>>>>>>> 750a635dcd05adba9684535e43d0001ed7f956c1
 	<dependencies>
 	</dependencies>
 </ivy-report>
