@@ -1,0 +1,53 @@
+[0m[[0minfo[0m] [0mtdd.GradeCurricularTest[0m
+[0m[[0minfo[0m] [0m+ deveConterDisciplina[0m
+[0m[[0minfo[0m] [0m+ deveFornecerDisciplina[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for test tdd.GradeCurricularTest[0m
+[0m[[0minfo[0m] [0mFinished in 0.003 seconds[0m
+[0m[[0minfo[0m] [0m2 tests, 0 failures, 0 errors[0m
+[0m[[0minfo[0m] [0mtdd.LeitorDeDisciplinasTest[0m
+[0m[[0minfo[0m] [0m+ deveMostrarDisciplina[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for test tdd.LeitorDeDisciplinasTest[0m
+[0m[[0minfo[0m] [0mFinished in 0.002 seconds[0m
+[0m[[0minfo[0m] [0m1 tests, 0 failures, 0 errors[0m
+[0m[[0minfo[0m] [0mtdd.PlanejamentoDeCursoTest[0m
+[0m[[0minfo[0m] [0mx deveRemoverDisciplina[0m
+[0m[[0minfo[0m] [0mx naoSatisfazRequisitosAoColocarDisciplinaAntesDosPreRequisitos[0m
+[0m[[0minfo[0m] [0mx deveMostrarDificuldadeTotalAlocadaEmPeriodo[0m
+[0m[[0minfo[0m] [0mx deveMoverDisciplina[0m
+[0m[[0minfo[0m] [0mx deveAdicionarDisciplinaEmPeriodo[0m
+[0m[[0minfo[0m] [0mx naoDeveMoverDisciplinaSeLimiteDeCreditosAtingido[0m
+[0m[[0minfo[0m] [0mx ultimoPeriodoNaoDeveTerLimiteDeCreditos[0m
+[0m[[0minfo[0m] [0mx naoDeveAdicionarPeriodoAcimaDoLimite[0m
+[0m[[0minfo[0m] [0mx naoDeveUltrapassarLimiteMaximoDeCreditosEmPeriodoQueNaoSejaUltimo[0m
+[0m[[0minfo[0m] [0mx deveMostrarBlocagemPadrao[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for test tdd.PlanejamentoDeCursoTest[0m
+[0m[[0minfo[0m] [0mFinished in 0.01 seconds[0m
+[0m[[0minfo[0m] [0m10 tests, 10 failures, 0 errors[0m
+[0m[[0minfo[0m] [0mtdd.DisciplinaTest[0m
+[0m[[0minfo[0m] [0m+ testaConstrutor[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for test tdd.DisciplinaTest[0m
+[0m[[0minfo[0m] [0mFinished in 0.002 seconds[0m
+[0m[[0minfo[0m] [0m1 tests, 0 failures, 0 errors[0m
+[0m[[0minfo[0m] [0mApplicationTest[0m
+[0m[[0minfo[0m] [0m+ simpleCheck[0m
+[0m[[0minfo[0m] [0m+ renderTemplate[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for test ApplicationTest[0m
+[0m[[0minfo[0m] [0mFinished in 0.005 seconds[0m
+[0m[[0minfo[0m] [0m2 tests, 0 failures, 0 errors[0m
+[0m[[0minfo[0m] [0mIntegrationTest[0m
+[0m[[0minfo[0m] [0mx test[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTotal for test IntegrationTest[0m
+[0m[[0minfo[0m] [0mFinished in 0.002 seconds[0m
+[0m[[0minfo[0m] [0m1 tests, 1 failures, 0 errors[0m
