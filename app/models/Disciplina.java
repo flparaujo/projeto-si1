@@ -1,161 +1,126 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
-import play.data.validation.Constraints;
-import play.db.ebean.Model;
-
-import com.google.common.base.Objects;
 /**
- * Essa classe representa uma disciplina.
+ * Classe que representa uma disciplina.
+ * 
+ * 
+ * @version 1.0
  */
-@Entity
-public class Disciplina extends Model implements Comparable<Disciplina>{
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	Long id;
-	
-	@Constraints.Required
-	@Column(unique = true, nullable=false)
-	private String nome;
-	
-	private int creditos;
-
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinTable(name = "disciplina_requisito", 
-    joinColumns = {@JoinColumn (name = "fk_disciplina")}, inverseJoinColumns = {@JoinColumn(name = "fk_requisito")})
-	private List<Disciplina> preRequisitos;
+public class Disciplina implements Comparable<Disciplina> {
 	
 	private int dificuldade;
-	
-	@Column(name="periodo_original")
-	private int periodo;
+	private String nome;
+	private int numeroDeCreditos;
+	private int periodoSugerido;
 
-	public Disciplina() {
-		setPreRequisitos(new ArrayList<Disciplina>());
-	}
+	// INFORMATION EXPERT: Disciplinas tem a responsabilidade de saber seus pre-requisitos.	
+	private List<Disciplina> preRequisitos;
 
-	public Disciplina(String nome, int dificuldade) {
-		this.setNome(nome);	
-		this.creditos = 4;
+	/**
+	 * Construtor de uma disciplina.
+	 * @param nome O nome da disciplina.
+	 * @param numeroDeCreditos O numero de creditos da disciplina.
+	 * @param preRequisitos A lista de disciplinas pre-requisitos da disciplina.
+	 * @param dificuldade A dificuldade da disciplina.
+	 * @param periodo O periodo sugerido para alocar esta disciplina.
+	 */
+	public Disciplina(String nome, int numeroDeCreditos, List<Disciplina> preRequisitos, 
+			int dificuldade, int periodo) {
+		this.nome = nome;
+		this.numeroDeCreditos = numeroDeCreditos;
+		this.preRequisitos =  preRequisitos;
 		this.dificuldade = dificuldade;
-		setPreRequisitos(new ArrayList<Disciplina>());
+		this.periodoSugerido = periodo;
 	}
+	
 
-	public Disciplina(String nome, int dificuldade, int creditos) {
-		this(nome, dificuldade);
-		this.creditos = creditos;
+	/**
+	 * Recupera a dificuldade da disciplina.
+	 * @return a dificuldade da disciplina.
+	 */
+	public int getDificuldade() {
+		return this.dificuldade;
 	}
 	
 	/**
-	 * Retorna verdadeiro caso a disciplina seja pre-requisito.
+	 * Recupera o nome da disciplina.
+	 * @return o nome da disciplina.
 	 */
-	public boolean isPreRequisito(Disciplina d) {
-		return this.getPreRequisitos().contains(d);
-	}
-
-	public void addPreRequisito(Disciplina... d) {
-		Disciplina[] lista = d;
-		for (Disciplina disciplina : lista) {
-			getPreRequisitos().add(disciplina);
-		}
-	}
-	
-	public void setCreditos(int creditos) {
-		this.creditos = creditos;
-	}
-
-	public int getCreditos() {
-		return this.creditos;
-	}
-
 	public String getNome() {
 		return this.nome;
 	}
 
-	public void setDificuldade(int dificuldade) {
-		this.dificuldade = dificuldade;
+	/**
+	 * Recupera o numero de creditos da disciplina.
+	 * @return o numero de creditos da disciplina.
+	 */
+	public int getNumeroDeCreditos() {
+		return this.numeroDeCreditos;
 	}
-
-	public int getDificuldade() {
-		return dificuldade;
-	}
-
+	
+	/**
+	 * Recupera a lista de disciplinas pre-requisito da disciplina.
+	 * @return a lista contendo as disciplinas pre-requisito.
+	 */
 	public List<Disciplina> getPreRequisitos() {
-		return preRequisitos;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setPreRequisitos(List<Disciplina> preRequisitos) {
-		this.preRequisitos = preRequisitos;
-	}
-
-	public int getPeriodo(){
-		return periodo;
+		return this.preRequisitos;
 	}
 	
-	public void setPeriodo(int periodo){
-		this.periodo = periodo;
+	/**
+	 * Obtem o id do periodo sugerido para alocar a disciplina.
+	 * @return o id do periodo.
+	 */
+	public int getPeriodoSugerido() {
+		return periodoSugerido;
 	}
 	
-	public static Finder<Long,Disciplina> find = new Finder<Long,Disciplina>(
-		    Long.class, Disciplina.class
-	); 
-	
-	public static void create(Disciplina c) {
-		c.save();
-	}
-
-	public static void delete(Long id) {
-		find.ref(id).delete();
-	}
-	
-	public static void atualizar(Long id) {
-		Disciplina p = find.ref(id);
-		p.update();
-	}
-	
-	@Override
-	public int compareTo(Disciplina c) {
-		return getNome().compareTo(c.getNome());
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(getNome(), creditos);
-	}
-
+	/**
+	 * Verifica a igualdade entre esta disciplina e outra.
+	 * Duas disciplinas sao iguais se possuem o mesmo nome e numero de creditos.
+	 * @return true se as disciplinas sao identicas, false caso contrario.
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if(!(obj instanceof Disciplina)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Disciplina other = (Disciplina) obj;
-		return Objects.equal(this.getCreditos(), other.getCreditos())
-				&& Objects.equal(this.getNome(), other.getNome());
+		}
+		return ((Disciplina) obj).getNome().equals(nome) 
+				&& ((Disciplina) obj).getNumeroDeCreditos() == numeroDeCreditos;
 	}
-
+	
+	/**
+	 * Formata a disciplina como string.
+	 * @return a representacao da disciplina como string.
+	 */
 	@Override
 	public String toString() {
-		return "Disciplina [id=" + id + ", nome=" + nome + ", periodo=" + periodo
-				+ "]";
+		return this.getNome();
+	}
+    
+	/**
+	 * Compara esta disciplina com outra pelo nome.
+	 * @param outraDisciplina A disciplina a ser comparada com esta.
+	 */
+	@Override
+	public int compareTo(Disciplina outraDisciplina) {
+		return this.getNome().compareTo(outraDisciplina.getNome());
+	}
+
+	
+	/**
+	 * Recupera uma string com a lista de disciplinas pre-requisito da disciplina.
+	 * @return a lista contendo as disciplinas pre-requisito.
+	 */
+	public String getPreRequisitosToString() {
+		String result = "";
+		String[] aux = this.preRequisitos.toString().split("");
+		for (int i = 0; i < aux.length; i++) {
+			if (!aux[i].equals("]") && !aux[i].equals("[")) {
+				result += aux[i];
+			}
+		}
+		return result;
 	}
 }

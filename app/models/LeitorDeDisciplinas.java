@@ -2,7 +2,6 @@ package models;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -29,18 +28,11 @@ public class LeitorDeDisciplinas {
 	
 	private LeitorDeDisciplinas() {
 		disciplinas = new HashMap<Integer, Disciplina>();
-//		lerArquivo();
+		lerArquivo();
 	}
 	
 	private void lerArquivo () {
-		URL url = getClass().getClassLoader().getResource("disciplinas-do-curso.xml");
-		File fXmlFile;
-		if(url != null && url.getFile() != null) {
-		   fXmlFile = new File(url.getFile());
-		}
-		else {
-			fXmlFile = new File("disciplinas-do-curso.xml");
-		}
+		File fXmlFile = new File("disciplinas-do-curso.xml");
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
 		try {
@@ -72,8 +64,7 @@ public class LeitorDeDisciplinas {
 			requisitos.add(disciplinas.get(Integer.parseInt(preRequisitos.item(i).getTextContent())));
 		}
 		//CREATOR: A classe LeitorDeDisciplina possui os dados para inicialização de objetos do tipo Disciplina.
-		Disciplina disciplina = new Disciplina(Long.parseLong(cadeira.getAttribute("id")),
-				cadeira.getAttribute("nome"), 
+		Disciplina disciplina = new Disciplina(cadeira.getAttribute("nome"), 
 				Integer.parseInt(cadeira.getElementsByTagName("creditos").item(0).getTextContent()),
 				requisitos,
 				Integer.parseInt(cadeira.getElementsByTagName("dificuldade").item(0).getTextContent()),

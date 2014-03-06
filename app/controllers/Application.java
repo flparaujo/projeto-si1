@@ -1,42 +1,47 @@
 package controllers;
 
-import models.Disciplina;
-import models.PlanoDeCurso;
-import models.exceptions.LimiteUltrapassadoException;
-import play.mvc.Controller;
-import play.mvc.Result;
+import models.PlanejamentoDeCurso;
+import exceptions.LimiteDeCreditosExcedidoException;
+import exceptions.LimiteDePeriodosException;
+import form.FormHandler;
+import play.data.Form;
+import play.mvc.*;
 
 public class Application extends Controller {
+	
+	static PlanejamentoDeCurso sistema = new PlanejamentoDeCurso();
+	static Form<FormHandler> formHandler = Form.form(FormHandler.class);
+	static String message = "";
 
-	static PlanoDeCurso plano;
-
-	public static Result index(){
-		if (plano == null) {
-			if (!PlanoDeCurso.find.all().isEmpty()){
-				plano = PlanoDeCurso.find.all().get(0);
-				plano.atualizaMapaCadeira(plano.getDisciplinasAlocadas());
-			} else { 
-				plano = new PlanoDeCurso();
-				plano.distribuiCaderas(Disciplina.find.all());
-				plano.save();
-			}
+    public static Result index() {
+    	return redirect(routes.Application.planejamentoDeCurso());
+    }
+    
+    public static Result planejamentoDeCurso() {
+    	String tempMsg = message; 
+    	message = ""; 
+    	return ok(views.html.index.render(sistema, formHandler, tempMsg));
+    }
+    
+    public static Result novoPeriodo() {
+    	try {
+			sistema.adicionaPeriodo();
+		} catch (LimiteDePeriodosException e) {
+			message = e.getMessage();
 		}
-		return ok(views.html.index.render(plano));
-	}
+    	return redirect(routes.Application.planejamentoDeCurso());
+    }
+    
+    public static Result moveDisciplinaParaPeriodo() {
+    	Form<FormHandler> form = formHandler.bindFromRequest();
+    	int idPeriodo = form.get().getIdPeriodo()-1;
+    	try {
+    		sistema.moveDisciplina(form.get().getInputNameDisciplina(), idPeriodo);
+    	}
+    	catch(LimiteDeCreditosExcedidoException e) {
+    		 message = e.getMessage();
+    	}
+    	return redirect(routes.Application.planejamentoDeCurso());
+    }
 
-	public static Result addCadeira(String disciplina, int periodo){
-		try {
-			plano.adicionaDisciplina(disciplina, periodo);
-		} catch (LimiteUltrapassadoException e) {
-			return badRequest(e.getMessage());
-		}
-		plano.update();
-		return redirect(routes.Application.index());
-	}
-
-	public static Result removerDisciplina(String disciplina){
-		plano.removeDisciplina(disciplina);
-		plano.update();
-		return redirect(routes.Application.index());
-	}
 }

@@ -19,7 +19,7 @@ public class DisciplinaTest {
 
 	@Before
 	public void setUp() {
-		disciplina = new Disciplina(1L,"Programacao 1", 4, new ArrayList<Disciplina>(), 5, 1);
+		disciplina = new Disciplina("Programacao 1", 4, new ArrayList<Disciplina>(), 5, 1);
 	}
 
 	@Test

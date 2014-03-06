@@ -2,38 +2,16 @@ package models;
 
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-
-import play.db.ebean.Model;
 import exceptions.*;
 
 /**
  * Classe que representa o planejamento de curso.
  *
  */
-@Entity
-public class PlanejamentoDeCurso extends Model {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue
-    public Long id;
-	
-	public static Finder<Long,PlanejamentoDeCurso> find = new Finder<Long,PlanejamentoDeCurso>(Long.class, PlanejamentoDeCurso.class);
+public class PlanejamentoDeCurso {
 	
 	private List<Periodo> periodos;
 	private GradeCurricular grade;
-	
-	@OneToMany
-	@JoinColumn(name = "disciplina_id")
 	private List<Disciplina> handlerDisciplinas;
 	
 	/**
@@ -51,34 +29,14 @@ public class PlanejamentoDeCurso extends Model {
 	 * Constroi um planejamento de curso, com o primeiro periodo predefinido.
 	 */
 	public PlanejamentoDeCurso() {
-		gerarPeriodos();
-		if (!GradeCurricular.find.all().isEmpty()){
-			grade = GradeCurricular.find.all().get(0);
-		} else {
-			grade = new GradeCurricular();
-			grade.save();
-		}
-		handlerDisciplinas = new ArrayList<Disciplina>();
-	}
-	
-	/**
-	 * Cria os periodos e aloca as disciplinas
-	 */
-	private void gerarPeriodos (){
 		periodos = new ArrayList <Periodo>();
-		List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-		if (Disciplina.find.all() != null) {
-			disciplinas = Disciplina.find.all();
-		}
-		for (Disciplina d: disciplinas) {
-			if (d.getPeriodoAtual() > 0) {
-				try {
-					adicionaDisciplinaAoPeriodo(d.getPeriodoAtual() - 1, d.getNome());
-				} catch (LimiteDeCreditosExcedidoException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		grade = new GradeCurricular();
+		try {
+			realizaBlocagemPadrao();
+		} catch (LimiteDeCreditosExcedidoException e) {
+			e.printStackTrace();
+		} 
+		handlerDisciplinas = new ArrayList<Disciplina>();
 	}
 	
 	/**
@@ -162,7 +120,6 @@ public class PlanejamentoDeCurso extends Model {
 		if(getDisciplinaDaGrade(nome) != null) {
 			getPeriodo(indicePeriodo).adicionaDisciplina(getDisciplinaDaGrade(nome));
 			grade.retiraDisciplina(nome);
-			grade.update();
 		}
 	}
 	
@@ -199,7 +156,6 @@ public class PlanejamentoDeCurso extends Model {
 					devolveDisciplinaParaGrade(disciplina.getNome());
 			}
 		}
-		grade.update();
 	}
 	
 	/**
@@ -250,6 +206,23 @@ public class PlanejamentoDeCurso extends Model {
 		
 	}
 	
+	private void realizaBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
+		for(int i = 0; i < MINIMO_DE_PERIODOS-1; i++)
+			periodos.add(new Periodo());
+		periodos.add(new PeriodoSemMaximoCreditos());
+		alocaDisciplinasBlocagemPadrao();
+	}
+	
+	private void alocaDisciplinasBlocagemPadrao() throws LimiteDeCreditosExcedidoException {
+		List<Disciplina> aux = new ArrayList<Disciplina>();
+		aux.addAll(grade.getDisciplinas());
+		for(Disciplina disciplina : aux) {
+			if(disciplina.getPeriodoSugerido() > 0) {
+				periodos.get(disciplina.getPeriodoSugerido()-1).adicionaDisciplina(grade.retiraDisciplina(disciplina));
+			}
+		}
+	}
+
 	/**
 	 * Move uma disciplina de um periodo para outro.
 	 * @param nome O nome da disciplina a ser remanejada.
@@ -262,9 +235,8 @@ public class PlanejamentoDeCurso extends Model {
 			Disciplina disciplina = pesquisaDisciplinaEmPeriodo(idPeriodoEmQueFoiAlocada, nome);
 			getPeriodo(idOutroPeriodo).adicionaDisciplina(disciplina);
 			desalocaDisciplinaDePeriodo(idPeriodoEmQueFoiAlocada, nome);
-			disciplina.setPeriodoAtual(idOutroPeriodo);
-			disciplina.update();
 		}
+		
 	}
 	
 	/**
@@ -322,16 +294,4 @@ public class PlanejamentoDeCurso extends Model {
 		return disciplina;
 	}
 	
-	public static void create(PlanejamentoDeCurso c) {
-		c.save();
-	}
-
-	public static void delete(Long id) {
-		find.ref(id).delete();
-	}
-
-	public static void atualizar(Long id) {
-		PlanejamentoDeCurso p = find.ref(id);
-		p.update();
-	}
 }

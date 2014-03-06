@@ -2,39 +2,15 @@ package models;
 
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-
-import play.db.ebean.Model;
-
-
 /**
  * Classe que representa a grade curricular do curso.
  * 
  * 
  * @version 1.2
  */
-@Entity
-public class GradeCurricular extends Model {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue
-    public Long id;
-	
-	public static Finder<Long,GradeCurricular> find = new Finder<Long,GradeCurricular>(Long.class, GradeCurricular.class);
+public class GradeCurricular {
 	
 	private LeitorDeDisciplinas leitorDeDisciplinas;
-	
-	@OneToMany
-	@JoinColumn(name = "disciplina_id")
 	private List<Disciplina> disciplinas;
 	
 	/**
@@ -111,16 +87,4 @@ public class GradeCurricular extends Model {
 		}
 	}
 	
-	public static void create(GradeCurricular c) {
-		c.save();
-	}
-
-	public static void delete(Long id) {
-		find.ref(id).delete();
-	}
-
-	public static void atualizar(Long id) {
-		GradeCurricular p = find.ref(id);
-		p.update();
-	}
 }

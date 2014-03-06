@@ -7,7 +7,6 @@ import models.PlanejamentoDeCurso;
 
 import org.junit.Before;
 import org.junit.Test;
-import static play.test.Helpers.*;
 
 import exceptions.LimiteDeCreditosExcedidoException;
 import exceptions.LimiteDePeriodosException;
@@ -23,7 +22,6 @@ public class PlanejamentoDeCursoTest {
 	@Before
 	public void setUp() {
 	   sistema = new PlanejamentoDeCurso();
-	   start(fakeApplication(inMemoryDatabase()));
 	}
 	
 	@Test
@@ -121,7 +119,6 @@ public class PlanejamentoDeCursoTest {
 	public void deveMoverDisciplina() throws LimiteDeCreditosExcedidoException {
 		assertTrue(sistema.pesquisaDisciplinaEmPeriodo(0, "Matematica Discreta") == null);
 		assertFalse(sistema.pesquisaDisciplinaEmPeriodo(1, "Matematica Discreta") == null);
-		
 		assertEquals(24, sistema.numeroDeCreditosDoPeriodo(0));
 		assertEquals(26, sistema.numeroDeCreditosDoPeriodo(1));
 		
