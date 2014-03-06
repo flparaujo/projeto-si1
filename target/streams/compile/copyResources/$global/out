@@ -1,3 +1,9 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/conf/application.conf,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/application.conf)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/conf/routes,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\application.conf,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\application.conf)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\dependencies.yml,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\dependencies.yml)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\evolutions,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\evolutions)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\messages.pt,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\messages.pt)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\routes,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\routes)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\evolutions\default,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\evolutions\default)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\evolutions\default\1.sql,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\evolutions\default\1.sql)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\conf\evolutions\default\2.sql,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\evolutions\default\2.sql)[0m

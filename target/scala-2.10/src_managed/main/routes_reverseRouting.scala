@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-// @SOURCE:C:/Users/Franklin Wesley/si1/projeto-si1/conf/routes
-// @HASH:8096231e1b1d93bdf9ab7a80631a7f24732d4887
-// @DATE:Fri Feb 28 11:19:20 GMT-03:00 2014
-=======
-// @SOURCE:/home/felipeaa/herokuProjeto/projeto-si1/conf/routes
-// @HASH:e7509f0b490347ac336a2ed26e80801c9d543e5e
-// @DATE:Thu Feb 27 13:41:10 BRT 2014
->>>>>>> 750a635dcd05adba9684535e43d0001ed7f956c1
+// @SOURCE:C:/Users/Franklin Wesley/Downloads/projeto-si1-master/conf/routes
+// @HASH:812d818b2b7430d14ea7d2814ae256e5d37a966d
+// @DATE:Wed Mar 05 19:28:44 GMT-03:00 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -19,18 +13,18 @@ import play.libs.F
 import Router.queryString
 
 
-// @LINE:14
+// @LINE:13
+// @LINE:12
 // @LINE:11
-// @LINE:10
 // @LINE:9
 // @LINE:6
 package controllers {
 
-// @LINE:14
+// @LINE:9
 class ReverseAssets {
     
 
-// @LINE:14
+// @LINE:9
 def at(file:String): Call = {
    Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
 }
@@ -39,34 +33,36 @@ def at(file:String): Call = {
 }
                           
 
+// @LINE:13
+// @LINE:12
 // @LINE:11
-// @LINE:10
-// @LINE:9
 // @LINE:6
 class ReverseApplication {
     
 
-// @LINE:9
-def planejamentoDeCurso(): Call = {
-   Call("GET", _prefix + { _defaultPrefix } + "planejamentoDeCurso")
+// @LINE:11
+def addCadeira(disciplina:String, periodo:Int): Call = {
+   Call("POST", _prefix + { _defaultPrefix } + "addCadeira/" + implicitly[PathBindable[String]].unbind("disciplina", dynamicString(disciplina)) + "/" + implicitly[PathBindable[Int]].unbind("periodo", periodo))
 }
                                                 
 
-// @LINE:11
-def moveDisciplinaParaPeriodo(): Call = {
-   Call("POST", _prefix + { _defaultPrefix } + "planejamentoDeCurso/moveDisciplinaParaPeriodo")
+// @LINE:13
+// @LINE:12
+def removerDisciplina(disciplina:String): Call = {
+   (disciplina: @unchecked) match {
+// @LINE:12
+case (disciplina) if true => Call("POST", _prefix + { _defaultPrefix } + "removerDisciplina/" + implicitly[PathBindable[String]].unbind("disciplina", dynamicString(disciplina)))
+                                                        
+// @LINE:13
+case (disciplina) if true => Call("GET", _prefix + { _defaultPrefix } + "removerDisciplina/" + implicitly[PathBindable[String]].unbind("disciplina", dynamicString(disciplina)))
+                                                        
+   }
 }
                                                 
 
 // @LINE:6
 def index(): Call = {
    Call("GET", _prefix)
-}
-                                                
-
-// @LINE:10
-def novoPeriodo(): Call = {
-   Call("POST", _prefix + { _defaultPrefix } + "planejamentoDeCurso/novoPeriodo")
 }
                                                 
     
@@ -76,18 +72,18 @@ def novoPeriodo(): Call = {
                   
 
 
-// @LINE:14
+// @LINE:13
+// @LINE:12
 // @LINE:11
-// @LINE:10
 // @LINE:9
 // @LINE:6
 package controllers.javascript {
 
-// @LINE:14
+// @LINE:9
 class ReverseAssets {
     
 
-// @LINE:14
+// @LINE:9
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
@@ -101,30 +97,36 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
+// @LINE:13
+// @LINE:12
 // @LINE:11
-// @LINE:10
-// @LINE:9
 // @LINE:6
 class ReverseApplication {
     
 
-// @LINE:9
-def planejamentoDeCurso : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.planejamentoDeCurso",
+// @LINE:11
+def addCadeira : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.addCadeira",
    """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "planejamentoDeCurso"})
+      function(disciplina,periodo) {
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addCadeira/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("disciplina", encodeURIComponent(disciplina)) + "/" + (""" + implicitly[PathBindable[Int]].javascriptUnbind + """)("periodo", periodo)})
       }
    """
 )
                         
 
-// @LINE:11
-def moveDisciplinaParaPeriodo : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.moveDisciplinaParaPeriodo",
+// @LINE:13
+// @LINE:12
+def removerDisciplina : JavascriptReverseRoute = JavascriptReverseRoute(
+   "controllers.Application.removerDisciplina",
    """
-      function() {
-      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "planejamentoDeCurso/moveDisciplinaParaPeriodo"})
+      function(disciplina) {
+      if (true) {
+      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "removerDisciplina/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("disciplina", encodeURIComponent(disciplina))})
+      }
+      if (true) {
+      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "removerDisciplina/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("disciplina", encodeURIComponent(disciplina))})
+      }
       }
    """
 )
@@ -140,17 +142,6 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
    """
 )
                         
-
-// @LINE:10
-def novoPeriodo : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.novoPeriodo",
-   """
-      function() {
-      return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "planejamentoDeCurso/novoPeriodo"})
-      }
-   """
-)
-                        
     
 }
               
@@ -158,19 +149,19 @@ def novoPeriodo : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
-// @LINE:14
+// @LINE:13
+// @LINE:12
 // @LINE:11
-// @LINE:10
 // @LINE:9
 // @LINE:6
 package controllers.ref {
 
 
-// @LINE:14
+// @LINE:9
 class ReverseAssets {
     
 
-// @LINE:14
+// @LINE:9
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Assets.at(path, file), HandlerDef(this, "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Map static resources from the /public folder to the /assets URL path""", _prefix + """assets/$file<.+>""")
 )
@@ -179,34 +170,28 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
+// @LINE:13
+// @LINE:12
 // @LINE:11
-// @LINE:10
-// @LINE:9
 // @LINE:6
 class ReverseApplication {
     
 
-// @LINE:9
-def planejamentoDeCurso(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.planejamentoDeCurso(), HandlerDef(this, "controllers.Application", "planejamentoDeCurso", Seq(), "GET", """ Disciplinas""", _prefix + """planejamentoDeCurso""")
+// @LINE:11
+def addCadeira(disciplina:String, periodo:Int): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.addCadeira(disciplina, periodo), HandlerDef(this, "controllers.Application", "addCadeira", Seq(classOf[String], classOf[Int]), "POST", """""", _prefix + """addCadeira/$disciplina<[^/]+>/$periodo<[^/]+>""")
 )
                       
 
-// @LINE:11
-def moveDisciplinaParaPeriodo(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.moveDisciplinaParaPeriodo(), HandlerDef(this, "controllers.Application", "moveDisciplinaParaPeriodo", Seq(), "POST", """""", _prefix + """planejamentoDeCurso/moveDisciplinaParaPeriodo""")
+// @LINE:12
+def removerDisciplina(disciplina:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
+   controllers.Application.removerDisciplina(disciplina), HandlerDef(this, "controllers.Application", "removerDisciplina", Seq(classOf[String]), "POST", """""", _prefix + """removerDisciplina/$disciplina<[^/]+>""")
 )
                       
 
 // @LINE:6
 def index(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Application.index(), HandlerDef(this, "controllers.Application", "index", Seq(), "GET", """ Home page""", _prefix + """""")
-)
-                      
-
-// @LINE:10
-def novoPeriodo(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.novoPeriodo(), HandlerDef(this, "controllers.Application", "novoPeriodo", Seq(), "POST", """""", _prefix + """planejamentoDeCurso/novoPeriodo""")
 )
                       
     

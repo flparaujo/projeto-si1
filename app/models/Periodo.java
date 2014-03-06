@@ -1,112 +1,130 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import exceptions.LimiteDeCreditosExcedidoException;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import play.db.ebean.Model;
 
 /**
- * Classe que representa um periodo de curso.
- * 
- * @author Felipe Araujo de Andrade
- * @version 1.1
+ * Essa clasee representa um período
  */
-public class Periodo {
+@Entity
+public class Periodo extends Model{
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Long id;
+	
+	private int numero;
+
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinTable(name = "periodo_disciplina", 
+    joinColumns = {@JoinColumn (name = "fk_periodo")}, inverseJoinColumns = {@JoinColumn(name = "fk_disciplina")})
 	private List<Disciplina> disciplinas;
-	
-	private final int MINIMO_DE_CREDITOS = 14;
-	private final int MAXIMO_DE_CREDITOS = 28;
-	
-	/**
-	 * Construtor de Periodo.
-	 */
-	public Periodo() {
+
+	public Periodo(){
 		disciplinas = new ArrayList<Disciplina>();
 	}
 	
-	/**
-	 * Recupera a lista das disciplinas alocadas para o periodo.
-	 * @return a lista de disciplinas do periodo.
-	 */
-	public List<Disciplina> disciplinasAlocadas() {
-		return this.disciplinas;
-	}
-
-	/**
-	 * Adiciona uma disciplina a este periodo.
-	 * @param nome O nome da disciplina.
-	 * @param numeroDeCreditos O numero de creditos da disciplina.
-	 * @param preRequisitos A lista contendo as disciplinas pre-requisito da disciplina a ser adicionada.
-	 * @return true se a disciplina foi adicionada, false caso contrario.
-	 * @throws LimiteDeCreditosExcedidoException quando a tentativa de adicionar a disciplina ultrapassa 
-	 * o limite maximo de creditos.
-	 */
-	public void adicionaDisciplina(Disciplina disciplina) 
-			throws LimiteDeCreditosExcedidoException {
-		if (!disciplinas.contains(disciplina)) {
-			if ((getNumeroDeCreditosDoPeriodo() + disciplina.getNumeroDeCreditos()) > MAXIMO_DE_CREDITOS) {
-				throw new LimiteDeCreditosExcedidoException();
-			}
-			disciplinas.add(disciplina);
-		}
-	}
-
-	/**
-	 * Obtem o numero de creditos do periodo.
-	 * @return o numero de creditos do periodo.
-	 */
-	public int getNumeroDeCreditosDoPeriodo() {
-	    //INFORMATION EXPERT: Casse Periodo contem disciplinas, que sao o atributo necessario para o calculo do total de creditos
-		int total = 0;
-		for(Disciplina disciplina : disciplinas)
-			total += disciplina.getNumeroDeCreditos();
-		return total;
-	}
-
-	/**
-	 * Metodo que verifica se o periodo tem menos creditos do que o limite minimo.
-	 * @return true se esta abaixo do limite minimo de creditos, false caso contrario.
-	 */
-	public boolean abaixoDoLimiteMinimoDeCreditos() {
-		return getNumeroDeCreditosDoPeriodo() < MINIMO_DE_CREDITOS;
-	}
-
-	/**
-	 * Remove uma disciplina deste periodo, retornando-a.
-	 * @param nomeDaDisciplina O nome da disciplina a ser removida.
-	 * @return a disciplina removida.
-	 */
-	public Disciplina removeDisciplina(String nomeDaDisciplina) {
-		for(Disciplina disciplina : disciplinas) {
-			if(disciplina.getNome().equals(nomeDaDisciplina))
-				return disciplinas.remove(disciplinas.indexOf(disciplina));
-		}
-		return null;
-	}
-
-	/**
-	 * Obtem uma disciplina deste periodo, sem remove-la.
-	 * @param nomeDaDisciplina O nome da disciplina que se quer obter.
-	 * @return a disciplina, se ela estiver no periodo, null caso contrario.
-	 */
-	public Disciplina getDisciplina(String nomeDaDisciplina) {
-		for(Disciplina disciplina : disciplinas) {
-			if(disciplina.getNome().equals(nomeDaDisciplina))
-				return disciplinas.get(disciplinas.indexOf(disciplina));
-		}
-		return null;
+	public Periodo(int numeroDoPeriodo) {
+		this.numero = numeroDoPeriodo;
+		disciplinas = new ArrayList<Disciplina>();
 	}
 	
-	/**
-	 * Obtem a dificuldade do periodo.
-	 * @return a dificuldade do periodo.
-	 */
-	public int getDificuldadeDoPeriodo() {
-		//INFORMATION EXPERT: Classe Periodo contem disciplinas, que sao o atributo necessario para o calculo da dificuldade total
-		int dificuldade = 0;
-		for(Disciplina disciplina : disciplinas) {
-			dificuldade += disciplina.getDificuldade();
+	public Long getId(){
+		return id;
+	}	
+
+	public static Finder<Long,Periodo> find = new Finder<Long,Periodo>(
+		    Long.class, Periodo.class
+	);
+	
+	public static void create(Periodo p) {
+		p.save();
+	}
+
+	public static void delete(Long id) {
+		find.ref(id).delete();
+	}
+	
+	public static void atualizar(Long id) {
+		Periodo p = find.ref(id);
+		p.update();
+	}
+
+	public void adicionarDisciplina(Disciplina disciplina){
+		disciplinas.add(disciplina);
+	}
+
+	public void removerDisciplina(Disciplina disciplina) {
+		disciplinas.remove(disciplina);
+	}
+
+	public int getDificuldadeTotal() {
+		int difi = 0;
+		for (Disciplina d : getDisciplinas()) {
+			difi += d.getDificuldade();
 		}
-		return dificuldade;
+		return difi;
+	}
+
+	/**
+	 * Calcula o total de Créditos do Periodo.
+	 */
+	public int getCreditos() {
+		int sum = 0;
+		for (Disciplina d : getDisciplinas()) {
+			sum += d.getCreditos();
+		}
+		return sum;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		Collections.sort(disciplinas);
+		return disciplinas;
+	}
+	
+	public void setDisciplinas(List<Disciplina> disciplinas){
+		this.disciplinas = disciplinas;
+	}
+	
+	public int getNumero() {
+		return numero;
+	}
+	
+	public void setNumero(int numero){
+		this.numero = numero;
+	}
+	
+	public List<Disciplina> getListaDisciplinas(){
+		return disciplinas;
+	}
+
+	public Disciplina getDisciplina(String disciplina) {
+		for(Disciplina d: disciplinas){
+			if(d.getNome().equals(disciplina)){
+				return d;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "Periodo [id=" + id + ", numero=" + numero + ", disciplinas="
+				+ disciplinas + "]";
 	}
 }

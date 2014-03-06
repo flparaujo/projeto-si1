@@ -1,17 +1,8 @@
 [0m[[0mdebug[0m] [0mCopy play resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/javascripts/bootstrap.js,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/javascripts/bootstrap.js)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/javascripts/bootstrap.min.js,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/javascripts/bootstrap.min.js)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/javascripts/jquery-1.9.0.min.js,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/javascripts/jquery-1.9.0.min.js)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/fundo_rodape.jpg,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/fundo_rodape.jpg)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/estudos.jpg,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/estudos.jpg)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/bg-item.png,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/bg-item.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/glyphicons-halflings-white.png,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/glyphicons-halflings-white.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/favicon.png,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/favicon.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/bg.jpg,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/bg.jpg)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/images/glyphicons-halflings.png,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/images/glyphicons-halflings.png)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/stylesheets/bootstrap.css,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/stylesheets/bootstrap.css)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/stylesheets/main.css,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/stylesheets/main.css)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/stylesheets/bootstrap.min.css,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/stylesheets/bootstrap.min.css)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/stylesheets/bootstrap-responsive.min.css,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/stylesheets/bootstrap-responsive.min.css)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/stylesheets/xom.css,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/stylesheets/xom.css)[0m
-[0m[[0mdebug[0m] [0m	(/home/felipeaa/herokuProjeto/projeto-si1/public/stylesheets/bootstrap-responsive.css,/home/felipeaa/herokuProjeto/projeto-si1/target/scala-2.10/classes/public/stylesheets/bootstrap-responsive.css)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\images\bg-1.jpg,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\images\bg-1.jpg)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\images\bg-body.gif,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\images\bg-body.gif)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\images\favicon.png,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\images\favicon.png)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\javascripts\funcoes.js,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\javascripts\funcoes.js)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\javascripts\jquery-1.9.0.min.js,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\javascripts\jquery-1.9.0.min.js)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\stylesheets\main.css,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\stylesheets\main.css)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\Franklin Wesley\Downloads\projeto-si1-master\public\stylesheets\pure.css,C:\Users\Franklin Wesley\Downloads\projeto-si1-master\target\scala-2.10\classes\public\stylesheets\pure.css)[0m

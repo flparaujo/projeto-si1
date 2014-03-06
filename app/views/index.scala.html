@@ -1,173 +1,71 @@
-@(sistema: SistemaDePlanejamentoDeCurso, formHandler: Form[form.FormHandler], message: String)
+@(plano: PlanoDeCurso)
 
 @import helper._
 
-@main("Meu Curso") {
-	
-	<style type="text/css">
-		<!--
-			body {
-				margin-top: 0px;
-				background-image: url(assets/images/bg.jpg);
-				background-repeat: repeat-x;
-				background-position: top;
-				background-color: #E7E7E7;
-			}
-		-->
-	</style>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type='text/javascript' src="@routes.Assets.at("javascripts/funcoes.js")"></script>
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-	<body>
-		<div class="containerWrap">
-		  	<div class="header">
-    			<h1>Meu Curso</h1>
-    			<div class="content" id="wrapper">
-      				<article>
-        				<h3 class="shad">Planejamento de curso</h3>
-        				<center>
-        					<img src="assets/images/estudos.jpg" class="img-polaroid" style="width:450; height:280px;">
-        				</center>
-      				</article>
-					<aside>
-						<br>
-						<br>
-						<br>
-        				<hgroup>
-         					<h1>Bem-vindo ao Meu Curso</h1>
-         					<br>
-          					<h2>Planeje seu curso com facilidade e rapidez.</h2>
-        				</hgroup>
-						<br>
-    					<br>
-    					<br>
-    					<br>
-    					<br>
-    					<br>
-    					<br>
-    				</aside> 				
-    					<font color="black" size=12>Periodos</font>
-    	    			<br>
-    	    			<br>
-    	    			<br>
-        				Planeje seus periodos aqui. 
-						<div id="colunas">
-	 						@for(periodo <- sistema.getPeriodos()) {
-	 							<br>
-	 							<nome> ------------------------------------------------------- </nome>
-	 	 						<br>
-		 	  					<h2>	
-		 	  						<small> @(sistema.getPeriodos.indexOf(periodo)+1)º periodo </small>
-	 		  					</h2>
-		  						@for(disciplina <- sistema.getDisciplinasDoPeriodo(sistema.getPeriodos.indexOf(periodo))){
-			 						<div id="c1" class="coluna">
-			 							<div class="disciplina" name="inputNameDisciplina">
-											<font @if(!sistema.preRequisitosSatisfeitos(disciplina.getNome())){color="red"}>
-												<nome>
-
-													@disciplina.getNome()
-												
-												</nome>
-												<descricao> ---- @disciplina.getNumeroDeCreditos() creditos</descricao>
-											</font>
-			 							</div>
-				 					</div>
-			  					}	
-			  					<br>
-		 		 				<nome> Total de créditos: @sistema.numeroDeCreditosDoPeriodo(sistema.getPeriodos.indexOf(periodo))</nome>
-		 		 				<br>
-		 		 				<nome> Dificuldade do Período: @sistema.dificuldadeDoPeriodo(sistema.getPeriodos.indexOf(periodo))</nome>
-		   						@if(sistema.periodoComCreditosAbaixoDoLimiteMinimo(sistema.getPeriodos().indexOf(periodo))) {
-									<br>
-									<nome>Aviso: Mínimo de creditos não atingido</nome>
-									<br>
-		  						}
-								<br>
-							}
-							<br>
-							<div id="c2" class="coluna"></div>
-							<div id="c3" class="coluna"></div>
-							<div id="c4" class="coluna"></div>
-							<div id="c5" class="coluna"></div>
-							<div id="c6" class="coluna"></div>
-							<div id="c7" class="coluna"></div>
-							<div id="c8" class="coluna"></div>
-						</div>
-						@if(message != "") {
-			 				<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">alert ("@message.toString()")</SCRIPT>
-						}
-						<br>
-						<div id="alocarDisciplina">
-							@form(routes.Application.moveDisciplinaParaPeriodo()){
-								@if(sistema.getPeriodos.size() > 1) {
-		    						<nome> --------------------------- </nome>
-			   		 				<br>
-			    					<nome> Move disciplina para um periodo </nome>
-									<br>
-									<select class="selectpicker" data-live-search="true" name="inputNameDisciplina" >
-        								@for(disciplina <- sistema.disciplinasAlocadas()) { 
-											<option value="@disciplina.getNome()" name="inputNameDisciplina" >@disciplina.getNome()</option> 
-										}	
-        							</select> 
-	        						<br>
-    	    						<select class="selectpicker" data-width="100px" name="idPeriodo" >
-        								@for(periodo <- sistema.getPeriodos()) {
-        		   							<option value=@(sistema.getPeriodos().indexOf(periodo)+1) name="idPeriodo" >@(sistema.getPeriodos().indexOf(periodo)+1)</option> 
-			   								
-										}
-        							</select> 
-	        						<button type="submit" class="btn btn-primary" type="button">mover disciplina</button>		
-    	    					}
-							}
-						</div>
-						
-						<br>
-						<div id="addperiodos">
-							@form(routes.Application.novoPeriodo()) {
-								@if(sistema.numeroDeCreditosDoPeriodo(sistema.getPeriodos().size() -1) < 14) {
-									<button type="submit" class="btn btn-large btn-primary disabled" type="button" disabled="disabled">Adicionar periodo</button>
-								} else {
-									<button type="submit" class="btn btn-large btn-primary type="button">Adicionar periodo</button>
-								}
-	    					}	
-    					</div>
-    					<br>
-    					<br>
-    					<br>
-    					<hr>
-    					<font color="black" size=12>Grade Curricular</font>
-    					<br>
-    					<br>
-    					<br>
-        				<form name="contactformfree" method="post" action="free_process.php" onSubmit="return validate.check(this)">
-							<table width="400px" class="cffree">
-								<tr>
-	 								<td colspan="2"></td>
-								</tr>
-								<div id="gradeCurricular">
-									<table class="table table-hover">
-            	       					<tr style="background-color: #8B8B7A;">
-                	       					<th >Disciplina</td>
-                    	   					<th >Creditos</td>
-                    	   					<th >Dificuldade</td>
-                       						<th >Requisitos</td>
-          	     						</tr>
-        								@for(disciplina <- sistema.disciplinasDoCurso()){
-            								<tr>
-                    							<td >@disciplina.getNome()</td>
-                    							<td >@disciplina.getNumeroDeCreditos()</td>
-                    							<td >@disciplina.getDificuldade()</td>
-                 					   			<td >@disciplina.getPreRequisitosToString()</td>                
-            								</tr>
-        								}
-    								</table>
-								</div>
-							</table>
-        				</form>
-        				
-    			</div>
+<body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
+@main("Meu Plano de Curso") {
+	<center><h2>@Messages("PlanoDeCurso")</h2></center>
+	<center><h3 style="position:absolute;left:43%;top:50px;color:#fff;text-shadow:2px 2px #000;">Períodos Do Curso</h3></center>
+	<div id="periodos">
+		@for(periodo <- plano.getPeriodos()) {
+			<div id="@periodo.getNumero()" class="periodo" ondrop="drop(event, this)"
+				ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
+		
+				<ul style="list-style:none;">
+					<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;" color=#000000>@periodo.getNumero() @Messages("nPeriodo") </span>
+					@for(cadeira <- periodo.getDisciplinas()) {
+		  				@if(plano.verificaPrerequisito(cadeira.getNome())){
+		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="remover" draggable="true" 
+								ondragstart="drag(event)" ondragend="dragEnd()">
+		  				}else{
+		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
+								ondragstart="drag(event)" ondragend="dragEnd()">
+		  				}		  	
+		  				<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
+		  				<label class="creditos">
+		  					<font color=000000>@cadeira.getCreditos() @Messages("creditos")</font> 
+		  				</label>
+		  				<label class="dificuldade"> 
+		  					<font color=000000>dificuldade: @cadeira.getDificuldade()</font> 
+		  				</label>
+		  		
+		  				<span style="margin-top: 5px;margin-left:150px;" 
+		  					onclick="removerDisciplina('@cadeira.getNome()', '@plano.isPreRequisito(cadeira.getNome())')"></span>	
+		  				</div>
+					}	 
+				</ul>
+				<span class="periodoCreditos">
+					<font color=000000>@periodo.getCreditos() @Messages("creditos")</font>
+				</span>
+				<span class="periodoDificuldade">
+					<font color=000000>Dificuldade: @periodo.getDificuldadeTotal()</font>
+				</span>
 			</div>
-		</div>
- 		<footer>
-			<img src="assets/images/fundo_rodape.jpg" class="img-polaroid">
-		</footer> 
-	</body>
-}
+		}
+	</div>
+	<br/>
+	<center><div class="separator"> </div> </center>
+	
+		<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#000000;font-size:18px;
+			background-color:#fff;">
+			- Arraste a cadeira para o período que você quer alocá-la
+		</h5>
+		<div style="width:0%;height:500px;overflow-y:auto;margin-top:20px;margin-left:30px;">
+			<ul style="list-style:none;overflow-y:auto;margin-top:20px;"> 
+				@for(cadeira <- plano.getDisciplinaDispniveisOrdenadas()) {
+					<div class="disponiveis" id="@cadeira.getNome()"	draggable="true" 
+						ondragstart="drag(event)" ondragend="dragEnd()">
+	  						<center><label class="nome">@cadeira.getNome()</label></center>
+		  					<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
+		  					<label class="dificuldade"> dificuldade: @cadeira.getDificuldade()</label>
+	  				</div>
+			} 
+			</ul>
+		</div>	
+	}
+</body>
