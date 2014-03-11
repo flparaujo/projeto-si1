@@ -16,8 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import models.exceptions.LimiteDePeriodosException;
 import models.exceptions.LimiteUltrapassadoException;
-
 import play.db.ebean.Model;
 
 /**
@@ -36,18 +36,21 @@ public class PlanoDeCurso extends Model{
     @JoinTable(name = "plano_periodo", 
     joinColumns = {@JoinColumn (name = "fk_plano")}, inverseJoinColumns = {@JoinColumn(name = "fk_periodo")})
 	private List<Periodo> periodos;
-
+	private int periodoAtual;
 	private Map<String, Disciplina> mapaDeDisciplinas;
 	
+	public static final int MAXIMO_DE_PERIODOS = 14;
 	public static final int MAXIMO_CREDITOS = 28;
+	public static final int MINIMO_CREDITOS = 12;
 
 	public PlanoDeCurso() {
 		this.periodos = new ArrayList<Periodo>();
 		for (int i = 1; i<= 8; i++ ){
-			periodos.add(new Periodo(i));
+			periodos.add(new Periodo(i, MAXIMO_CREDITOS));
 		}
 		this.mapaDeDisciplinas = new HashMap<String, Disciplina>();
-		distribuiDisciplinas();  
+		distribuiDisciplinas();
+		this.periodoAtual = 1;
 	}
 
 	public Long getId(){
@@ -71,6 +74,17 @@ public class PlanoDeCurso extends Model{
 		p.update();
 	}
 	
+	public int getMinimoCreditos() {
+		return MINIMO_CREDITOS;
+	}
+	
+	public void setPeriodoAtual (int novoPeriodoAtual){
+		for (int i = periodoAtual; i < novoPeriodoAtual; i++) {
+			getPeriodo(i).setEValido(new ValidadorMax(MAXIMO_CREDITOS));
+		}
+		this.periodoAtual = novoPeriodoAtual;
+	}
+	
 	/**
 	 * Distribui as disciplinas em seus respectivos períodos.
 	 */
@@ -78,7 +92,11 @@ public class PlanoDeCurso extends Model{
 		for(Disciplina d: mapaDeDisciplinas.values()){
 			if(d.getPeriodo() != 0) {
 				Periodo p = getPeriodo(d.getPeriodo());
-				p.adicionarDisciplina(d);
+				try {
+					p.adicionarDisciplina(d);
+				} catch (LimiteUltrapassadoException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -108,12 +126,14 @@ public class PlanoDeCurso extends Model{
 	 * Adiciona um periodo à lista de períodos, de acordo com o tamanho da
 	 * lista.
 	 */
-	public void adicionaPeriodo() {
-		this.periodos.add(new Periodo(this.periodos.size() + 1));
+	public void adicionaPeriodo() throws LimiteDePeriodosException {
+		if(periodos.size() == MAXIMO_DE_PERIODOS)
+			throw new LimiteDePeriodosException();
+		this.periodos.add(new Periodo(this.periodos.size() + 1, MAXIMO_CREDITOS));
 	}
 	
 	public void adicionaPeriodo(int num_periodo) {
-		this.periodos.add(new Periodo(num_periodo));
+		this.periodos.add(new Periodo(num_periodo, MAXIMO_CREDITOS));
 	}
 	
 	public Map<String, Disciplina> getMapaDisciplina(){
@@ -178,9 +198,6 @@ public class PlanoDeCurso extends Model{
 	 */
 	public void adicionaDisciplina(String disciplinaNome, int periodo) throws LimiteUltrapassadoException {
 		Disciplina disciplina = mapaDeDisciplinas.get(disciplinaNome);
-		if (getPeriodo(periodo).getCreditos() + disciplina.getCreditos() > MAXIMO_CREDITOS) {
-			throw new LimiteUltrapassadoException("Limite de Créditos Ultrapassado!");
-		}
 		for(Periodo p: periodos){
 			if(p.getDisciplinas().contains(disciplina)){
 				p.removerDisciplina(disciplina);

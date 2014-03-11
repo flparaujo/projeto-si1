@@ -59,10 +59,10 @@ function remDisciplina(disciplina, flagRequisitos){
 	if (r==true){
 	$.ajax({
 		  type: "POST",
-		  url: "/remomerDisciplina/" + cadeira,
+		  url: "/remCadeira/" + disciplina,
 		  data: "",
 		  success: function(){
-		        alert( "Disciplina Removida");
+		        alert("Disciplina Removida");
 		        window.location = "/";
 		  },
 		  error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -73,5 +73,11 @@ function remDisciplina(disciplina, flagRequisitos){
 		      alert(res2);
 		  }
 		});
+	}
+	
+function dropR(ev, e){
+	ev.preventDefault();
+	var data=ev.dataTransfer.getData("Text");
+	$remDisciplina(data, true);
 	}
 }

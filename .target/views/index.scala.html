@@ -2,9 +2,6 @@
 
 @import helper._
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script type='text/javascript' src="@routes.Assets.at("javascripts/funcoes.js")"></script>
-<link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 <body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
@@ -26,16 +23,13 @@
 		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
 								ondragstart="drag(event)" ondragend="dragEnd()">
 		  				}		  	
-		  				<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
-		  				<label class="creditos">
-		  					<font color=000000>@cadeira.getCreditos() @Messages("creditos")</font> 
-		  				</label>
-		  				<label class="dificuldade"> 
-		  					<font color=000000>dificuldade: @cadeira.getDificuldade()</font> 
-		  				</label>
-		  		
-		  				<span style="margin-top: 5px;margin-left:150px;" 
-		  					onclick="removerDisciplina('@cadeira.getNome()', '@plano.isPreRequisito(cadeira.getNome())')"></span>	
+		  					<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
+		  					<label class="creditos">
+		  						<font color=000000>@cadeira.getCreditos() @Messages("creditos")</font> 
+		  					</label>
+		  					<label class="dificuldade"> 
+		  						<font color=000000>dificuldade: @cadeira.getDificuldade()</font> 
+		  					</label>	
 		  				</div>
 					}	 
 				</ul>
@@ -47,7 +41,10 @@
 				</span>
 			</div>
 		}
+		
 	</div>
+	</div>
+	
 	<br/>
 	<center><div class="separator"> </div> </center>
 	

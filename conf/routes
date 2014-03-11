@@ -9,5 +9,5 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 POST    /addCadeira/:disciplina/:periodo  controllers.Application.addCadeira(disciplina:String,periodo:Int)
-POST    /removerDisciplina/:disciplina           controllers.Application.removerDisciplina(disciplina:String)
-GET     /removerDisciplina/:disciplina           controllers.Application.removerDisciplina(disciplina:String)
+POST    /remCadeira/:disciplina           controllers.Application.remCadeira(disciplina:String)
+GET     /remCadeira/:disciplina           controllers.Application.remCadeira(disciplina:String)

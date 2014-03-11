@@ -18,3 +18,4 @@ db/
 dist/
 test-result/
 modules/
+/bin

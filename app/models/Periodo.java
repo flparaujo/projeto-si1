@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import models.exceptions.LimiteUltrapassadoException;
 import play.db.ebean.Model;
 
 /**
@@ -28,6 +29,8 @@ public class Periodo extends Model{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
+	private ValidadorDeCreditos validador;
+	
 	private int numero;
 
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -35,13 +38,15 @@ public class Periodo extends Model{
     joinColumns = {@JoinColumn (name = "fk_periodo")}, inverseJoinColumns = {@JoinColumn(name = "fk_disciplina")})
 	private List<Disciplina> disciplinas;
 
-	public Periodo(){
+	public Periodo (int maxCreditos){
 		disciplinas = new ArrayList<Disciplina>();
+		validador = new ValidadorMax(maxCreditos);
 	}
 	
-	public Periodo(int numeroDoPeriodo) {
+	public Periodo (int numeroDoPeriodo, int maxCreditos) {
 		this.numero = numeroDoPeriodo;
 		disciplinas = new ArrayList<Disciplina>();
+		validador = new ValidadorMax(maxCreditos);
 	}
 	
 	public Long getId(){
@@ -65,7 +70,14 @@ public class Periodo extends Model{
 		p.update();
 	}
 
-	public void adicionarDisciplina(Disciplina disciplina){
+	public void setEValido (ValidadorDeCreditos validador){
+		this.validador = validador;
+	}
+	
+	public void adicionarDisciplina(Disciplina disciplina) throws LimiteUltrapassadoException{
+		if (!validador.eValido(getCreditos(), disciplina.getCreditos())) {
+			throw new LimiteUltrapassadoException("Limite de Créditos Ultrapassado!");
+		}
 		disciplinas.add(disciplina);
 	}
 
