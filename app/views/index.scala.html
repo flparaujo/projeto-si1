@@ -41,17 +41,34 @@
 				</span>
 			</div>
 		}
+	</div>
+	
+	<STYLE> 
+		<!-- 
+		.teste{position: absolute; top: 665px; left: 50px;} 
+		--> 
+	</STYLE>  
 		
-	</div>
-	</div>
+	<div id="addperiodos" class="teste">
+		@form(routes.Application.novoPeriodo()) {
+			<button type="submit" class="btn btn-large btn-primary type="button" position="fixed" bottom="0px">Adicionar periodo</button>
+	   	}	
+    </div>
 	
 	<br/>
 	<center><div class="separator"> </div> </center>
-	
-		<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#000000;font-size:18px;
-			background-color:#fff;">
-			- Arraste a cadeira para o período que você quer alocá-la
-		</h5>
+		@if(!plano.minimoCreditosSatisfeitos()) {
+			<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#FF0000;font-size:18px;">
+				Aviso: Mínimo de creditos não atingido
+			</h5>
+			<h5 style="float:right;width:70%;position:absolute;top:640px;left:90px;margin:0;color:#000000;font-size:18px;">
+				Arraste a cadeira para o período que você quer alocá-la
+			</h5>
+		} else {
+			<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#000000;font-size:18px;">
+				Arraste a cadeira para o período que você quer alocá-la
+			</h5>
+		}
 		<div style="width:0%;height:500px;overflow-y:auto;margin-top:20px;margin-left:30px;">
 			<ul style="list-style:none;overflow-y:auto;margin-top:20px;"> 
 				@for(cadeira <- plano.getDisciplinaDispniveisOrdenadas()) {

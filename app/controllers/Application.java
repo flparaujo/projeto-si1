@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Disciplina;
+import models.Periodo;
 import models.PlanoDeCurso;
 import models.exceptions.LimiteDePeriodosException;
 import models.exceptions.LimiteUltrapassadoException;
@@ -30,10 +31,6 @@ public class Application extends Controller {
 			plano.adicionaDisciplina(disciplina, periodo);
 		} catch (LimiteUltrapassadoException e) {
 			return badRequest(e.getMessage());
-		} finally {
-			if (plano.getPeriodo(periodo).getCreditos() < 12) {
-				return badRequest ("O " + periodo + " período não atingiu o mínimo de creditos");
-			}
 		}
 		plano.update();
 		return redirect(routes.Application.index());

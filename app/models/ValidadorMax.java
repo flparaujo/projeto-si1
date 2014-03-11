@@ -10,9 +10,10 @@ public class ValidadorMax implements ValidadorDeCreditos{
 
 	@Override
 	public boolean eValido(int creditosPeriodo, int creditoDisciplina) {
+		boolean result = true;
 		if (creditosPeriodo + creditoDisciplina > maximoCreditos) {
-			return false;
+			result = false;
 		}
-		return true;
+		return result;
 	}
 }

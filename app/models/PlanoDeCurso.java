@@ -46,7 +46,10 @@ public class PlanoDeCurso extends Model{
 	public PlanoDeCurso() {
 		this.periodos = new ArrayList<Periodo>();
 		for (int i = 1; i<= 8; i++ ){
-			periodos.add(new Periodo(i, MAXIMO_CREDITOS));
+			periodos.add(new Periodo(i));
+			if (i > 1) {
+				getPeriodo(i - 1).setEValido(new ValidadorMax(MAXIMO_CREDITOS));
+			}
 		}
 		this.mapaDeDisciplinas = new HashMap<String, Disciplina>();
 		distribuiDisciplinas();
@@ -74,8 +77,14 @@ public class PlanoDeCurso extends Model{
 		p.update();
 	}
 	
-	public int getMinimoCreditos() {
-		return MINIMO_CREDITOS;
+	public boolean minimoCreditosSatisfeitos() {
+		boolean result = true;
+		for (Periodo p: periodos) {
+			if (p.getCreditos() < MINIMO_CREDITOS) {
+				result = false;
+			}
+		}
+		return result;
 	}
 	
 	public void setPeriodoAtual (int novoPeriodoAtual){
@@ -129,11 +138,11 @@ public class PlanoDeCurso extends Model{
 	public void adicionaPeriodo() throws LimiteDePeriodosException {
 		if(periodos.size() == MAXIMO_DE_PERIODOS)
 			throw new LimiteDePeriodosException();
-		this.periodos.add(new Periodo(this.periodos.size() + 1, MAXIMO_CREDITOS));
+		this.periodos.add(new Periodo(this.periodos.size() + 1));
 	}
 	
 	public void adicionaPeriodo(int num_periodo) {
-		this.periodos.add(new Periodo(num_periodo, MAXIMO_CREDITOS));
+		this.periodos.add(new Periodo(num_periodo));
 	}
 	
 	public Map<String, Disciplina> getMapaDisciplina(){
@@ -193,8 +202,6 @@ public class PlanoDeCurso extends Model{
 	/**
 	 * Adiciona uma disciplina ao periodo
 	 * @throws LimiteUltrapassadoException 
-	 * 
-	 * @throws Exception
 	 */
 	public void adicionaDisciplina(String disciplinaNome, int periodo) throws LimiteUltrapassadoException {
 		Disciplina disciplina = mapaDeDisciplinas.get(disciplinaNome);

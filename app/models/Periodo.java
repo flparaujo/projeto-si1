@@ -38,15 +38,15 @@ public class Periodo extends Model{
     joinColumns = {@JoinColumn (name = "fk_periodo")}, inverseJoinColumns = {@JoinColumn(name = "fk_disciplina")})
 	private List<Disciplina> disciplinas;
 
-	public Periodo (int maxCreditos){
+	public Periodo (){
 		disciplinas = new ArrayList<Disciplina>();
-		validador = new ValidadorMax(maxCreditos);
+		validador = new ValidadorMin();
 	}
 	
-	public Periodo (int numeroDoPeriodo, int maxCreditos) {
+	public Periodo (int numeroDoPeriodo) {
 		this.numero = numeroDoPeriodo;
 		disciplinas = new ArrayList<Disciplina>();
-		validador = new ValidadorMax(maxCreditos);
+		validador = new ValidadorMin();
 	}
 	
 	public Long getId(){
@@ -76,7 +76,7 @@ public class Periodo extends Model{
 	
 	public void adicionarDisciplina(Disciplina disciplina) throws LimiteUltrapassadoException{
 		if (!validador.eValido(getCreditos(), disciplina.getCreditos())) {
-			throw new LimiteUltrapassadoException("Limite de Créditos Ultrapassado!");
+			throw new LimiteUltrapassadoException();
 		}
 		disciplinas.add(disciplina);
 	}

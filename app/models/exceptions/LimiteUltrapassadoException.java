@@ -4,8 +4,8 @@ public class LimiteUltrapassadoException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
-	public LimiteUltrapassadoException(String message){
-		super(message);
+	public LimiteUltrapassadoException(){
+		super("Limite de Créditos Ultrapassado!");
 	}
 
 	@Override
