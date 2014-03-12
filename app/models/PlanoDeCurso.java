@@ -42,6 +42,7 @@ public class PlanoDeCurso extends Model{
 	public static final int MAXIMO_DE_PERIODOS = 14;
 	public static final int MAXIMO_CREDITOS = 28;
 	public static final int MINIMO_CREDITOS = 12;
+	public static final int MINIMO_CREDITOS_CONCLUIR = 208;
 
 	public PlanoDeCurso() {
 		this.periodos = new ArrayList<Periodo>();
@@ -77,14 +78,38 @@ public class PlanoDeCurso extends Model{
 		p.update();
 	}
 	
+	public int getCreditosCursados() {
+		int result = 0;
+		for (int i = 1; i < periodoAtual; i++) {
+			result += getPeriodo(i).getCreditos();
+		}
+		return result;
+	}
+	
+	public int getTotalDeCreditos() {
+		int result = 0;
+		for (Periodo p: periodos) {
+			result += p.getCreditos();
+		}
+		return result;
+	}
+	
+	public int getMinimoCreditosConcluir() {
+		return MINIMO_CREDITOS_CONCLUIR;
+	}
+	
 	public boolean minimoCreditosSatisfeitos() {
 		boolean result = true;
-		for (Periodo p: periodos) {
-			if (p.getCreditos() < MINIMO_CREDITOS) {
+		for (int i = periodoAtual; i <= periodos.size(); i++) {
+			if (getPeriodo(i).getCreditos() < MINIMO_CREDITOS) {
 				result = false;
 			}
 		}
 		return result;
+	}
+	
+	public int getPeriodoAtual () {
+		return this.periodoAtual;
 	}
 	
 	public void setPeriodoAtual (int novoPeriodoAtual){

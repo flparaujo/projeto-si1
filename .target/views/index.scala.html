@@ -1,4 +1,4 @@
-@(plano: PlanoDeCurso)
+@(plano: PlanoDeCurso, formHandler: Form[form.FormHandler])
 
 @import helper._
 
@@ -47,6 +47,9 @@
 		<!-- 
 		.teste{position: absolute; top: 665px; left: 50px;} 
 		--> 
+		<!-- 
+		.selectpicker{position: absolute; top: 665px; left: 320px;} 
+		-->
 	</STYLE>  
 		
 	<div id="addperiodos" class="teste">
@@ -69,6 +72,30 @@
 				Arraste a cadeira para o período que você quer alocá-la
 			</h5>
 		}
+		<h5 style="float:right;width:70%;position:absolute;top:665px;left:500px;margin:0;color:#000000;font-size:18px;">
+			Período Atual: @plano.getPeriodoAtual() período
+			<br>
+			Total de créditos cursados: @plano.getCreditosCursados() créditos
+			<br>
+			Total de créditos cursados e planejados: @plano.getTotalDeCreditos() créditos
+			<br>
+			Mínimo necessário para concluir o curso: @plano.getMinimoCreditosConcluir() créditos
+		</h5>
+		
+		@form(routes.Application.setPeriodoAtual()) {
+			<h5 style="float:right;width:70%;position:absolute;top:665px;left:200px;margin:0;color:#000000;font-size:18px;">Periodo atual: </h5>
+			<select class="selectpicker" data-width="100px" name="idPeriodo" >
+        		@for(periodo <- plano.getPeriodos()) {
+					@if(periodo.getNumero() == plano.getPeriodoAtual()){
+						<option selected value="@(periodo.getNumero())" name="idPeriodo" >@(periodo.getNumero())</option>
+					}else{
+						<option value="@(periodo.getNumero())" name="idPeriodo" >@(periodo.getNumero())</option>
+					}
+				}
+			</select> 
+        	<button type="submit" style="position:absolute;top:660px;left:360px;" class="btn btn-info" type="button">OK</button>		
+        }
+  
 		<div style="width:0%;height:500px;overflow-y:auto;margin-top:20px;margin-left:30px;">
 			<ul style="list-style:none;overflow-y:auto;margin-top:20px;"> 
 				@for(cadeira <- plano.getDisciplinaDispniveisOrdenadas()) {

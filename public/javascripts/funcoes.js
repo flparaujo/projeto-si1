@@ -59,7 +59,7 @@ function remDisciplina(disciplina, flagRequisitos){
 	if (r==true){
 	$.ajax({
 		  type: "POST",
-		  url: "/remCadeira/" + disciplina,
+		  url: "/remCadeira/"+disciplina,
 		  data: "",
 		  success: function(){
 		        alert("Disciplina Removida");
