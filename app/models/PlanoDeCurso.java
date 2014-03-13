@@ -230,8 +230,10 @@ public class PlanoDeCurso extends Model{
 	 */
 	public void adicionaDisciplina(String disciplinaNome, int periodo) throws LimiteUltrapassadoException {
 		Disciplina disciplina = mapaDeDisciplinas.get(disciplinaNome);
-		getPeriodo(periodo).adicionarDisciplina(disciplina);
 		for(Periodo p: periodos){
+			if (p.getNumero() == periodo && !p.getDisciplinas().contains(disciplina)) {
+				getPeriodo(periodo).adicionarDisciplina(disciplina);
+			}
 			if(p.getNumero() != periodo && p.getDisciplinas().contains(disciplina)){
 				p.removerDisciplina(disciplina);
 			}

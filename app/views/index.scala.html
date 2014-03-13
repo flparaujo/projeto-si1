@@ -41,7 +41,11 @@
 				</span>
 			</div>
 		}
-		
+		<div id="remove" class="periodo" ondrop="remDisciplina(event, this)"
+			ondragover="allowDrop(event,this)" ondragleave="leave(, this)">
+			<img src="@routes.Assets.at("images/recycle.thumbnail.png")">
+			<h5 style="color:#000000;font-size:18px;">Arraste para aqui a disciplina que deseja remover</h5>
+		</div>
 	</div>
 	
 	<STYLE> 

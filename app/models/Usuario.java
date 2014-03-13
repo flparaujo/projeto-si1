@@ -12,6 +12,11 @@ import play.db.ebean.Model;
 @Entity
 public class Usuario extends Model {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
@@ -21,8 +26,6 @@ public class Usuario extends Model {
 	private String senha;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	//@JoinTable(name = "usuario_plano", 
-    //joinColumns = {@JoinColumn (name = "fk_usuario")}, inverseJoinColumns = {@JoinColumn(name = "fk_plano")})
 	private PlanoDeCurso plano;
 	
 	public Usuario(String nome, String login, String senha) {
