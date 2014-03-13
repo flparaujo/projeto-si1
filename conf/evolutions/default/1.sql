@@ -25,6 +25,15 @@ create table plano_de_curso (
   constraint pk_plano_de_curso primary key (id))
 ;
 
+create table usuario (
+  id                        bigint not null,
+  nome                      varchar(255),
+  login                     varchar(255),
+  senha                     varchar(255),
+  plano_id                  bigint,
+  constraint pk_usuario primary key (id))
+;
+
 
 create table disciplina_requisito (
   fk_disciplina                  bigint not null,
@@ -49,6 +58,10 @@ create sequence periodo_seq;
 
 create sequence plano_de_curso_seq;
 
+create sequence usuario_seq;
+
+alter table usuario add constraint fk_usuario_plano_1 foreign key (plano_id) references plano_de_curso (id) on delete restrict on update restrict;
+create index ix_usuario_plano_1 on usuario (plano_id);
 
 
 
@@ -80,6 +93,8 @@ drop table if exists plano_de_curso;
 
 drop table if exists plano_periodo;
 
+drop table if exists usuario;
+
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists disciplina_seq;
@@ -87,4 +102,6 @@ drop sequence if exists disciplina_seq;
 drop sequence if exists periodo_seq;
 
 drop sequence if exists plano_de_curso_seq;
+
+drop sequence if exists usuario_seq;
 

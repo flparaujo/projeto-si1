@@ -4,6 +4,7 @@ import form.FormHandler;
 import models.Disciplina;
 import models.Periodo;
 import models.PlanoDeCurso;
+import models.Usuario;
 import models.exceptions.LimiteDePeriodosException;
 import models.exceptions.LimiteUltrapassadoException;
 import play.data.Form;
@@ -12,54 +13,54 @@ import play.mvc.Result;
 
 public class Application extends Controller {
 
-	static PlanoDeCurso plano;
+	static Usuario user;
 	static Form<FormHandler> formHandler = Form.form(FormHandler.class);
 
 	public static Result index(){
-		if (plano == null) {
-			if (!PlanoDeCurso.find.all().isEmpty()){
-				plano = PlanoDeCurso.find.all().get(0);
-				plano.atualizaMapaCadeira(plano.getDisciplinasAlocadas());
+		if (user == null) {
+			if (!Usuario.find.all().isEmpty()){
+				user = Usuario.find.all().get(0);
+				user.atualizaCadeiras();
 			} else { 
-				plano = new PlanoDeCurso();
-				plano.distribuiCaderas(Disciplina.find.all());
-				plano.save();
+				user = new Usuario("", "", "");
+				user.distribuiCadeiras();
+				user.save();
 			}
 		}
-		return ok(views.html.index.render(plano, formHandler));
+		return ok(views.html.index.render(user, formHandler));
 	}
 	
 	public static Result addCadeira(String disciplina, int periodo){
 		try {
-			plano.adicionaDisciplina(disciplina, periodo);
+			user.adicionaDisciplina(disciplina, periodo);
 		} catch (LimiteUltrapassadoException e) {
 			return badRequest(e.getMessage());
 		}
-		plano.update();
+		user.update();
 		return redirect(routes.Application.index());
 	}
 
 	public static Result remCadeira(String disciplina){
-		plano.removeDisciplina(disciplina);
-		plano.update();
+		user.removeDisciplina(disciplina);
+		user.update();
 		return redirect(routes.Application.index());
 	}
 	
 	public static Result novoPeriodo() {
     	try {
-			plano.adicionaPeriodo();
+			user.adicionaPeriodo();
 		} catch (LimiteDePeriodosException e) {
 			return badRequest(e.getMessage());
 		}
-    	plano.update();
+    	user.update();
     	return redirect(routes.Application.index());
     }
 	
 	public static Result setPeriodoAtual() {
 		Form<FormHandler> form = formHandler.bindFromRequest();
     	int idPeriodo = form.get().getIdPeriodo();
-		plano.setPeriodoAtual(idPeriodo);
-		plano.update();
+		user.setPeriodoAtualPlano(idPeriodo);
+		user.update();
 		return redirect(routes.Application.index());
 	}
 }

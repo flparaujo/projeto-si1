@@ -1,4 +1,4 @@
-@(plano: PlanoDeCurso, formHandler: Form[form.FormHandler])
+@(user: Usuario, formHandler: Form[form.FormHandler])
 
 @import helper._
 
@@ -9,14 +9,14 @@
 	<center><h2>@Messages("PlanoDeCurso")</h2></center>
 	<center><h3 style="position:absolute;left:43%;top:50px;color:#fff;text-shadow:2px 2px #000;">Períodos Do Curso</h3></center>
 	<div id="periodos">
-		@for(periodo <- plano.getPeriodos()) {
+		@for(periodo <- user.getPeriodosPlano()) {
 			<div id="@periodo.getNumero()" class="periodo" ondrop="drop(event, this)"
 				ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
 		
 				<ul style="list-style:none;">
 					<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;" color=#000000>@periodo.getNumero() @Messages("nPeriodo") </span>
 					@for(cadeira <- periodo.getDisciplinas()) {
-		  				@if(plano.verificaPrerequisito(cadeira.getNome(), periodo.getNumero())){
+		  				@if(user.verificaPreRequisito(cadeira.getNome(), periodo.getNumero())){
 		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
 								ondragstart="drag(event)" ondragend="dragEnd()">
 		  				}else{
@@ -61,7 +61,7 @@
 	
 	<br/>
 	<center><div class="separator"> </div> </center>
-		@if(!plano.minimoCreditosSatisfeitos()) {
+		@if(!user.minimoDeCreditosSatisfeitos()) {
 			<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#FF0000;font-size:18px;">
 				Aviso: Mínimo de creditos não atingido
 			</h5>
@@ -74,20 +74,20 @@
 			</h5>
 		}
 		<h5 style="float:right;width:70%;position:absolute;top:665px;left:500px;margin:0;color:#000000;font-size:18px;">
-			Período Atual: @plano.getPeriodoAtual() período
+			Período Atual: @user.getIdPeriodoAtual() período
 			<br>
-			Total de créditos cursados: @plano.getCreditosCursados() créditos
+			Total de créditos cursados: @user.getTotalCreditosCursados() créditos
 			<br>
-			Total de créditos cursados e planejados: @plano.getTotalDeCreditos() créditos
+			Total de créditos cursados e planejados: @user.getTotalDeCreditos() créditos
 			<br>
-			Mínimo necessário para concluir o curso: @plano.getMinimoCreditosConcluir() créditos
+			Mínimo necessário para concluir o curso: @user.getMinimoDeCreditosConcluir() créditos
 		</h5>
 		
 		@form(routes.Application.setPeriodoAtual()) {
 			<h5 style="float:right;width:70%;position:absolute;top:665px;left:200px;margin:0;color:#000000;font-size:18px;">Periodo atual: </h5>
 			<select class="selectpicker" data-width="100px" name="idPeriodo" >
-        		@for(periodo <- plano.getPeriodos()) {
-					@if(periodo.getNumero() == plano.getPeriodoAtual()){
+        		@for(periodo <- user.getPeriodosPlano()) {
+					@if(periodo.getNumero() == user.getIdPeriodoAtual()){
 						<option selected value="@(periodo.getNumero())" name="idPeriodo" >@(periodo.getNumero())</option>
 					}else{
 						<option value="@(periodo.getNumero())" name="idPeriodo" >@(periodo.getNumero())</option>
@@ -99,7 +99,7 @@
   
 		<div style="width:0%;height:500px;overflow-y:auto;margin-top:20px;margin-left:30px;">
 			<ul style="list-style:none;overflow-y:auto;margin-top:20px;"> 
-				@for(cadeira <- plano.getDisciplinaDispniveisOrdenadas()) {
+				@for(cadeira <- user.getDisciplinaDispniveisOrdenadasPlano()) {
 					<div class="disponiveis" id="@cadeira.getNome()"	draggable="true" 
 						ondragstart="drag(event)" ondragend="dragEnd()">
 	  						<center><label class="nome">@cadeira.getNome()</label></center>
