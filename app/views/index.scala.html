@@ -16,11 +16,11 @@
 				<ul style="list-style:none;">
 					<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;" color=#000000>@periodo.getNumero() @Messages("nPeriodo") </span>
 					@for(cadeira <- periodo.getDisciplinas()) {
-		  				@if(plano.verificaPrerequisito(cadeira.getNome())){
-		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="remover" draggable="true" 
+		  				@if(plano.verificaPrerequisito(cadeira.getNome(), periodo.getNumero())){
+		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
 								ondragstart="drag(event)" ondragend="dragEnd()">
 		  				}else{
-		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
+		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="remover" draggable="true" 
 								ondragstart="drag(event)" ondragend="dragEnd()">
 		  				}		  	
 		  					<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
@@ -41,6 +41,7 @@
 				</span>
 			</div>
 		}
+		
 	</div>
 	
 	<STYLE> 

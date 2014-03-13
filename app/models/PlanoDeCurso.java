@@ -230,12 +230,12 @@ public class PlanoDeCurso extends Model{
 	 */
 	public void adicionaDisciplina(String disciplinaNome, int periodo) throws LimiteUltrapassadoException {
 		Disciplina disciplina = mapaDeDisciplinas.get(disciplinaNome);
+		getPeriodo(periodo).adicionarDisciplina(disciplina);
 		for(Periodo p: periodos){
-			if(p.getDisciplinas().contains(disciplina)){
+			if(p.getNumero() != periodo && p.getDisciplinas().contains(disciplina)){
 				p.removerDisciplina(disciplina);
 			}
 		}
-		getPeriodo(periodo).adicionarDisciplina(disciplina);
 	}
 	
 	/**
@@ -243,27 +243,23 @@ public class PlanoDeCurso extends Model{
 	 * 
 	 * @param cadeira a ser verificada
 	 */
-	public boolean verificaPrerequisito(String disciplina){
-		Disciplina disc = mapaDeDisciplinas.get(disciplina);
-		int periodo_disc = 0;
-		for(Periodo p: periodos){
-			if(p.getDisciplinas().contains(disc)){
-				periodo_disc = p.getNumero();
-			}
-		}
-		for (Periodo p: periodos){
-			for (Disciplina d: p.getDisciplinas()){
-				if (disc.isPreRequisito(d) && p.getNumero() >= periodo_disc){
-					return true;
+	public boolean verificaPrerequisito(String disciplina, int indicePeriodo) {
+		boolean result;
+		int contPreRequisitos = 0;
+		Disciplina d = mapaDeDisciplinas.get(disciplina);
+		for (Disciplina disc: d.getPreRequisitos()) {
+			for (int i = 1; i < indicePeriodo; i++) {
+				if(getPeriodo(i).getDisciplinas().contains(disc)) {
+					contPreRequisitos ++;
 				}
 			}
 		}
-		for(Disciplina d: disc.getPreRequisitos()){
-			if(verificaPrerequisito(d.getNome())){
-				return true;
-			}
+		if (contPreRequisitos == d.getPreRequisitos().size()) {
+			result = true;
+		} else {
+			result = false;
 		}
-		return false;
+		return result;
 	}
 
 	/**
