@@ -66,11 +66,11 @@ function remDisciplina(ev){
 		});
 	}
 	
-function dropR(ev, e){
-	var r = true;
-	if (flagRequisitos == 'true'){
-		r=confirm("A remoção dessa disciplina implicará na remoção de outra(s) cadeira(s), você realmente deseja removê-la?");
-	}
-	if (r==true){
-	}
-}
+#function dropR(ev, e){
+#	var r = true;
+#	if (flagRequisitos == 'true'){
+#		r=confirm("A remoção dessa disciplina implicará na remoção de outra(s) cadeira(s), você realmente deseja removê-la?");
+#	}
+#	if (r==true){
+#	}
+#}

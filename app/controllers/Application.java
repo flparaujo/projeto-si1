@@ -40,7 +40,7 @@ public class Application extends Controller {
 		return redirect(routes.Application.index());
 	}
 
-	public static Result remCadeira(String disciplina){
+	public static Result remDisciplina(String disciplina){
 		user.removeDisciplina(disciplina);
 		user.update();
 		return redirect(routes.Application.index());
