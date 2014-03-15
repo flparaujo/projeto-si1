@@ -68,7 +68,7 @@ public class Application extends Controller {
 			flash("sucesso", "cadastrou!");
 			return login();
 	    } else {
-	    	flash("fail", "Eita ja tem usuario com esse login");
+	    	flash("fail", "Nome de usuário indisponível");
 	    	return cadastro();
 	    }
 	}
@@ -112,7 +112,7 @@ public class Application extends Controller {
 		return redirect(routes.Application.index());
 	}
 
-	public static Result remCadeira(String disciplina){
+	public static Result remDisciplina(String disciplina){
 		plano.removeDisciplina(disciplina);
 		plano.update();
 		return redirect(routes.Application.index());

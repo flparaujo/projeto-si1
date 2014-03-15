@@ -1,9 +1,8 @@
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,60 +16,91 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+//PURE FABRICATION: a classe LeitorDeDisciplinas nao representa algo do dominio do problema, serve pra manter a alta coesao da GradeCurricular.
+/**
+ * Classe responsavel por carregar disciplinas contidas em um arquivo.
+ * 
+ * @author Franklin Bastos/Felipe Araujo.
+ * @version 1.1
+ */
 public class LeitorDeDisciplinas {
-	private static Map<String, Disciplina> listaDeDisciplina = new HashMap<String, Disciplina>();
-
-	private static void populaMapas() {
-		Map<String, Disciplina> disciplinaPorId = new HashMap<String, Disciplina>();
+	
+	private Map<Integer, Disciplina> disciplinas;
+	private static LeitorDeDisciplinas instancia;
+	
+	private LeitorDeDisciplinas() {
+		disciplinas = new HashMap<Integer, Disciplina>();
+		lerArquivo();
+	}
+	
+	private void lerArquivo () {
+		InputStream fXmlFile = null;
 		try {
-			Document doc = criaParserXml();
-			NodeList nList = doc.getElementsByTagName("cadeira");
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node nNode = nList.item(temp);
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					criaDisciplina(disciplinaPorId, nNode);
-				}
-			}
-		} catch (Exception e) {
+			fXmlFile = new FileInputStream("test/disciplinas-do-curso.xml");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = null;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private static void criaDisciplina(Map<String, Disciplina> disciplinaPorId, Node nNode) {
-		List<Disciplina> requisitos = new ArrayList<Disciplina>();
-		Element cadeiraXml = (Element) nNode;
-		NodeList preRequisitos = cadeiraXml.getElementsByTagName("id");
-		for (int i = 0; i < preRequisitos.getLength(); i++) {
-			requisitos.add(disciplinaPorId.get(Integer.parseInt(preRequisitos.item(i).getTextContent())));
+		Document doc = null;
+		try {
+			doc = dBuilder.parse(fXmlFile);
+		} catch (SAXException | IOException e) {
+			e.printStackTrace();
 		}
-		Disciplina criandoDisciplina = new Disciplina(cadeiraXml.getAttribute("nome"),
-				Integer.parseInt(cadeiraXml.getElementsByTagName("creditos").item(0).getTextContent()),
-				requisitos,
-				Integer.parseInt(cadeiraXml.getElementsByTagName("dificuldade").item(0).getTextContent()),
-				Integer.parseInt(cadeiraXml.getElementsByTagName("periodo").item(0).getTextContent()));
-		String idCadeira = cadeiraXml.getAttribute("id");
-		disciplinaPorId.put(idCadeira, criandoDisciplina);
-		listaDeDisciplina.put(criandoDisciplina.getNome(), criandoDisciplina);
-	}
-
-	private static Document criaParserXml()
-			throws ParserConfigurationException, SAXException, IOException {
-		File fXmlFile = new File("test/disciplinas-do-curso.xml");
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(fXmlFile);
 		doc.getDocumentElement().normalize();
-		return doc;
+		NodeList nList = doc.getElementsByTagName("cadeira");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				criaDisciplina(nNode);
+			}
+		}
+	}
+	
+	private void criaDisciplina (Node nNode) {
+		List<Disciplina> requisitos = new ArrayList<Disciplina>();
+		Element cadeira = (Element) nNode;
+		NodeList preRequisitos = cadeira.getElementsByTagName("id");
+		for (int i = 0; i < preRequisitos.getLength(); i++) {
+			requisitos.add(disciplinas.get(Integer.parseInt(preRequisitos.item(i).getTextContent())));
+		}
+		//CREATOR: A classe LeitorDeDisciplina possui os dados para inicialização de objetos do tipo Disciplina.
+		Disciplina disciplina = new Disciplina(cadeira.getAttribute("nome"), 
+				Integer.parseInt(cadeira.getElementsByTagName("creditos").item(0).getTextContent()),
+				requisitos,
+				Integer.parseInt(cadeira.getElementsByTagName("dificuldade").item(0).getTextContent()),
+				Integer.parseInt(cadeira.getElementsByTagName("periodo").item(0).getTextContent()));
+		disciplinas.put(Integer.parseInt(cadeira.getAttribute("id")), disciplina);
+	}
+	
+	/**
+	 * Obtem uma unica instancia deste leitor de disciplinas.
+	 * @return o leitor de disciplinas instanciado.
+	 */
+	//SINGLETON: Essa classe deve ser instanciada uma unica vez
+	public static LeitorDeDisciplinas getInstance() {
+		if(instancia == null) {
+			instancia = new LeitorDeDisciplinas();
+		}
+		return instancia;
+	}
+	
+	/**
+	 * Obtem uma lista com todas as disciplinas lidas do arquivo.
+	 * @return uma lista de disciplinas.
+	 */
+	public List<Disciplina> getDisciplinas() {
+		List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+		for (int i = 1; i <= this.disciplinas.size(); i++) {
+			disciplinas.add(this.disciplinas.get(i));
+		}
+		return disciplinas;
 	}
 
-	public static List<Disciplina> getListaDeCadeiras() {
-		if (listaDeDisciplina.isEmpty()) {
-			populaMapas();
-		}
-		List<Disciplina> lista = new ArrayList<Disciplina>();
-		for(Disciplina c: listaDeDisciplina.values()){
-			lista.add(c);
-		}
-		return lista;
-	}
 }
