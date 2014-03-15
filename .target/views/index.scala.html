@@ -1,0 +1,117 @@
+@(user: Usuario, formHandler: Form[form.FormHandler])
+
+@import helper._
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
+@main("Meu Plano de Curso") {
+	<center><h2>@Messages("PlanoDeCurso")</h2></center>
+	<center><h3 style="position:absolute;left:43%;top:50px;color:#fff;text-shadow:2px 2px #000;">Períodos Do Curso</h3></center>
+	<div id="periodos">
+		@for(periodo <- user.getPeriodosPlano()) {
+			<div id="@periodo.getNumero()" class="periodo" ondrop="drop(event, this)"
+				ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
+		
+				<ul style="list-style:none;">
+					<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;" color=#000000>@periodo.getNumero() @Messages("nPeriodo") </span>
+					@for(cadeira <- periodo.getDisciplinas()) {
+		  				@if(user.verificaPreRequisito(cadeira.getNome(), periodo.getNumero())){
+		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
+								ondragstart="drag(event)" ondragend="dragEnd()">
+		  				}else{
+		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="remover" draggable="true" 
+								ondragstart="drag(event)" ondragend="dragEnd()">
+		  				}		  	
+		  					<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
+		  					<label class="creditos">
+		  						<font color=000000>@cadeira.getCreditos() @Messages("creditos")</font> 
+		  					</label>
+		  					<label class="dificuldade"> 
+		  						<font color=000000>dificuldade: @cadeira.getDificuldade()</font> 
+		  					</label>	
+		  				</div>
+					}	 
+				</ul>
+				<span class="periodoCreditos">
+					<font color=000000>@periodo.getCreditos() @Messages("creditos")</font>
+				</span>
+				<span class="periodoDificuldade">
+					<font color=000000>Dificuldade: @periodo.getDificuldadeTotal()</font>
+				</span>
+			</div>
+		}
+		<div id="remove" class="periodo" ondrop="remDisciplina(event)"
+			ondragover="allowDrop(event,this)" ondragleave="leave(, this)">
+			<img src="@routes.Assets.at("images/recycle.thumbnail.png")">
+			<h5 style="color:#000000;font-size:18px;">Arraste para aqui a disciplina que deseja remover</h5>
+		</div>
+	</div>
+	
+	<STYLE> 
+		<!-- 
+		.teste{position: absolute; top: 665px; left: 50px;} 
+		--> 
+		<!-- 
+		.selectpicker{position: absolute; top: 665px; left: 320px;} 
+		-->
+	</STYLE>  
+		
+	<div id="addperiodos" class="teste">
+		@form(routes.Application.novoPeriodo()) {
+			<button type="submit" class="btn btn-large btn-primary type="button" position="fixed" bottom="0px">Adicionar periodo</button>
+	   	}	
+    </div>
+	
+	<br/>
+	<center><div class="separator"> </div> </center>
+		@if(!user.minimoDeCreditosSatisfeitos()) {
+			<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#FF0000;font-size:18px;">
+				Aviso: Mínimo de creditos não atingido
+			</h5>
+			<h5 style="float:right;width:70%;position:absolute;top:640px;left:90px;margin:0;color:#000000;font-size:18px;">
+				Arraste a cadeira para o período que você quer alocá-la
+			</h5>
+		} else {
+			<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#000000;font-size:18px;">
+				Arraste a cadeira para o período que você quer alocá-la
+			</h5>
+		}
+		<h5 style="float:right;width:70%;position:absolute;top:665px;left:500px;margin:0;color:#000000;font-size:18px;">
+			Período Atual: @user.getIdPeriodoAtual() período
+			<br>
+			Total de créditos cursados: @user.getTotalCreditosCursados() créditos
+			<br>
+			Total de créditos cursados e planejados: @user.getTotalDeCreditos() créditos
+			<br>
+			Mínimo necessário para concluir o curso: @user.getMinimoDeCreditosConcluir() créditos
+		</h5>
+		
+		@form(routes.Application.setPeriodoAtual()) {
+			<h5 style="float:right;width:70%;position:absolute;top:665px;left:200px;margin:0;color:#000000;font-size:18px;">Periodo atual: </h5>
+			<select class="selectpicker" data-width="100px" name="idPeriodo" >
+        		@for(periodo <- user.getPeriodosPlano()) {
+					@if(periodo.getNumero() == user.getIdPeriodoAtual()){
+						<option selected value="@(periodo.getNumero())" name="idPeriodo" >@(periodo.getNumero())</option>
+					}else{
+						<option value="@(periodo.getNumero())" name="idPeriodo" >@(periodo.getNumero())</option>
+					}
+				}
+			</select> 
+        	<button type="submit" style="position:absolute;top:660px;left:360px;" class="btn btn-info" type="button">OK</button>		
+        }
+  
+		<div style="width:0%;height:500px;overflow-y:auto;margin-top:20px;margin-left:30px;">
+			<ul style="list-style:none;overflow-y:auto;margin-top:20px;"> 
+				@for(cadeira <- user.getDisciplinaDispniveisOrdenadasPlano()) {
+					<div class="disponiveis" id="@cadeira.getNome()"	draggable="true" 
+						ondragstart="drag(event)" ondragend="dragEnd()">
+	  						<center><label class="nome">@cadeira.getNome()</label></center>
+		  					<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
+		  					<label class="dificuldade"> dificuldade: @cadeira.getDificuldade()</label>
+	  				</div>
+			} 
+			</ul>
+		</div>	
+	}
+</body>
