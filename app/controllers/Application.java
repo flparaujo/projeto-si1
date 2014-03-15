@@ -84,9 +84,7 @@ public class Application extends Controller {
 			user2.distribuiCadeiras();
 			user2.save();
     	}
-        return ok(
-        		views.html.login.render(Form.form(Login.class))
-        );
+        return ok(views.html.login.render(Form.form(Login.class)));
     }
     
     /**
@@ -101,7 +99,7 @@ public class Application extends Controller {
             return redirect(routes.Application.index());
         }
     }
-	
+    
 	public static Result addCadeira(String disciplina, int periodo){
 		try {
 			plano.adicionaDisciplina(disciplina, periodo);
@@ -134,5 +132,10 @@ public class Application extends Controller {
 		plano.setPeriodoAtual(idPeriodo);
 		plano.update();
 		return redirect(routes.Application.index());
+	}
+	
+	public static Result logout() {
+    	plano.update();
+    	return redirect(routes.Application.login());
 	}
 }

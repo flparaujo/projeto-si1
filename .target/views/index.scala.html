@@ -55,8 +55,15 @@
 		<!-- 
 		.selectpicker{position: absolute; top: 665px; left: 320px;} 
 		-->
+		<!-- 
+		.test{position: absolute; top: 10px; left: 1200px;} 
+		--> 
 	</STYLE>  
-		
+	<div id="logout" class=test>
+		@form(routes.Application.logout()) {
+			<button type="submit" class="btn btn-info type="button" position="fixed" bottom="0px">Sair</button>
+	   	}	
+    </div>
 	<div id="addperiodos" class="teste">
 		@form(routes.Application.novoPeriodo()) {
 			<button type="submit" class="btn btn-large btn-primary type="button" position="fixed" bottom="0px">Adicionar periodo</button>

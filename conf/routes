@@ -19,6 +19,7 @@ POST    /cadastrar                 			controllers.Application.novoCadastro()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 POST    /addCadeira/:disciplina/:periodo  controllers.Application.addCadeira(disciplina:String,periodo:Int)
-POST    /remDisciplina/:disciplina           controllers.Application.remDisciplina(disciplina:String)
+POST    /remDisciplina/:disciplina        controllers.Application.remDisciplina(disciplina:String)
 POST    /novoPeriodo                      controllers.Application.novoPeriodo()
 POST    /setPeriodoAtual                  controllers.Application.setPeriodoAtual()
+POST    /logout                           controllers.Application.logout()
