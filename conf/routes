@@ -3,12 +3,23 @@
 # ~~~~
 
 # Home page
-GET     /                                 controllers.Application.index()
+GET     /home                               controllers.Application.index()
+GET     /                                   controllers.Application.login()
+
+# Authentication
+GET     /login                              controllers.Application.login()
+POST    /login                              controllers.Application.authenticate()
+
+# Cadastro
+GET     /cadastrar              			controllers.Application.cadastro() 
+POST    /cadastrar                 			controllers.Application.novoCadastro() 
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 POST    /addCadeira/:disciplina/:periodo  controllers.Application.addCadeira(disciplina:String,periodo:Int)
-POST    /remDisciplina/:disciplina           controllers.Application.remDisciplina(disciplina:String)
+POST    /remCadeira/:disciplina           controllers.Application.remCadeira(disciplina:String)
+GET     /remCadeira/:disciplina           controllers.Application.remCadeira(disciplina:String)
 POST    /novoPeriodo                      controllers.Application.novoPeriodo()
 POST    /setPeriodoAtual                  controllers.Application.setPeriodoAtual()

@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,12 +43,20 @@ public class Disciplina extends Model implements Comparable<Disciplina>{
 	@Column(name="periodo_original")
 	private int periodo;
 
-	public Disciplina(String nome, int creditos, List<Disciplina> preRequisitos, int dificuldade, int periodoSugerido) {
-		this.nome = nome;
-		this.creditos = creditos;
-		this.preRequisitos = preRequisitos;
+	public Disciplina() {
+		setPreRequisitos(new ArrayList<Disciplina>());
+	}
+
+	public Disciplina(String nome, int dificuldade) {
+		this.setNome(nome);	
+		this.creditos = 4;
 		this.dificuldade = dificuldade;
-		this.periodo = periodoSugerido;
+		setPreRequisitos(new ArrayList<Disciplina>());
+	}
+
+	public Disciplina(String nome, int dificuldade, int creditos) {
+		this(nome, dificuldade);
+		this.creditos = creditos;
 	}
 	
 	/**

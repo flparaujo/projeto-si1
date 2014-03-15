@@ -51,26 +51,33 @@ $(document).ready(function(){
 	
 	});
 
-function remDisciplina(ev){
-	$(".periodo").removeClass("periodoActive");
-	ev.preventDefault();
-	var data=ev.dataTransfer.getData("Text");
-	$.ajax({
-		  type: "POST",
-		  url: "/remDisciplina/"+data,
-		  data: "",
-		  success: function(){
-		        alert("Disciplina Removida");
-		        window.location = "/";
-		  },
-		});
-	}
-	
-function dropR(ev, e){
+function remDisciplina(disciplina, flagRequisitos){
 	var r = true;
 	if (flagRequisitos == 'true'){
 		r=confirm("A remoção dessa disciplina implicará na remoção de outra(s) cadeira(s), você realmente deseja removê-la?");
 	}
 	if (r==true){
+	$.ajax({
+		  type: "POST",
+		  url: "/remCadeira/"+disciplina,
+		  data: "",
+		  success: function(){
+		        alert("Disciplina Removida");
+		        window.location = "/";
+		  },
+		  error: function(XMLHttpRequest, textStatus, errorThrown) {
+			  var ind = XMLHttpRequest.responseText.indexOf("Exception:");
+			  var res = XMLHttpRequest.responseText.substring(ind +11 , ind + 500);
+			  var ind2 = res.indexOf("]");
+			  var res2 = res.substring(0, ind2);
+		      alert(res2);
+		  }
+		});
+	}
+	
+function dropR(ev, e){
+	ev.preventDefault();
+	var data=ev.dataTransfer.getData("Text");
+	$remDisciplina(data, true);
 	}
 }

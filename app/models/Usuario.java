@@ -6,26 +6,32 @@ import javax.persistence.*;
 
 import models.exceptions.LimiteDePeriodosException;
 import models.exceptions.LimiteUltrapassadoException;
+import play.data.validation.Constraints.*;
 
 import play.db.ebean.Model;
 
 @Entity
 public class Usuario extends Model {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
-
+	
+    @Required
 	private String nome;
+	
+    @Required
+    @Email
 	private String login;
+	
+    @Required
 	private String senha;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	//@JoinTable(name = "usuario_plano", 
+    //joinColumns = {@JoinColumn (name = "fk_usuario")}, inverseJoinColumns = {@JoinColumn(name = "fk_plano")})
 	private PlanoDeCurso plano;
 	
 	public Usuario(String nome, String login, String senha) {
@@ -55,6 +61,10 @@ public class Usuario extends Model {
 		return plano.getPeriodoAtual();
 	}
 	
+	public PlanoDeCurso getPlano() {
+		return plano;
+	}
+	
 	public int getTotalDeCreditos() {
 		return plano.getTotalDeCreditos();
 	}
@@ -75,10 +85,6 @@ public class Usuario extends Model {
 		return plano.getDisciplinaDispniveisOrdenadas();
 	} 
 	
-	public boolean verificaPreRequisito(String nomeCadeira, int indicePeriodo) {
-		return plano.verificaPrerequisito(nomeCadeira, indicePeriodo);
-	}
-	
 	public void adicionaDisciplina(String nome, int periodo) throws LimiteUltrapassadoException {
 		plano.adicionaDisciplina(nome, periodo);
 	}
@@ -89,10 +95,6 @@ public class Usuario extends Model {
 	
 	public void adicionaPeriodo() throws LimiteDePeriodosException {
 		plano.adicionaPeriodo();
-	}
-	
-	public Long getId() {
-		return id;
 	}
 	
 	public static Finder<Long,Usuario> find = new Finder<Long,Usuario>(
@@ -136,5 +138,16 @@ public class Usuario extends Model {
 		this.senha = senha;
 	}
 
+	public Long getId(){
+		return id;
+	}	
+	
+	public void setId(Long id){
+		this.id = id;	
+	}
+	
+	public String toString() {
+		return "usuario: " + nome + " - " + login;
+	}
 
 }

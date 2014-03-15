@@ -1,0 +1,56 @@
+@(form: Form[Application.Login])
+
+<html>
+    <head>
+        <title>Meu Plano De Curso</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    <body>
+        
+        <header>
+            <a href="@routes.Application.index" id="logo"><span>Zen</span>tasks</a>
+        </header>
+       
+        @helper.form(routes.Application.authenticate) {
+            
+            <h1>Sign in</h1>
+            
+            @if(form.hasGlobalErrors) { 
+                <p class="error">
+                    @form.globalError.message
+                </p>
+            }
+            
+            @if(flash.contains("success")) {
+                <p class="success">
+                    @flash.get("success")
+                </p>
+            }
+            
+            <p>
+                <input type="login" name="login" placeholder="Email" value="@form("login").value">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password" value="@form("senha").value">
+            </p>
+            <p>
+                <button type="submit">Login</button>
+            </p>
+            
+        }
+        
+        <div class="button">
+				<a href="/cadastrar">Faz o cadastro se nao tiver!</a>
+		</div>
+        
+        <p class="note">
+            Try <em>guillaume@@sample.com</em> with <em>secret</em> as password.
+        </p>
+            
+    </body>
+</html>
+    
+
+
+
