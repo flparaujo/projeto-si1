@@ -25,7 +25,6 @@ public class PlanoDeCursoTest {
 	
 	@Test
 	public void testaDisciplinasESeusRequisitos(){
-		System.out.println(plano.getMapaDisciplina());
 		Disciplina p1 = plano.getMapaDisciplina().get("Programacao I");
 		Disciplina p2 = plano.getMapaDisciplina().get("Programacao II");
 		Disciplina c1 = plano.getMapaDisciplina().get("Calculo I");
