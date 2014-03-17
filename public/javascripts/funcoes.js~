@@ -22,15 +22,12 @@ function drop(ev, e){
 		  type: "POST",
 		  url: "/addCadeira/"+data+"/"+e.id,
 		  data: "",
-		  success: function(){
-		        alert("Disciplina Adicionada");
-		        window.location = "/home";
-		  },
 		  error: function(result, exception, v, r) {
 			  if (v == "Bad Request"){
 				  alert("Limite de Créditos Ultrapassados!");
 			  }
-		  }
+		  },		  
+		  
 		});
 }
 
