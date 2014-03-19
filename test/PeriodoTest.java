@@ -25,7 +25,7 @@ public class PeriodoTest {
 		periodo = new Periodo();
 		periodo.setEValido(new ValidadorMax(28));
 		start(fakeApplication(inMemoryDatabase()));
-//		periodo.save();
+		periodo.save();
 	}
 	
 	@Test
@@ -42,7 +42,8 @@ public class PeriodoTest {
 		Assert.assertEquals(true, c2.isPreRequisito(c1));
 		Assert.assertEquals(true, p2.isPreRequisito(p1));
 		Assert.assertEquals(false, p2.isPreRequisito(c1));
-//		assertEquals(periodo, Periodo.find.all().get(0));
+		Periodo periodo1 = Periodo.find.all().get(0);
+		Assert.assertEquals(periodo, periodo1);
 	}
 
 	@Test

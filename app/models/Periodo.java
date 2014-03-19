@@ -18,7 +18,7 @@ import models.exceptions.LimiteUltrapassadoException;
 import play.db.ebean.Model;
 
 /**
- * Essa clasee representa um período
+ * Essa classe representa um período
  */
 @Entity
 public class Periodo extends Model{
@@ -39,13 +39,13 @@ public class Periodo extends Model{
 	private List<Disciplina> disciplinas;
 
 	public Periodo (){
-		this(1);
+		this(1,28);
 	}
 	
-	public Periodo (int numeroDoPeriodo) {
+	public Periodo (int numeroDoPeriodo, int maximoCreditos) {
 		this.numero = numeroDoPeriodo;
 		disciplinas = new ArrayList<Disciplina>();
-		validador = new ValidadorMin();
+		validador = new ValidadorMax(maximoCreditos);
 	}
 	
 	public Long getId(){

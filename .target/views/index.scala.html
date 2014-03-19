@@ -42,7 +42,7 @@
 			</div>
 		}
 		<div id="remove" class="periodo" ondrop="remDisciplina(event)"
-			ondragover="allowDrop(event,this)" ondragleave="leave(, this)">
+			ondragover="allowDrop(event,this)" ondragleave="leave(event, this)">
 			<img src="@routes.Assets.at("images/recycle.thumbnail.png")">
 			<h5 style="color:#000000;font-size:18px;">Arraste para aqui a disciplina que deseja remover</h5>
 		</div>
@@ -61,12 +61,12 @@
 	</STYLE>  
 	<div id="logout" class=test>
 		@form(routes.Application.logout()) {
-			<button type="submit" class="btn btn-info type="button" position="fixed" bottom="0px">Sair</button>
+			<button type="submit" class="btn btn-info type" position="fixed" bottom="0px">Sair</button>
 	   	}	
     </div>
 	<div id="addperiodos" class="teste">
 		@form(routes.Application.novoPeriodo()) {
-			<button type="submit" class="btn btn-large btn-primary type="button" position="fixed" bottom="0px">Adicionar periodo</button>
+			<button type="submit" class="btn btn-large btn-primary" position="fixed" bottom="0px">Adicionar periodo</button>
 	   	}	
     </div>
 	

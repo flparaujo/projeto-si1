@@ -55,6 +55,8 @@ function remDisciplina(ev){
 	$(".periodo").removeClass("periodoActive");
 	ev.preventDefault();
 	var data=ev.dataTransfer.getData("Text");
+	var r=confirm("A remoção dessa disciplina implicará na remoção de outra(s) cadeira(s), você realmente deseja removê-la?");
+	if (r==true){
 	$.ajax({
 		  type: "POST",
 		  url: "/remDisciplina/"+data,
@@ -65,11 +67,12 @@ function remDisciplina(ev){
 		  },
 		});
 	}
+}
 	
 function dropR(ev, e){
 	var r = true;
 	if (flagRequisitos == 'true'){
-		r=confirm("A remoção dessa disciplina implicará na remoção de outra(s) cadeira(s), você realmente deseja removê-la?");
+		r=confirm("A remoção dessa disciplina poderá implicar na remoção de outra(s) cadeira(s), você realmente deseja removê-la?");
 	}
 	if (r==true){
 	}

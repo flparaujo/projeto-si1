@@ -1,3 +1,6 @@
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.inMemoryDatabase;
+import static play.test.Helpers.start;
 import models.Disciplina;
 import models.PlanoDeCurso;
 import models.exceptions.LimiteUltrapassadoException;
@@ -14,13 +17,17 @@ public class PlanoDeCursoTest {
 	public void setUp() {
 		plano = new PlanoDeCurso();
 		plano.distribuiCaderas(LeitorDeDisciplinas.getInstance().getDisciplinas());
+		start(fakeApplication(inMemoryDatabase()));
+		plano.save();
 	}
 
 	@Test
 	public void testaDadosPlano(){
 		Assert.assertEquals(8, plano.getPeriodos().size());
 		Assert.assertEquals(48, plano.getDisciplinasAlocadas().size());
-		Assert.assertEquals(13, plano.getDisciplinaDispniveisOrdenadas().size());	
+		Assert.assertEquals(13, plano.getDisciplinaDispniveisOrdenadas().size());
+		PlanoDeCurso p = PlanoDeCurso.find.all().get(0);
+		Assert.assertEquals(plano, p);
 	}
 	
 	@Test
@@ -127,5 +134,41 @@ public class PlanoDeCursoTest {
 		Assert.assertEquals(false, plano.verificaPrerequisito(p2.getNome(), 2));
 		Assert.assertEquals(true, plano.verificaPrerequisito(p1.getNome(), 1));
 		Assert.assertEquals(true, plano.verificaPrerequisito(lpt.getNome(), 1));
+	}
+	
+	@Test
+	public void testaAdicionarDisciplinaNoUltimoPeriodo() {
+		Disciplina p1 = plano.getMapaDisciplina().get("Programacao I");
+		try {
+			plano.adicionaDisciplina("Programacao I", 8);
+		} catch (LimiteUltrapassadoException e) {
+			Assert.fail("nao devia ter lançado exceptio");
+		}
+		try {
+			plano.adicionaDisciplina("Programacao II", 8);
+		} catch (LimiteUltrapassadoException e) {
+			Assert.fail("nao devia ter lançado exceptio");
+		}
+		try {
+			plano.adicionaDisciplina("Calculo II", 8);
+		} catch (LimiteUltrapassadoException e) {
+			Assert.fail("nao devia ter lançado exceptio");
+		}
+		try {
+			plano.adicionaDisciplina("Calculo I", 8);
+		} catch (LimiteUltrapassadoException e) {
+			Assert.fail("nao devia ter lançado exceptio");
+		}
+		try {
+			plano.adicionaDisciplina("Teoria da Computacao", 8);
+		} catch (LimiteUltrapassadoException e) {
+			Assert.fail("nao devia ter lançado exceptio");
+		}
+		try {
+			plano.adicionaDisciplina("Leitura e Prod. de Textos", 8);
+		} catch (LimiteUltrapassadoException e) {
+			Assert.fail("nao devia ter lançado exceptio");
+		}
+		Assert.assertEquals(30, plano.getPeriodo(8).getCreditos());
 	}
 }

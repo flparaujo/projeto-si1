@@ -1,11 +1,6 @@
 package models;
 
-import java.util.List;
-
 import javax.persistence.*;
-
-import models.exceptions.LimiteDePeriodosException;
-import models.exceptions.LimiteUltrapassadoException;
 import play.data.validation.Constraints.*;
 
 import play.db.ebean.Model;
@@ -30,8 +25,6 @@ public class Usuario extends Model {
 	private String senha;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	//@JoinTable(name = "usuario_plano", 
-    //joinColumns = {@JoinColumn (name = "fk_usuario")}, inverseJoinColumns = {@JoinColumn(name = "fk_plano")})
 	private PlanoDeCurso plano;
 	
 	public Usuario(String nome, String login, String senha) {
@@ -41,60 +34,8 @@ public class Usuario extends Model {
 		plano = new PlanoDeCurso();
 	} 
 	
-	public void setPeriodoAtualPlano(int novoPeriodoAtual) {
-		plano.setPeriodoAtual(novoPeriodoAtual);
-	}
-	
-	public void atualizaCadeiras() {
-		plano.atualizaMapaCadeira(plano.getDisciplinasAlocadas());
-	}
-	
 	public void distribuiCadeiras() {
 		plano.distribuiCaderas(Disciplina.find.all());
-	}
-	
-	public boolean minimoDeCreditosSatisfeitos() {
-		return plano.minimoCreditosSatisfeitos();
-	}
-	
-	public int getIdPeriodoAtual() {
-		return plano.getPeriodoAtual();
-	}
-	
-	public PlanoDeCurso getPlano() {
-		return plano;
-	}
-	
-	public int getTotalDeCreditos() {
-		return plano.getTotalDeCreditos();
-	}
-	
-	public int getMinimoDeCreditosConcluir() {
-		return plano.getMinimoCreditosConcluir();
-	}
-	
-	public int getTotalCreditosCursados() {
-		return plano.getCreditosCursados();
-	}
-	
-	public List<Periodo> getPeriodosPlano() {
-		return plano.getPeriodos();
-	}
-	
-	public List<Disciplina> getDisciplinaDispniveisOrdenadasPlano() {
-		return plano.getDisciplinaDispniveisOrdenadas();
-	} 
-	
-	public void adicionaDisciplina(String nome, int periodo) throws LimiteUltrapassadoException {
-		plano.adicionaDisciplina(nome, periodo);
-	}
-	
-	public void removeDisciplina(String nome) {
-		plano.removeDisciplina(nome);
-	}
-	
-	public void adicionaPeriodo() throws LimiteDePeriodosException {
-		plano.adicionaPeriodo();
 	}
 	
 	public static Finder<Long,Usuario> find = new Finder<Long,Usuario>(
@@ -148,6 +89,10 @@ public class Usuario extends Model {
 	
 	public String toString() {
 		return "usuario: " + nome + " - " + login;
+	}
+
+	public PlanoDeCurso getPlano() {
+		return this.plano;
 	}
 
 }
