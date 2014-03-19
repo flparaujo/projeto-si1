@@ -5,33 +5,46 @@
 	window.location.href = "/login" 
 	</script>
 }
+
+
 <html>
-	<head>
-		<title>Novo Cadastro</title>
-		<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/cadastro.css")">
-	</head>
-	<body>
-		<form id="login" action="none" style="position:absolute;top:80px;">
-    		<h1 id="ff-proof" class="ribbon">Fazer Cadastro &nbsp;&nbsp;</h1>
-    		<div class="apple">
-    			<!--adicionar simbolo da ufcg-->
+<head>
+<title>Novo Cadastro</title>
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">    
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/login.css")">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+	<section id="content">
+		@helper.form(routes.Application.novoCadastro) {
+			<h1>Fazer Cadastro</h1>
+			@if(flash.contains("fail")) {
+    		<p class="fail" style="">
+        		@flash.get("fail")
+    		</p>
+			}
+			<div>
+				<input type="text" name="nome" placeholder="Nome" id="nome"/>
 			</div>
-			@helper.form(routes.Application.novoCadastro) {
-				@if(flash.contains("fail")) {
-    				<p class="fail" style="">
-        				@flash.get("fail")
-    				</p>
-				}
-    			<fieldset id="inputs">
-        			<input type="text" name="nome" placeholder="Nome" id="nome" onblur="if(this.value=='')this.value='Nome';" onfocus="if(this.value=='Nome')this.value='';">
-        			<input type="email" name="login" placeholder="Email" id="username" onblur="if(this.value=='')this.value='Email';" onfocus="if(this.value=='Email')this.value='';">
-        			<input type="password" placeholder="Password" required="" id="password" name="senha" onblur="if(this.value=='')this.value='Password';" onfocus="if(this.value=='Password')this.value='';">
-    			</fieldset>
-    			<fieldset id="actions">
-        			<input id="submit" value="Cadastrar" type="submit">
-    			</fieldset>
-    		}
-		</form>
+			<div>
+				<input type="email" name="login" placeholder="Email" id="username"/>
+			</div>
+			<div>
+				<input type="password" placeholder="Password" required="" id="password" name="senha"/>
+			</div>
+			<div>
+				<input type="submit" value="finalizar" />
+			</div>
+		}<!-- form -->
+		</section><!-- content -->
+	</div><!-- container -->
+	
+	@if(form.hasGlobalErrors) {
+	    <p class="error">
+	        @form.globalError.message
+	    </p>
+	}
 	</body>
-</html>
+	</html>

@@ -1,39 +1,56 @@
 @(form: Form[Application.Login])
 
 <html>
-	<head>
-		<title>Meu Plano de Curso</title>
-		<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
-	</head>
-	<body>
-		<form id="login" action="none" style="position:absolute;top:80px;">
-    		<h1 id="ff-proof" class="ribbon">Meu Plano de Curso &nbsp;&nbsp;</h1>
-    		<div class="apple">
-    			<!--adicionar simbolo da ufcg-->
-			</div>
-			@helper.form(routes.Application.authenticate) {
-				@if(form.hasGlobalErrors) { 
-        			<p class="error">
-            			@form.globalError.message
-            		</p>
-        		}
-        	    
-        		@if(flash.contains("success")) {
-        			<p class="success">
-            			@flash.get("success")
-        		    </p>
-        		}
-    	
-    			<fieldset id="inputs">
-        			<input type="login" name="login" placeholder="Email" value="@form("login").value" id="username" onblur="if(this.value=='')this.value='Email';" onfocus="if(this.value=='Email')this.value='';">
-        			<input type="password" name="password" placeholder="Password" value="@form("senha").value" id="password" onblur="if(this.value=='')this.value='Password';" onfocus="if(this.value=='Password')this.value='';">
-    			</fieldset>
-    			<fieldset id="actions">
-        			<input id="submit" value="Entrar" type="submit">
-       				<p class="option"><a href="/cadastrar">Cadastrar usuário</a></p>
-    			</fieldset>
-    		}
-		</form>
-	</body>
+    <head>
+        <title>Meu Plano De Curso</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    <body>
+        
+        <header>
+            <a href="@routes.Application.index" id="logo"><span>Zen</span>tasks</a>
+        </header>
+       
+        @helper.form(routes.Application.authenticate) {
+            
+            <h1>Entrar</h1>
+            
+            @if(form.hasGlobalErrors) { 
+                <p class="error">
+                    @form.globalError.message
+                </p>
+            }
+            
+            @if(flash.contains("success")) {
+                <p class="success">
+                    @flash.get("success")
+                </p>
+            }
+            
+            <p>
+                <input type="login" name="login" placeholder="Email" value="@form("login").value">
+            </p>
+            <p>
+                <input type="password" name="senha" placeholder="Password" value="@form("senha").value">
+            </p>
+            <p>
+                <button type="submit">Entrar</button>
+            </p>
+            
+        }
+        
+        <div class="button">
+				<a href="/cadastrar">Cadastrar usuário</a>
+		</div>
+        
+        <p class="note">
+            Try <em>guillaume@@sample.com</em> with <em>secret</em> as password.
+        </p>
+            
+    </body>
 </html>
+    
+
+
+

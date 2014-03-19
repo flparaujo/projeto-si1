@@ -30,6 +30,8 @@ public class Usuario extends Model {
 	private String senha;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	//@JoinTable(name = "usuario_plano", 
+    //joinColumns = {@JoinColumn (name = "fk_usuario")}, inverseJoinColumns = {@JoinColumn(name = "fk_plano")})
 	private PlanoDeCurso plano;
 	
 	public Usuario(String nome, String login, String senha) {

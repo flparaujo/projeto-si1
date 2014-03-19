@@ -61,7 +61,7 @@ function remDisciplina(ev){
 		  data: "",
 		  success: function(){
 		        alert("Disciplina Removida");
-		        window.location = "/";
+		        window.location = "/home";
 		  },
 		});
 	}
