@@ -1,4 +1,12 @@
-/views
 /controllers
+/form
 /models
+/views
+/DisciplinaTest.class
+/IntegrationTest$1.class
+/IntegrationTest.class
+/LeitorDeDisciplinas.class
+/PeriodoTest.class
+/PlanoDeCursoTest.class
 /UsuarioTest.class
+/disciplinas-do-curso.xml

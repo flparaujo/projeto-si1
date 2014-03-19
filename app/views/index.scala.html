@@ -108,14 +108,25 @@
         	<button type="submit" style="position:absolute;top:660px;left:360px;" class="btn btn-info" type="button">OK</button>		
         }
   
-		<div style="width:0%;height:500px;overflow-y:auto;margin-top:20px;margin-left:30px;">
+  		<div style="position:absolute;top:800px;left:100px;">
+  			<h5 style="float:right;width:70%;margin:0;color:#000000;font-size:40px;">
+				Grade
+				<br>
+				Curricular
+			</h5>
+  		</div>	
+		<div style="position:absolute;top:800px;left:360px;border: 3px solid #4169E1">
 			<ul style="list-style:none;overflow-y:auto;margin-top:20px;"> 
 				@for(cadeira <- plano.getDisciplinaDispniveisOrdenadas()) {
 					<div class="disponiveis" id="@cadeira.getNome()"	draggable="true" 
 						ondragstart="drag(event)" ondragend="dragEnd()">
 	  						<center><label class="nome">@cadeira.getNome()</label></center>
-		  					<label class="creditos">@cadeira.getCreditos() @Messages("creditos")</label>
-		  					<label class="dificuldade"> dificuldade: @cadeira.getDificuldade()</label>
+		  					<label class="creditos">
+		  						<font color=000000>@cadeira.getCreditos() @Messages("creditos")</font>
+		  					</label>
+		  					<label class="dificuldade">
+		  						<font color=000000>dificuldade: @cadeira.getDificuldade()</font>
+		  					</label>
 	  				</div>
 			} 
 			</ul>

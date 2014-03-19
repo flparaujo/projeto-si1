@@ -1,6 +1,9 @@
 package controllers;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import form.FormHandler;
 import models.Disciplina;
 import models.PlanoDeCurso;
@@ -31,9 +34,9 @@ public class Application extends Controller {
         
         public String validate() {
 			Usuario user = Usuario.find.where().eq("login", login)
-					.eq("senha", senha).findUnique();
+					.eq("senha", stringHexa(gerarHash(senha))).findUnique();
     		if(user == null){
-    			return "login ou senha invalidos.";
+    			return "Login ou senha invalidos.";
     		}
     		session("session", String.valueOf(user.getPlano().getId()));
     		return null;
@@ -53,12 +56,33 @@ public class Application extends Controller {
 		return ok(views.html.cadastro.render(Form.form(Cadastro.class)));
 	}
 
+	private static byte[] gerarHash(String frase) {
+		  try {
+		    MessageDigest md = MessageDigest.getInstance("SHA-256");
+		    md.update(frase.getBytes());
+		    return md.digest();
+		  } catch (NoSuchAlgorithmException e) {
+		    return null;
+		  }
+	}
+	
+	private static String stringHexa(byte[] bytes) {
+		   StringBuilder s = new StringBuilder();
+		   for (int i = 0; i < bytes.length; i++) {
+		       int parteAlta = ((bytes[i] >> 4) & 0xf) << 4;
+		       int parteBaixa = bytes[i] & 0xf;
+		       if (parteAlta == 0) s.append('0');
+		       s.append(Integer.toHexString(parteAlta | parteBaixa));
+		   }
+		   return s.toString();
+		}
+	
 	public static Result novoCadastro() {
 		geraUsuarios();
 		Form<Cadastro> cadastroForm = Form.form(Cadastro.class).bindFromRequest();
 		String nome = cadastroForm.get().nome;
 	    String login = cadastroForm.get().login;
-	    String senha = cadastroForm.get().senha;
+	    String senha = stringHexa(gerarHash(cadastroForm.get().senha));
 	    Usuario user = Usuario.find.where().eq("login", login).findUnique();
 	    
 	    if(user == null) {
@@ -134,12 +158,11 @@ public class Application extends Controller {
     	return redirect(routes.Application.login());
 	}
 	
-	//gera 30 usuarios automaticamente
 	private static void geraUsuarios() {
 		if(Usuario.find.all().size() < 30) {
 			for(int i = 1; i <= 30; i++) {
 				Usuario user = new Usuario("Usuario " + i, "usuario" + i + 
-						"@meuplano.com", i + "000");
+						"@meuplano.com", stringHexa(gerarHash(i + "000")));
 				user.distribuiCadeiras();
 				user.save();
 			}

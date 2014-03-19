@@ -138,7 +138,6 @@ public class PlanoDeCursoTest {
 	
 	@Test
 	public void testaAdicionarDisciplinaNoUltimoPeriodo() {
-		Disciplina p1 = plano.getMapaDisciplina().get("Programacao I");
 		try {
 			plano.adicionaDisciplina("Programacao I", 8);
 		} catch (LimiteUltrapassadoException e) {

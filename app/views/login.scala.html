@@ -8,15 +8,12 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
 	</head>
     <body>
-        <div id="login" action="none" style="position:absolute;top:80px;">
+        <div id="login" action="none">
         	<h1 id="ff-proof" class="ribbon">Meu Plano de Curso &nbsp;&nbsp;</h1>
-    		<div class="apple">
-    			<!-- <img src="@routes.Assets.at("images/ufcg.png")" class="img-rounded"> -->
-			</div>
         	@helper.form(routes.Application.authenticate) {           
             	@if(form.hasGlobalErrors) { 
                 	<p class="error">
-                	    @form.globalError.message
+                	    <h2 style="color:#FFE1FF;">@form.globalError.message</h2>
                 	</p>
             	}
             	@if(flash.contains("success")) {
