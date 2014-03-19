@@ -139,4 +139,33 @@ public class Periodo extends Model{
 		return "Periodo [id=" + id + ", numero=" + numero + ", disciplinas="
 				+ disciplinas + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Periodo other = (Periodo) obj;
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
+				return false;
+		} else if (!disciplinas.equals(other.disciplinas))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (numero != other.numero)
+			return false;
+		if (validador == null) {
+			if (other.validador != null)
+				return false;
+		} else if (!validador.equals(other.validador))
+			return false;
+		return true;
+	}
 }
