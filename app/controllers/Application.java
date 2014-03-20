@@ -8,6 +8,7 @@ import form.FormHandler;
 import models.Disciplina;
 import models.PlanoDeCurso;
 import models.Usuario;
+import models.ValidadorMin;
 import models.exceptions.LimiteDePeriodosException;
 import models.exceptions.LimiteUltrapassadoException;
 import play.data.Form;
@@ -23,6 +24,7 @@ public class Application extends Controller {
 		if (plano == null){
 			plano = PlanoDeCurso.find.byId(Long.parseLong(session("session")));
 			plano.atualizaMapaCadeira(Disciplina.find.all());
+			plano.getPeriodos().get(plano.getPeriodos().size() - 1).setEValido(new ValidadorMin());
 		} 
 		return ok(views.html.index.render(plano, formHandler));
 	}

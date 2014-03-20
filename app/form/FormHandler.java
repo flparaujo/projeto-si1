@@ -2,6 +2,9 @@ package form;
 
 import play.data.validation.Constraints.*;
 
+/**
+ * Essa classe representa um formulario para pegar informações da interface.
+ */
 public class FormHandler {
 
 	@Required

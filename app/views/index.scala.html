@@ -66,7 +66,7 @@
     </div>
 	<div id="addperiodos" class="teste">
 		@form(routes.Application.novoPeriodo()) {
-			<button type="submit" class="btn btn-large btn-primary" position="fixed" bottom="0px">Adicionar periodo</button>
+			<button onclick="addPeriodo()" type="submit" class="btn btn-large btn-primary" position="fixed" bottom="0px">Adicionar periodo</button>
 	   	}	
     </div>
 	
@@ -74,7 +74,7 @@
 	<center><div class="separator"> </div> </center>
 		@if(!plano.minimoCreditosSatisfeitos()) {
 			<h5 style="float:right;width:70%;position:absolute;top:620px;left:90px;margin:0;color:#FF0000;font-size:18px;">
-				Aviso: Mínimo de creditos não atingido
+				Aviso: Mínimo de créditos não atingido
 			</h5>
 			<h5 style="float:right;width:70%;position:absolute;top:640px;left:90px;margin:0;color:#000000;font-size:18px;">
 				Arraste a cadeira para o período que você quer alocá-la

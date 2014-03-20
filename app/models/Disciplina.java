@@ -57,6 +57,9 @@ public class Disciplina extends Model implements Comparable<Disciplina>{
 		return this.getPreRequisitos().contains(d);
 	}
 
+	/**
+	 * Adiciona uma lista de disciplinas em seus pre-requisitos.
+	 */	
 	public void addPreRequisito(Disciplina... d) {
 		Disciplina[] lista = d;
 		for (Disciplina disciplina : lista) {
@@ -64,42 +67,86 @@ public class Disciplina extends Model implements Comparable<Disciplina>{
 		}
 	}
 	
+	/**
+	 * Muda o valor dos créditos
+	 * @param creditos 
+	 * 		Novo valor para os créditos da disciplina.
+	 */
 	public void setCreditos(int creditos) {
 		this.creditos = creditos;
 	}
 
+	/**
+	 * Retorna o valor dos créditos da disciplina.
+	 * @return um inteiro sendo o valor dos créditos da disciplina.
+	 */
 	public int getCreditos() {
 		return this.creditos;
 	}
 
+	/**
+	 * Retorna o nome da disciplina.
+	 * @return um string sendo o nome da disciplina.
+	 */
 	public String getNome() {
 		return this.nome;
 	}
-
+	/**
+	 * Muda o valor da dificuldado da disciplina.
+	 * @param dificuldade
+	 * 		Novo valor para a dificuldade da disciplina. 
+	 */
 	public void setDificuldade(int dificuldade) {
 		this.dificuldade = dificuldade;
 	}
 
+	/**
+	 * Retorna o valor da dificuldade da disciplina.
+	 * @return um inteiro sendo o valor da dificuldade da disciplina.
+	 */
 	public int getDificuldade() {
 		return dificuldade;
 	}
 
+	/**
+	 * Retorna uma lista de disciplinas sendo os pre-requisitos.
+	 * @return uma lista de disciplinas sendo os pre-requisitos.
+	 */
 	public List<Disciplina> getPreRequisitos() {
 		return preRequisitos;
 	}
 
+	/**
+	 * Muda o nome da disciplina.
+	 * @param nome
+	 * 		Novo nome da disciplina
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Muda a lista de disciplinas que são os pre-requisitos.
+	 * @param preRequisitos
+	 * 		Nova lista de disciplinas que são os pre-requisitos.
+	 */
 	public void setPreRequisitos(List<Disciplina> preRequisitos) {
 		this.preRequisitos = preRequisitos;
 	}
 
+	/**
+	 * Retorna o período sugerido da disciplina.
+	 * @return um inteiro sendo o período sugerido da disciplina.
+	 */
 	public int getPeriodo(){
 		return periodo;
 	}
 	
+	/**
+	 * Muda o período sugerido da disciplina.
+	 * @param periodo
+	 * 		Novo período sugerido da disciplina.
+	 */
 	public void setPeriodo(int periodo){
 		this.periodo = periodo;
 	}

@@ -5,6 +5,9 @@ import play.data.validation.Constraints.*;
 
 import play.db.ebean.Model;
 
+/**
+ * Essa classe representa um usuario.
+ */
 @Entity
 public class Usuario extends Model {
 	
@@ -34,6 +37,9 @@ public class Usuario extends Model {
 		plano = new PlanoDeCurso();
 	} 
 	
+	/**
+	 * Distribui as disciplinas em seus respectivos períodos.
+	 */
 	public void distribuiCadeiras() {
 		plano.distribuiCaderas(Disciplina.find.all());
 	}

@@ -21,7 +21,7 @@ import models.exceptions.LimiteUltrapassadoException;
 import play.db.ebean.Model;
 
 /**
- * Essa classe representa o Plano de Curso do sistema.
+ * Essa classe representa o Plano de Curso.
  */
 @Entity
 public class PlanoDeCurso extends Model{
@@ -49,7 +49,7 @@ public class PlanoDeCurso extends Model{
 		for (int i = 1; i<= 8; i++ ){
 			periodos.add(new Periodo(i, MAXIMO_CREDITOS));
 		}
-		this.periodos.get(this.periodos.size() - 1).setEValido(new ValidadorMin());;
+		this.periodos.get(this.periodos.size() - 1).setEValido(new ValidadorMin());
 		this.mapaDeDisciplinas = new HashMap<String, Disciplina>();
 		distribuiDisciplinas();
 		this.periodoAtual = 1;
@@ -76,6 +76,10 @@ public class PlanoDeCurso extends Model{
 		p.update();
 	}
 	
+	/**
+	 * Calcula o total de créditos já cursados.
+	 * @return um inteiro sendo o total de créditos já cursados.
+	 */
 	public int getCreditosCursados() {
 		int result = 0;
 		for (int i = 1; i < periodoAtual; i++) {
@@ -84,6 +88,10 @@ public class PlanoDeCurso extends Model{
 		return result;
 	}
 	
+	/**
+	 * Calcula o total de créditos planejados.
+	 * @return um inteiro sendo o total de créditos planejados.
+	 */
 	public int getTotalDeCreditos() {
 		int result = 0;
 		for (Periodo p: periodos) {
@@ -92,10 +100,18 @@ public class PlanoDeCurso extends Model{
 		return result;
 	}
 	
+	/**
+	 * Retorna o número de créditos mínimo para concluir o curso de ciência da computação. 
+	 * @return um inteiro sendo o número de créditos mínimo para concluir o curso de ciência da computação.
+	 */
 	public int getMinimoCreditosConcluir() {
 		return MINIMO_CREDITOS_CONCLUIR;
 	}
 	
+	/**
+	 * Retorna verdadeiro se em todos os períodos planejados satisfazem a quantidade mínima de créditos.
+	 * @return true se em todos os períodos planejados satisfazem a quantidade mínima de créditos.
+	 */
 	public boolean minimoCreditosSatisfeitos() {
 		boolean result = true;
 		for (int i = periodoAtual; i <= periodos.size(); i++) {
@@ -159,16 +175,27 @@ public class PlanoDeCurso extends Model{
 	 * lista.
 	 */
 	public void adicionaPeriodo() throws LimiteDePeriodosException {
-		if(periodos.size() == MAXIMO_DE_PERIODOS)
+		if(periodos.size() == MAXIMO_DE_PERIODOS) {
 			throw new LimiteDePeriodosException();
+		}
 		this.periodos.get(this.periodos.size() -1).setEValido(new ValidadorMax(MAXIMO_CREDITOS));;
 		Periodo newPeriodo = new Periodo(this.periodos.size() + 1, MAXIMO_CREDITOS);
 		newPeriodo.setEValido(new ValidadorMin());
 		this.periodos.add(newPeriodo);
 	}
 	
-	public void adicionaPeriodo(int num_periodo) {
-		this.periodos.add(new Periodo(num_periodo, MAXIMO_CREDITOS));
+	public void adicionaPeriodo(int num_periodo) throws LimiteDePeriodosException {
+		if(periodos.size() == MAXIMO_DE_PERIODOS) {
+			throw new LimiteDePeriodosException();
+		}
+		if (num_periodo == periodos.size()) {
+			this.periodos.get(this.periodos.size() -1).setEValido(new ValidadorMax(MAXIMO_CREDITOS));;
+			Periodo newPeriodo = new Periodo(num_periodo, MAXIMO_CREDITOS);
+			newPeriodo.setEValido(new ValidadorMin());
+			this.periodos.add(newPeriodo);
+		} else {
+			this.periodos.add(new Periodo(num_periodo, MAXIMO_CREDITOS));
+		}
 	}
 	
 	public Map<String, Disciplina> getMapaDisciplina(){
@@ -283,6 +310,11 @@ public class PlanoDeCurso extends Model{
 		return false;
 	}
 
+	/**
+	 * Remove uma disciplina do plano.
+	 * @param disciplina
+	 * 		Disciplina a ser removida do plano.
+	 */
 	public void removeDisciplina(String disciplina){
 		Disciplina removida = mapaDeDisciplinas.get(disciplina);
 		getPeriodo(removida.getPeriodo()).removerDisciplina(removida);

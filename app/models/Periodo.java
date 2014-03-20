@@ -73,6 +73,13 @@ public class Periodo extends Model{
 		this.validador = validador;
 	}
 	
+	/**
+	 * Adiciona uma disciplina ao período.
+	 * @param disciplina
+	 * 		Disciplina a ser adicionada ao período.
+	 * @throws LimiteUltrapassadoException
+	 * 		Se o período estiver atingido o máximo de créditos.
+	 */
 	public void adicionarDisciplina(Disciplina disciplina) throws LimiteUltrapassadoException{
 		if (!validador.eValido(getCreditos(), disciplina.getCreditos())) {
 			throw new LimiteUltrapassadoException();
@@ -80,6 +87,11 @@ public class Periodo extends Model{
 		disciplinas.add(disciplina);
 	}
 
+	/**
+	 * Remove uma disciplina do período.
+	 * @param disciplina
+	 * 		Disciplina a ser removida do período.
+	 */
 	public void removerDisciplina(Disciplina disciplina) {
 		disciplinas.remove(disciplina);
 	}

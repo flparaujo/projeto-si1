@@ -77,3 +77,16 @@ function dropR(ev, e){
 	if (r==true){
 	}
 }
+function addPeriodo(){
+	$.ajax({
+		success: function(){
+			alert("Período Adicionado");
+		    window.location = "/home";
+		},
+		error: function(result, exception, v, r) {
+			if (v == "Bad Request"){
+				alert("Limite de Períodos Ultrapassados!");
+			}
+		}
+	});
+}
