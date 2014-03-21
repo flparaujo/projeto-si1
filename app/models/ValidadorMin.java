@@ -4,7 +4,7 @@ package models;
  * Essa classe representa o validador de créditos.
  */
 public class ValidadorMin implements ValidadorDeCreditos{
-
+	
 	public ValidadorMin() {
 	}
 
@@ -15,5 +15,4 @@ public class ValidadorMin implements ValidadorDeCreditos{
 	public boolean eValido(int creditosPeriodo, int creditoDisciplina) {
 		return true;
 	}
-
 }

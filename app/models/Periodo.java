@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import models.exceptions.LimiteUltrapassadoException;
 import play.db.ebean.Model;
@@ -29,6 +30,7 @@ public class Periodo extends Model{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
+	@Transient
 	private ValidadorDeCreditos validador;
 	
 	private int numero;

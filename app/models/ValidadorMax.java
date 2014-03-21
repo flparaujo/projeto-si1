@@ -4,7 +4,7 @@ package models;
  * Essa classe representa o validador de créditos.
  */
 public class ValidadorMax implements ValidadorDeCreditos{
-
+	
 	private int maximoCreditos;
 	
 	public ValidadorMax(int maximoCreditos) {

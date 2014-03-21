@@ -76,6 +76,16 @@ public class PlanoDeCurso extends Model{
 		p.update();
 	}
 	
+	public void atualizaValidadores() {
+		for (Periodo p : this.periodos) {
+			if (p.getNumero() == this.periodos.size()) {
+				p.setEValido(new ValidadorMin());
+			} else {
+				p.setEValido(new ValidadorMax(MAXIMO_CREDITOS));
+			}
+		}		
+	}
+	
 	/**
 	 * Calcula o total de créditos já cursados.
 	 * @return um inteiro sendo o total de créditos já cursados.
@@ -147,6 +157,7 @@ public class PlanoDeCurso extends Model{
 				}
 			}
 		}
+		atualizaValidadores();
 	}
 	
 	/**
@@ -156,6 +167,7 @@ public class PlanoDeCurso extends Model{
 	public void distribuiCaderas(List<Disciplina> cadeiras){
 		atualizaMapaCadeira(cadeiras);
 		distribuiDisciplinas();
+		atualizaValidadores();
 	}
 
 	/**

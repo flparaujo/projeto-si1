@@ -3,7 +3,7 @@ package models;
 /**
  * Essa interface representa o compartamente de validar adicionar disciplina a períodos.
  */
-public interface ValidadorDeCreditos {
+public interface ValidadorDeCreditos{
 	
 	/**
 	 * Valida adicionar disciplina ao período se o total de créditos do período mais o da disciplina não ultrapassa o máximo de créditos
