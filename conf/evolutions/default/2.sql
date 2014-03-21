@@ -67,7 +67,24 @@ insert into disciplina values(52,'Optativa 8',4,3,8);
 insert into disciplina values(53,'Optativa 9',4,3,8);
 insert into disciplina values(54,'Optativa 10',4,3,8);
 insert into disciplina values(55,'Optativa 11',2,3,8);
-
+-- optativas
+insert into disciplina values(56,'Administração',4,5,0);
+insert into disciplina values(57,'Sociologia Industrial',3,5,0);
+insert into disciplina values(58,'Economia',4,5,0);
+insert into disciplina values(59,'Futsal',2,5,0);
+insert into disciplina values(60,'Basquete',2,5,0);
+insert into disciplina values(61,'Cálculo III',4,5,0);
+insert into disciplina values(62,'Equações Diferenciais',4,5,0);
+insert into disciplina values(63,'Inglês',4,5,0);
+insert into disciplina values(64,'Expressão Gráfica',4,5,0);
+insert into disciplina values(65,'Realidade Virtual',4,5,0);
+insert into disciplina values(66,'Empreendedorismo I',4,5,0);
+insert into disciplina values(67,'Administração Financeira',4,5,0);
+insert into disciplina values(68,'Administração de Sistemas',4,5,0);
+insert into disciplina values(69,'Análise de dados I',4,5,0);
+insert into disciplina values(70,'Arquitetura de Software',4,5,0);
+insert into disciplina values(71,'Desenvolvimento Dirigido a Modelos',4,5,0);
+insert into disciplina values(72,'Desenvolvimento de Aplicações Corporativas Avancadas',4,5,0);
 
 -- relacionamentos
 insert into disciplina_requisito values(7,1);
@@ -137,6 +154,14 @@ insert into disciplina_requisito values(44,17);
 insert into disciplina_requisito values(45,10);
 insert into disciplina_requisito values(45,33);
 insert into disciplina_requisito values(50,45);
+insert into disciplina_requisito values(61,4);
+insert into disciplina_requisito values(61,13);
+insert into disciplina_requisito values(62,16);
+insert into disciplina_requisito values(70,26);
+insert into disciplina_requisito values(70,27);
+insert into disciplina_requisito values(71,27);
+insert into disciplina_requisito values(72,31);
+
 # --- !Downs
 
 delete from disciplina;
