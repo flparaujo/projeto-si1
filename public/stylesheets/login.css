@@ -140,22 +140,22 @@ h1 {
     box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.3);
 }
 .ribbon { /* ruban  */
-    background-color: #0000FF;
+    background-color: #4169E1;
     background-size:5px 5px,100% 100% ;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#0000FF), to(#000000));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#4169E1), to(#4169E1));
     background-image: -webkit-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%), rgba(0, 0, 0,.125) 20px),
-    -webkit-linear-gradient(top, #0000FF, #0000FF);
+    -webkit-linear-gradient(top, #4169E1, #4169E1);
     background-image: -moz-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%),
-    -moz-linear-gradient(top, #0000FF, #0000FF);
+    -moz-linear-gradient(top, #4169E1, #4169E1);
     background-image: -ms-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%), rgba(0, 0, 0,.125) 20px),
-    -ms-linear-gradient(top, #0000FF, #0000FF);
+    -ms-linear-gradient(top, #4169E1, #4169E1);
     background-image: -o-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%), rgba(0, 0, 0,.125) 20px),
-    -o-linear-gradient(top, #0000FF, #0000FF);
+    -o-linear-gradient(top, #4169E1, #4169E1);
     background-image: linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%), rgba(0, 0, 0,.125) 20px),
-    linear-gradient(top, #0000FF, #0000FF);
+    linear-gradient(top, #4169E1, #4169E1);
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
     border-top-right-radius: 20px 5px;
-    color: #0000FF;
+    color: #301607;
     height: 55px;
     width: 460px;
     line-height: 55px;
