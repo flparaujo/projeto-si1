@@ -140,9 +140,9 @@ h1 {
     box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.3);
 }
 .ribbon { /* ruban  */
-    background-color: #000000;
+    background-color: #4169E1;
     background-size:5px 5px,100% 100% ;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#C94700), to(#000000));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#4169E1), to(#4169E1));
     background-image: -webkit-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%), rgba(0, 0, 0,.125) 20px),
     -webkit-linear-gradient(top, #4169E1, #4169E1);
     background-image: -moz-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%),
@@ -199,22 +199,7 @@ fieldset#inputs{ /* contour des inputs */
     border-radius: 5px;
 }
 @media screen and (-webkit-animation) {fieldset#inputs:before {width: 440px!important;}}
-fieldset#inputs:before{ /* couture autour des inputs */
-	content: "";
-	padding: 0px;
-    margin: -15px -45px;
-	width: 435px;
-	height: 205px;
-	position: absolute;
-	border: 1px dashed rgba(143, 143, 143,0.7);
-	-moz-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.8),0 0 1px 1px rgba(0, 0, 0, 0.5) inset;
-	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.8),0 0 1px 1px rgba(0, 0, 0, 0.5) inset;
-	box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.8),0 0 1px 1px rgba(0, 0, 0, 0.5) inset;
-	-moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-	z-index: -1;
-}
+
 #inputs input { /* pictos des inputs */
     background: #f1f1f1 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABkCAYAAACPQLC2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAhtJREFUeNrsV1FuwjAMbRECBAIqxD+7ARyhOwE9QvfDd28wbrB+8wNHaG9QblBuAP9IzeADAYLOntwqZQlk6z6mKZEMkRO/2o7T+plpmhplRsUoOTSABtAA/wagij+z2ayg7Pf7XfgLQGxSRSDOdrt95/dNJhOxB9frNQCxQQwSnAdSD24HvOZsgdpWzgG+J0ViWdZAFSASAESMsY0qgIMGWQ4I0FHOwW63w2w/t9vtwX6/3yjVQbPZ7IK8tVqtFCSBeW6Mc9ThGu6RheCDeBSvBfMptzZFHX2EPACZFwAajcYYYnW5c0dxQT9EkayN8xwAsisJMb4TPtqEGYDzg2vg5B6gW6UuU5kvdOVO5T2SiAfAyluAMAVDRns/c2DqBkMDaAANoAE0gAbQAH+PsdyyFQFz8amls0jNSOcjg6nKjHu93gDav5gzzEbWBjuwx5aGQI2UxTdYMBZoCPMYZATiCT0AZjIU0Z4kSV5o3SBS5slIly1q8TqdzpDWnayrl5EuS9L+xUBCGL8uA4junByfVCYDcBXLIPiSA2QjCEAxxg9a3mnBA2Ahc2QjHN21JU9em6bpHA6HTQ5Qr9fnnOuZ8ZrOHgtqlCXyeDyGBb5Qq9VExp+s5HQ6rWgeCu8CjFeB2wxc9M/n8+rhZeIqLn8yxgfGS6XbSAWx5t2+XC5L5fcBHckTHYsH4YTfeR9oxqIBNIAG+DWADwEGAAgZ5RSSVu1LAAAAAElFTkSuQmCC) no-repeat;
     padding: 15px 15px 15px 30px;
