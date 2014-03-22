@@ -140,7 +140,7 @@ h1 {
     box-shadow: -2px -2px 2px rgba(0, 0, 0, 0.3);
 }
 .ribbon { /* ruban  */
-    background-color: #0000FF;
+    background-color: #000000;
     background-size:5px 5px,100% 100% ;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#4169E1), to(#4169E1));
     background-image: -webkit-linear-gradient(45deg , transparent 0%, transparent 25%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.15) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.15) 100%), rgba(0, 0, 0,.125) 20px),
