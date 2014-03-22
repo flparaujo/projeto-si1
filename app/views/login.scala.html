@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
 	</head>
     <body>
-        <div id="login" action="none">
+        <div id="login" action="none" style="position:absolute;top:80px;">
         	<h1 id="ff-proof" class="ribbon">Meu Plano de Curso &nbsp;&nbsp;</h1>
         	@helper.form(routes.Application.authenticate) {           
             	@if(form.hasGlobalErrors) { 
