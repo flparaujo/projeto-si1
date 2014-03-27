@@ -1,0 +1,73 @@
+@(id: Long, nome: String, planoDeUsuario: PlanoDeCurso)
+
+@import helper._
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
+
+@main(nome) {
+	
+	<center><h2>Plano do usuario @nome.toUpperCase()</h2></center>
+	<center><h3 style="position:absolute;left:43%;top:50px;color:#fff;text-shadow:2px 2px #000;">Períodos Do Curso</h3></center>
+	<div id="periodos">
+		@for(periodo <- planoDeUsuario.getPeriodos()) {
+			<div id="@periodo.getNumero()" class="periodo">
+		
+				<ul style="list-style:none;">
+					<span style="width:190px;height:30px;font-size:20px;margin-bottom:10px;margin-left:-40px;" color=#000000>@periodo.getNumero() @Messages("nPeriodo") </span>
+					@for(cadeira <- periodo.getDisciplinas()) {
+		  				@if(planoDeUsuario.verificaPrerequisito(cadeira.getNome(), periodo.getNumero())){
+		  					<div class="alocadas" id="@cadeira.getNome()" title="@cadeira.getNome()">
+		  				}else{
+		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="@cadeira.getNome()">
+		  				}		  	
+		  					<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>
+		  					<label class="creditos">
+		  						<font color=000000>@cadeira.getCreditos() @Messages("creditos")</font> 
+		  					</label>
+		  					<label class="dificuldade"> 
+		  						<font color=000000>dificuldade: @cadeira.getDificuldade()</font> 
+		  					</label>	
+		  				</div>
+					}	 
+				</ul>
+				<span class="periodoCreditos">
+					<font color=000000>@periodo.getCreditos() @Messages("creditos")</font>
+				</span>
+				<span class="periodoDificuldade">
+					<font color=000000>Dificuldade: @periodo.getDificuldadeTotal()</font>
+				</span>
+			</div>
+		}
+	</div>
+	
+	<STYLE> 
+		<!-- 
+		.teste{position: absolute; top: 665px; left: 50px;} 
+		--> 
+		<!-- 
+		.selectpicker{position: absolute; top: 665px; left: 320px;} 
+		-->
+		<!-- 
+		.test{position: absolute; top: 10px; left: 1200px;} 
+		--> 
+	</STYLE>  
+	<div id="logout" class=test>
+		@form(routes.Application.index()) {
+			<button type="submit" class="btn btn-info type" position="fixed" bottom="0px">home</button>
+	   	}	
+    </div>
+	
+	<br/>
+	<center><div class="separator"> </div> </center>
+		<h5 style="float:right;width:70%;position:absolute;top:665px;left:500px;margin:0;color:#000000;font-size:18px;">
+			Período Atual: @planoDeUsuario.getPeriodoAtual() período
+			<br>
+			Total de créditos cursados: @planoDeUsuario.getCreditosCursados() créditos
+			<br>
+			Total de créditos cursados e planejados: @planoDeUsuario.getTotalDeCreditos() créditos
+			<br>
+			Mínimo necessário para concluir o curso: @planoDeUsuario.getMinimoCreditosConcluir() créditos
+		</h5>
+	}
+</body>

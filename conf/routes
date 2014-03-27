@@ -23,3 +23,9 @@ POST    /remDisciplina/:disciplina        controllers.Application.remDisciplina(
 POST    /novoPeriodo                      controllers.Application.novoPeriodo()
 POST    /setPeriodoAtual                  controllers.Application.setPeriodoAtual()
 POST    /logout                           controllers.Application.logout()
+
+# Lista de usuarios
+GET     /users                            controllers.Application.listarUsuarios()
+
+# Ver Plano de usuario
+GET     /users/:id              		   controllers.Application.verPlano(id:Long)

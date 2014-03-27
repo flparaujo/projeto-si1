@@ -1,0 +1,29 @@
+@(usuarios: List[Usuario])
+
+@import helper._
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
+
+@main("Usuarios") {
+	
+		<ul>
+	        <h2>Usuários Cadastrados</h2>
+	        <br>
+	        <table border="1">
+	            <tr>
+	                <th>Nome  </th>
+	                <th>Email </th>
+	                <th>Plano </th>
+	            </tr>
+	            @for(usuario <- usuarios) {
+					<tr>
+                        <td>@usuario.getNome()</td>
+                        <td>@usuario.getLogin()</td>
+                        <td><a href="@routes.Application.verPlano(usuario.getId())">plano - @usuario.getId()</td>
+                    </tr>
+				}
+	        </table>
+	    </ul>
+
+}

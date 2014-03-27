@@ -159,6 +159,26 @@ public class Application extends Controller {
     	return redirect(routes.Application.login());
 	}
 	
+	/**
+	 * mostra a lista de usuarios
+	 */
+	public static Result listarUsuarios() {
+		return ok(views.html.listaDeUsuarios.render(Usuario.find.all()));
+	}
+	
+	/**
+	 * Mostra o plano de um usuario qualquer.
+	 * @param id O id do usuario.
+	 */
+	public static Result verPlano(Long id) {
+		PlanoDeCurso planoDeUsuario = PlanoDeCurso.find.byId(id);
+		if(plano.getId().equals(planoDeUsuario.getId())) {
+			return redirect(routes.Application.index());
+		}
+		String nome = Usuario.find.byId(id).getNome();
+        return ok(views.html.usuario.render(id, nome, planoDeUsuario));
+    }
+	
 	private static void geraUsuarios() {
 		if(Usuario.find.all().size() < 30) {
 			for(int i = 1; i <= 30; i++) {

@@ -7,6 +7,17 @@
 <body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
 @main("Meu Plano de Curso") {
 	<center><h2>@Messages("PlanoDeCurso")</h2></center>
+	
+	<center>
+		<div class="actions">
+			@form(routes.Application.logout()) {
+				<h2 style="position:absolute;left:70%;top:0px;color:#fff">
+					<a href="@routes.Application.listarUsuarios()" class="btn">Ver outros planos</a> 
+				</h2>
+			}
+        </div>
+    </center>
+    
 	<center><h3 style="position:absolute;left:43%;top:50px;color:#fff;text-shadow:2px 2px #000;">Períodos Do Curso</h3></center>
 	<div id="periodos">
 		@for(periodo <- plano.getPeriodos()) {
@@ -20,7 +31,7 @@
 		  					<div class="alocadas" id="@cadeira.getNome()" title="remover" draggable="true" 
 								ondragstart="drag(event)" ondragend="dragEnd()">
 		  				}else{
-		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="remover" draggable="true" 
+		  					<div class="alocadas-vermelho" id="@cadeira.getNome()" title="A disciplina está vermelha por causa dos seguintes pré-requisitos não satisfeitos: @plano.preRequisitosNaoSatisfeitos(cadeira.getNome()).toString()" draggable="true" 
 								ondragstart="drag(event)" ondragend="dragEnd()">
 		  				}		  	
 		  					<center><label class="nome"> <span>@cadeira.getNome()</span></label></center>

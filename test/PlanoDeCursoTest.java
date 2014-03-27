@@ -31,6 +31,13 @@ public class PlanoDeCursoTest {
 	}
 	
 	@Test
+	public void testaRequisitosNaoSatisfeitos() throws LimiteUltrapassadoException {
+		plano.adicionaDisciplina("Calculo II", 1);
+		Disciplina calculo1 = plano.getMapaDisciplina().get("Calculo I");
+		Assert.assertTrue(plano.preRequisitosNaoSatisfeitos("Calculo II").contains(calculo1));
+	}
+	
+	@Test
 	public void testaDisciplinasESeusRequisitos(){
 		Disciplina p1 = plano.getMapaDisciplina().get("Programacao I");
 		Disciplina p2 = plano.getMapaDisciplina().get("Programacao II");
