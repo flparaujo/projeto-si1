@@ -7,6 +7,9 @@
 
 @main("Usuarios") {
 	
+	
+	@if(usuarios.size() != 0) {
+	
 		<ul>
 	        <h2>Usuários Cadastrados</h2>
 	        <br>
@@ -25,5 +28,16 @@
 				}
 	        </table>
 	    </ul>
+	}
+	@if(usuarios.size() == 0) { 
+		<h2>Nenhum resultado foi encontrado!</h2>
+	}
+	
+	<center>
+		<div class="actions">
+			<h3 style="position:absolute;left:70%;top:0px;color:#fff">
+				<a href="@routes.Application.index()" class="btn">voltar</a> 
+			</h3>
+        </div>
 
 }

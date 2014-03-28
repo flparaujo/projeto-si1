@@ -10,12 +10,18 @@
 	
 	<center>
 		<div class="actions">
-			@form(routes.Application.logout()) {
-				<h2 style="position:absolute;left:70%;top:0px;color:#fff">
-					<a href="@routes.Application.listarUsuarios()" class="btn">Ver outros planos</a> 
-				</h2>
-			}
+			<h2 style="position:absolute;left:70%;top:0px;color:#fff">
+				<a href="@routes.Application.listarUsuarios()" class="btn">Ver todos os planos</a> 
+			</h2>
         </div>
+        
+        <form action="@routes.Application.listarUsuariosComFiltro()" method="POST">
+			<div style="position:absolute;left:70%;top:30px;color:#000000">
+				<input type="search" id="searchbox" name="search" value=" " placeholder="filtrar por nome de usuario">
+				<input type="submit" id="searchsubmit" value="filtrar planos" class="btn primary">
+            </div>
+        </form>
+        
     </center>
     
 	<center><h3 style="position:absolute;left:43%;top:50px;color:#fff;text-shadow:2px 2px #000;">Períodos Do Curso</h3></center>

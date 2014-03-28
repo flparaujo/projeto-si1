@@ -25,7 +25,8 @@ POST    /setPeriodoAtual                  controllers.Application.setPeriodoAtua
 POST    /logout                           controllers.Application.logout()
 
 # Lista de usuarios
-GET     /users                            controllers.Application.listarUsuarios()
+GET     /users                             controllers.Application.listarUsuarios()
+POST    /users                             controllers.Application.listarUsuariosComFiltro()
 
 # Ver Plano de usuario
 GET     /users/:id              		   controllers.Application.verPlano(id:Long)

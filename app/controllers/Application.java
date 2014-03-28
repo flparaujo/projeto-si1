@@ -3,6 +3,9 @@ package controllers;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import form.FormHandler;
 import models.Disciplina;
@@ -163,7 +166,22 @@ public class Application extends Controller {
 	 * mostra a lista de usuarios
 	 */
 	public static Result listarUsuarios() {
-		return ok(views.html.listaDeUsuarios.render(Usuario.find.all()));
+		List<Usuario> usuarios = Usuario.find.all();
+		Collections.sort(usuarios);
+		return ok(views.html.listaDeUsuarios.render(usuarios));
+	}
+	
+	public static Result listarUsuariosComFiltro() {
+		Form<FormHandler> form = formHandler.bindFromRequest();
+		String nome = form.get().getSearch();
+		List<Usuario> usuarios = new ArrayList <Usuario> ();
+		for(Usuario user : Usuario.find.all()) {
+			if(user.getNome().toLowerCase().trim().contains(nome.toLowerCase().trim())) {
+				usuarios.add(user);
+			}
+		}
+		Collections.sort(usuarios);
+		return ok(views.html.listaDeUsuarios.render(usuarios));
 	}
 	
 	/**

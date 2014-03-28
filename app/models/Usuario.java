@@ -9,7 +9,7 @@ import play.db.ebean.Model;
  * Essa classe representa um usuario.
  */
 @Entity
-public class Usuario extends Model {
+public class Usuario extends Model implements Comparable <Usuario>{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -99,6 +99,11 @@ public class Usuario extends Model {
 
 	public PlanoDeCurso getPlano() {
 		return this.plano;
+	}
+
+	@Override
+	public int compareTo(Usuario outro) {
+		return getNome().compareTo(outro.getNome());
 	}
 
 }
