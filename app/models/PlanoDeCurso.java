@@ -339,6 +339,9 @@ public class PlanoDeCurso extends Model {
 					if (periodos.get(i).getDisciplinas().contains(requisito)) {
 						requisitos.add(requisito.getNome());
 					}
+					if(! getDisciplinasAlocadas().contains(requisito) && ! requisitos.contains(requisito.getNome())){
+						requisitos.add(requisito.getNome());
+					}
 				}
 			}
 		}
