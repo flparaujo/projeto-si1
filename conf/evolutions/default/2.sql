@@ -7,7 +7,7 @@
 -- periodo 1
 insert into disciplina values(1,'Programação I',4,4,1);
 insert into disciplina values(2,'Leitura e Prod. de Textos',4,2,1);
-insert into disciplina values(3,'Cálculo I ',4,7,1);
+insert into disciplina values(3,'Cálculo I',4,7,1);
 insert into disciplina values(4,'Algebra Vetorial',4,3,1);
 insert into disciplina values(5,'Int. à Computacação',4,5,1);
 insert into disciplina values(6,'Lab. de Programação I',4,4,1);

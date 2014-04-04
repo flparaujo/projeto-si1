@@ -1,4 +1,4 @@
-@(plano: PlanoDeCurso, formHandler: Form[form.FormHandler])
+@(userName: String, plano: PlanoDeCurso, formHandler: Form[form.FormHandler])
 
 @import helper._
 
@@ -6,6 +6,7 @@
 
 <body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
 @main("Meu Plano de Curso") {
+	<center><h2>Bem vindo(a), @userName.</h2></center>
 	<center><h2>@Messages("PlanoDeCurso")</h2></center>
 	
 	<center>
@@ -16,10 +17,10 @@
         </div>
         
         <form action="@routes.Application.listarUsuariosComFiltro()" method="POST">
-			<div style="position:absolute;left:70%;top:30px;color:#000000">
+			<h2 style="position:absolute;left:70%;top:30px;color:#000000">
 				<input type="search" id="searchbox" name="search" value=" " placeholder="filtrar por nome de usuario">
 				<input type="submit" id="searchsubmit" value="filtrar planos" class="btn primary">
-            </div>
+            </h2>
         </form>
         
     </center>

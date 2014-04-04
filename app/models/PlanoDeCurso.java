@@ -325,11 +325,12 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * lista os nomes dos pre-requisitos de uma disciplina insatisfeitos.
-	 * @param nomeDisciplina O nome da disciplina com pre-requisitos insatisfeitos.
+	 * 
+	 * @param nomeDisciplina
+	 *            O nome da disciplina com pre-requisitos insatisfeitos.
 	 * @return a lista com os nomes dos pre-requisitos insatisfeitos.
 	 */
-	public List<String> preRequisitosNaoSatisfeitos(
-			String nomeDisciplina) {
+	public List<String> preRequisitosNaoSatisfeitos(String nomeDisciplina) {
 		List<String> requisitos = new ArrayList<String>();
 		Disciplina disciplina = pesquisaDisciplina(nomeDisciplina);
 		if (disciplina != null) {
@@ -339,7 +340,8 @@ public class PlanoDeCurso extends Model {
 					if (periodos.get(i).getDisciplinas().contains(requisito)) {
 						requisitos.add(requisito.getNome());
 					}
-					if(! getDisciplinasAlocadas().contains(requisito) && ! requisitos.contains(requisito.getNome())){
+					if (!getDisciplinasAlocadas().contains(requisito)
+							&& !requisitos.contains(requisito.getNome())) {
 						requisitos.add(requisito.getNome());
 					}
 				}
@@ -388,16 +390,36 @@ public class PlanoDeCurso extends Model {
 	 * 
 	 * @param disciplina
 	 *            Disciplina a ser removida do plano.
+	 * @return
 	 */
 	public void removeDisciplina(String disciplina) {
 		Disciplina removida = mapaDeDisciplinas.get(disciplina);
-		getPeriodo(removida.getPeriodo()).removerDisciplina(removida);
-		for (Periodo p : periodos) {
-			for (Disciplina c : p.getDisciplinas()) {
-				if (c.isPreRequisito(removida)) {
-					removeDisciplina(c.getNome());
-				}
+		Periodo p;
+		if ((p = getPeriodoDeDisciplina(removida)) != null) {
+			p.removerDisciplina(removida);
+			update();
+			for (Disciplina dependente : disciplinasDependentes(removida)) {
+				removeDisciplina(dependente.getNome());
 			}
 		}
+	}
+
+	private Periodo getPeriodoDeDisciplina(Disciplina disciplina) {
+		for (Periodo periodo : periodos) {
+			if (periodo.getDisciplinas().contains(disciplina)) {
+				return periodo;
+			}
+		}
+		return null;
+	}
+
+	public List<Disciplina> disciplinasDependentes(Disciplina disciplina) {
+		List<Disciplina> dependentes = new ArrayList<Disciplina>();
+		for (Disciplina alocada : getDisciplinasAlocadas()) {
+			if (alocada.getPreRequisitos().contains(disciplina)) {
+				dependentes.add(alocada);
+			}
+		}
+		return dependentes;
 	}
 }
