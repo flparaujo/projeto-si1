@@ -404,6 +404,11 @@ public class PlanoDeCurso extends Model {
 		}
 	}
 
+	/**
+	 * Obtem o periodo ao qual uma disciplina esta alocada.
+	 * @param disciplina A disciplina
+	 * @return o periodo em que a disciplina esta
+	 */
 	private Periodo getPeriodoDeDisciplina(Disciplina disciplina) {
 		for (Periodo periodo : periodos) {
 			if (periodo.getDisciplinas().contains(disciplina)) {
@@ -413,6 +418,11 @@ public class PlanoDeCurso extends Model {
 		return null;
 	}
 
+	/**
+	 * Obtem uma lista de disciplinas que dependem de uma dada disciplina.
+	 * @param disciplina A disciplina da qual se quer obter as dependentes
+	 * @return a lista das dependentes da disciplina recebida.
+	 */
 	public List<Disciplina> disciplinasDependentes(Disciplina disciplina) {
 		List<Disciplina> dependentes = new ArrayList<Disciplina>();
 		for (Disciplina alocada : getDisciplinasAlocadas()) {
