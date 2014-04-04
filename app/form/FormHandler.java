@@ -5,6 +5,7 @@ import play.data.validation.Constraints.*;
 /**
  * Essa classe representa um formulario para pegar informações da interface.
  */
+//PURE FABRICATION - Essa classe nao representa algo no dominio do problema.
 public class FormHandler {
 
 	@Required

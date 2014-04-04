@@ -6,7 +6,7 @@
 create table disciplina (
   id                        bigint not null,
   nome                      varchar(255) not null,
-  creditos                  integer,
+  numero_de_creditos        integer,
   dificuldade               integer,
   periodo_original          integer,
   constraint uq_disciplina_nome unique (nome),

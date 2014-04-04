@@ -21,7 +21,7 @@ import models.exceptions.LimiteUltrapassadoException;
 import play.db.ebean.Model;
 
 /**
- * Essa classe representa o Plano de Curso.
+ * Classe que representa o Plano de Curso.
  */
 @Entity
 public class PlanoDeCurso extends Model {
@@ -38,15 +38,20 @@ public class PlanoDeCurso extends Model {
 	private int periodoAtual;
 	private Map<String, Disciplina> mapaDeDisciplinas;
 
+	/**
+	 * Constante que representa o numero maximo de periodos do curso.
+	 */
 	public static final int MAXIMO_DE_PERIODOS = 14;
-	public static final int MAXIMO_CREDITOS = 28;
-	public static final int MINIMO_CREDITOS = 12;
+
+	/**
+	 * Constante que representa o numero minimo de creditos a serem concluidos.
+	 */
 	public static final int MINIMO_CREDITOS_CONCLUIR = 208;
 
 	public PlanoDeCurso() {
 		this.periodos = new ArrayList<Periodo>();
 		for (int i = 1; i <= 8; i++) {
-			periodos.add(new Periodo(i, MAXIMO_CREDITOS));
+			periodos.add(new Periodo(i, Periodo.MAXIMO_CREDITOS));
 		}
 		this.periodos.get(this.periodos.size() - 1).setEValido(
 				new ValidadorMin());
@@ -75,12 +80,15 @@ public class PlanoDeCurso extends Model {
 		p.update();
 	}
 
+	/**
+	 * TODO By Franklin
+	 */
 	public void atualizaValidadores() {
 		for (Periodo p : this.periodos) {
 			if (p.getNumero() == this.periodos.size()) {
 				p.setEValido(new ValidadorMin());
 			} else {
-				p.setEValido(new ValidadorMax(MAXIMO_CREDITOS));
+				p.setEValido(new ValidadorMax(Periodo.MAXIMO_CREDITOS));
 			}
 		}
 	}
@@ -132,7 +140,7 @@ public class PlanoDeCurso extends Model {
 	public boolean minimoCreditosSatisfeitos() {
 		boolean result = true;
 		for (int i = periodoAtual; i <= periodos.size(); i++) {
-			if (getPeriodo(i).getCreditos() < MINIMO_CREDITOS) {
+			if (getPeriodo(i).getCreditos() < Periodo.MINIMO_CREDITOS) {
 				result = false;
 			}
 		}
@@ -145,7 +153,7 @@ public class PlanoDeCurso extends Model {
 
 	public void setPeriodoAtual(int novoPeriodoAtual) {
 		for (int i = periodoAtual; i < novoPeriodoAtual; i++) {
-			getPeriodo(i).setEValido(new ValidadorMax(MAXIMO_CREDITOS));
+			getPeriodo(i).setEValido(new ValidadorMax(Periodo.MAXIMO_CREDITOS));
 		}
 		this.periodoAtual = novoPeriodoAtual;
 	}
@@ -198,14 +206,22 @@ public class PlanoDeCurso extends Model {
 			throw new LimiteDePeriodosException();
 		}
 		this.periodos.get(this.periodos.size() - 1).setEValido(
-				new ValidadorMax(MAXIMO_CREDITOS));
+				new ValidadorMax(Periodo.MAXIMO_CREDITOS));
 		;
 		Periodo newPeriodo = new Periodo(this.periodos.size() + 1,
-				MAXIMO_CREDITOS);
+				Periodo.MAXIMO_CREDITOS);
 		newPeriodo.setEValido(new ValidadorMin());
 		this.periodos.add(newPeriodo);
 	}
 
+	/**
+	 * Adiciona um periodo.
+	 * 
+	 * @param num_periodo
+	 *            O id do periodo.
+	 * @throws LimiteDePeriodosException
+	 *             quando se tenta adicionar periodos acima do limite.
+	 */
 	public void adicionaPeriodo(int num_periodo)
 			throws LimiteDePeriodosException {
 		if (periodos.size() == MAXIMO_DE_PERIODOS) {
@@ -213,16 +229,24 @@ public class PlanoDeCurso extends Model {
 		}
 		if (num_periodo == periodos.size()) {
 			this.periodos.get(this.periodos.size() - 1).setEValido(
-					new ValidadorMax(MAXIMO_CREDITOS));
+					new ValidadorMax(Periodo.MAXIMO_CREDITOS));
 			;
-			Periodo newPeriodo = new Periodo(num_periodo, MAXIMO_CREDITOS);
+			Periodo newPeriodo = new Periodo(num_periodo,
+					Periodo.MAXIMO_CREDITOS);
 			newPeriodo.setEValido(new ValidadorMin());
 			this.periodos.add(newPeriodo);
 		} else {
-			this.periodos.add(new Periodo(num_periodo, MAXIMO_CREDITOS));
+			this.periodos
+					.add(new Periodo(num_periodo, Periodo.MAXIMO_CREDITOS));
 		}
 	}
 
+	/**
+	 * Obtem o mapa de disciplinas, onde as chaves sao os nomes e os valores sao
+	 * os objetos Disciplina.
+	 * 
+	 * @return o mapa de disciplinas
+	 */
 	public Map<String, Disciplina> getMapaDisciplina() {
 		return mapaDeDisciplinas;
 	}
@@ -350,6 +374,13 @@ public class PlanoDeCurso extends Model {
 		return requisitos;
 	}
 
+	/**
+	 * Obtem o id do periodo ao qual uma disciplina pertence.
+	 * 
+	 * @param nome
+	 *            O nome da disciplina.
+	 * @return o id do periodo da discipĺina.
+	 */
 	public int periodoDisciplinaAlocada(String nome) {
 		for (int i = 0; i < periodos.size(); i++) {
 			if (periodos.get(i).getDisciplina(nome) != null) {
@@ -359,6 +390,13 @@ public class PlanoDeCurso extends Model {
 		return -1;
 	}
 
+	/**
+	 * Pesquisa uma disciplina pelo nome.
+	 * 
+	 * @param nome
+	 *            O nome da disciplina.
+	 * @return a disciplina, se existir, ou null.
+	 */
 	public Disciplina pesquisaDisciplina(String nome) {
 		Disciplina disciplina = null;
 		for (Periodo periodo : periodos) {
@@ -406,7 +444,9 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * Obtem o periodo ao qual uma disciplina esta alocada.
-	 * @param disciplina A disciplina
+	 * 
+	 * @param disciplina
+	 *            A disciplina
 	 * @return o periodo em que a disciplina esta
 	 */
 	private Periodo getPeriodoDeDisciplina(Disciplina disciplina) {
@@ -420,7 +460,9 @@ public class PlanoDeCurso extends Model {
 
 	/**
 	 * Obtem uma lista de disciplinas que dependem de uma dada disciplina.
-	 * @param disciplina A disciplina da qual se quer obter as dependentes
+	 * 
+	 * @param disciplina
+	 *            A disciplina da qual se quer obter as dependentes
 	 * @return a lista das dependentes da disciplina recebida.
 	 */
 	public List<Disciplina> disciplinasDependentes(Disciplina disciplina) {

@@ -9,6 +9,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de testes para PlanoDeCurso
+ *
+ */
 public class PlanoDeCursoTest {
 	
 	PlanoDeCurso plano;

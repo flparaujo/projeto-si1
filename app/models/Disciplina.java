@@ -17,7 +17,7 @@ import play.db.ebean.Model;
 import com.google.common.base.Objects;
 
 /**
- * Essa classe representa uma disciplina.
+ * Classe que representa uma disciplina.
  */
 @Entity
 public class Disciplina extends Model implements Comparable<Disciplina> {
@@ -31,7 +31,7 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 	@Column(unique = true, nullable = false)
 	private String nome;
 
-	private int creditos;
+	private int numeroDeCreditos;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "disciplina_requisito", joinColumns = { @JoinColumn(name = "fk_disciplina") }, inverseJoinColumns = { @JoinColumn(name = "fk_requisito") })
@@ -42,10 +42,24 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 	@Column(name = "periodo_original")
 	private int periodo;
 
+	/**
+	 * Construtor de uma disciplina.
+	 * 
+	 * @param nome
+	 *            O nome da disciplina
+	 * @param creditos
+	 *            O numero de creditos da disciplina
+	 * @param preRequisitos
+	 *            Uma lista de disciplinas pre-requisitos desta
+	 * @param dificuldade
+	 *            A dificuldade da disciplina (valor inteiro)
+	 * @param periodoSugerido
+	 *            O periodo sugerido para esta disciplina (id do periodo)
+	 */
 	public Disciplina(String nome, int creditos,
 			List<Disciplina> preRequisitos, int dificuldade, int periodoSugerido) {
 		this.nome = nome;
-		this.creditos = creditos;
+		this.numeroDeCreditos = creditos;
 		this.preRequisitos = preRequisitos;
 		this.dificuldade = dificuldade;
 		this.periodo = periodoSugerido;
@@ -54,8 +68,8 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 	/**
 	 * Retorna verdadeiro caso a disciplina seja pre-requisito.
 	 */
-	public boolean isPreRequisito(Disciplina d) {
-		return this.getPreRequisitos().contains(d);
+	public boolean isPreRequisito(Disciplina disciplina) {
+		return this.getPreRequisitos().contains(disciplina);
 	}
 
 	/**
@@ -75,7 +89,7 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 	 *            Novo valor para os créditos da disciplina.
 	 */
 	public void setCreditos(int creditos) {
-		this.creditos = creditos;
+		this.numeroDeCreditos = creditos;
 	}
 
 	/**
@@ -84,7 +98,7 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 	 * @return um inteiro sendo o valor dos créditos da disciplina.
 	 */
 	public int getCreditos() {
-		return this.creditos;
+		return this.numeroDeCreditos;
 	}
 
 	/**
@@ -179,6 +193,10 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 		p.update();
 	}
 
+	/**
+	 * Compara uma disciplina com outra pelo nome. Nao considera diferenca entre
+	 * letras maiusculas e minusculas na comparacao.
+	 */
 	@Override
 	public int compareTo(Disciplina outra) {
 		return getNome().toLowerCase().compareTo(outra.getNome().toLowerCase());
@@ -186,7 +204,7 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(getNome(), creditos);
+		return Objects.hashCode(getNome(), numeroDeCreditos);
 	}
 
 	@Override
@@ -202,6 +220,9 @@ public class Disciplina extends Model implements Comparable<Disciplina> {
 				&& Objects.equal(this.getNome(), other.getNome());
 	}
 
+	/**
+	 * Formata a disciplina como string.
+	 */
 	@Override
 	public String toString() {
 		return "Disciplina [id=" + id + ", nome=" + nome + ", periodo="
