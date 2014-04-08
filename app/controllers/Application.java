@@ -8,6 +8,10 @@ import java.util.List;
 
 import form.FormHandler;
 import models.Disciplina;
+import models.Fluxograma;
+import models.FluxogramaComum;
+import models.FluxogramaNormal;
+import models.FluxogramaNovo;
 import models.PlanoDeCurso;
 import models.Usuario;
 import models.exceptions.LimiteDePeriodosException;
@@ -54,6 +58,7 @@ public class Application extends Controller {
 		public String nome;
 		public String login;
 		public String senha;
+		public String fluxograma;
 
 	}
 
@@ -83,6 +88,18 @@ public class Application extends Controller {
 		return s.toString();
 	}
 
+	private static Fluxograma decideFluxograma (String url) {
+		Fluxograma fluxograma = null;
+		if (url == null || url.equals("Fluxograma normal")) {
+			fluxograma = new FluxogramaNormal();
+		} else if (url.equals("Fluxograma mais ultilizado")) {
+			fluxograma = new FluxogramaComum();
+		} else if (url.equals("Fluxograma Novo")) {
+			fluxograma = new FluxogramaNovo();
+		}
+		return fluxograma;
+	}
+	
 	public static Result novoCadastro() {
 		geraUsuarios();
 		Form<Cadastro> cadastroForm = Form.form(Cadastro.class)
@@ -90,6 +107,7 @@ public class Application extends Controller {
 		String nome = cadastroForm.get().nome;
 		String login = cadastroForm.get().login;
 		String senha = stringHexa(gerarHash(cadastroForm.get().senha));
+		String fluxograma = cadastroForm.get().fluxograma;
 		Usuario user = Usuario.find.where().eq("login", login).findUnique();
 
 		if (nome == null || nome.trim().equals("")) {
@@ -100,7 +118,7 @@ public class Application extends Controller {
 			return cadastro();
 		} else if (user == null) {
 			Usuario novo = new Usuario(nome, login, senha);
-			novo.distribuiCadeiras();
+		    novo.distribuiCadeiras(decideFluxograma(fluxograma));
 			novo.save();
 			flash("sucesso", "cadastrou!");
 			return cadastro();
@@ -205,8 +223,8 @@ public class Application extends Controller {
 		if (plano.getId().equals(planoDeUsuario.getId())) {
 			return redirect(routes.Application.index());
 		}
-		String nome = Usuario.find.byId(id).getNome();
-		return ok(views.html.usuario.render(id, nome, planoDeUsuario));
+		Usuario user = Usuario.find.byId(id);
+		return ok(views.html.usuario.render(id, user.getNome(), planoDeUsuario));
 	}
 
 	private static void geraUsuarios() {
@@ -214,7 +232,7 @@ public class Application extends Controller {
 			for (int i = 1; i <= 30; i++) {
 				Usuario user = new Usuario("Usuario " + i, "usuario" + i
 						+ "@meuplano.com", stringHexa(gerarHash(i + "000")));
-				user.distribuiCadeiras();
+				user.distribuiCadeiras(new FluxogramaNormal());
 				user.save();
 			}
 		}

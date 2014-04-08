@@ -3,6 +3,7 @@
 @import helper._
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 <body style='background-image:url(@routes.Assets.at("images/bg-1.jpg"));'>
 
 @main(nome) {
@@ -52,7 +53,7 @@
 		.test{position: absolute; top: 10px; left: 1200px;} 
 		--> 
 	</STYLE>  
-	<div id="logout" class=test>
+	<div id="home" class=test>
 		@form(routes.Application.index()) {
 			<button type="submit" class="btn btn-info type" position="fixed" bottom="0px">home</button>
 	   	}	

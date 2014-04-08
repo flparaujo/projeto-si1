@@ -9,10 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Classe de testes para PlanoDeCurso
- *
- */
 public class PlanoDeCursoTest {
 	
 	PlanoDeCurso plano;
@@ -20,7 +16,7 @@ public class PlanoDeCursoTest {
 	@Before
 	public void setUp() {
 		plano = new PlanoDeCurso();
-		plano.distribuiCaderas(LeitorDeDisciplinas.getInstance().getDisciplinas());
+		plano.distribuiCaderas(LeitorDeDisciplinas.getInstance().getDisciplinas(), 8);
 		start(fakeApplication(inMemoryDatabase()));
 		//plano.save();
 	}

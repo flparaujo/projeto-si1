@@ -67,7 +67,6 @@
 	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/org.avaje.ebeanorm/avaje-ebeanorm/3.2.2/jars/avaje-ebeanorm.jar"/>
 	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/org.avaje.ebeanorm/avaje-ebeanorm-agent/3.2.1/jars/avaje-ebeanorm-agent.jar"/>
 	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/jars/hibernate-jpa-2.0-api.jar"/>
-	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/com.typesafe.play/play-java-jpa_2.10/2.2.1/jars/play-java-jpa_2.10.jar"/>
 	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/com.typesafe.play/play-cache_2.10/2.2.1/jars/play-cache_2.10.jar"/>
 	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/net.sf.ehcache/ehcache-core/2.6.6/jars/ehcache-core.jar"/>
 	<classpathentry kind="lib" path="C:/play-2.2.1/repository/local/com.typesafe.play/play-test_2.10/2.2.1/jars/play-test_2.10.jar"/>

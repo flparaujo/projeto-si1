@@ -21,11 +21,22 @@
         				<h2 style="color:#FFE1FF;">@flash.get("fail")</h2>
     				</p>
 				}
-    			<fieldset id="inputs">
-        			<input type="text" name="nome" placeholder="Nome" id="nome" onblur="if(this.value=='')this.value='Nome';" onfocus="if(this.value=='Nome')this.value='';">
-        			<input type="email" name="login" placeholder="Email" id="username" onblur="if(this.value=='')this.value='Email';" onfocus="if(this.value=='Email')this.value='';">
-        			<input type="password" placeholder="Password" required="" id="password" name="senha" onblur="if(this.value=='')this.value='Password';" onfocus="if(this.value=='Password')this.value='';">
-    			</fieldset>
+    			 <fieldset id="inputs">
+                 	<div id="input">
+                    	<input type="text" name="nome" placeholder="Nome" id="nome" onblur="if(this.value=='')this.value='Nome';" onfocus="if(this.value=='Nome')this.value='';">
+                        <input type="email" name="login" placeholder="Email" id="username" onblur="if(this.value=='')this.value='Email';" onfocus="if(this.value=='Email')this.value='';">
+                        <input type="password" placeholder="Password" required="" id="password" name="senha" onblur="if(this.value=='')this.value='Password';" onfocus="if(this.value=='Password')this.value='';">
+                        <br>
+                    </div>
+                    <div align="left">
+                    	<h2>Fluxograma inicial:</h2>
+                        <input type="radio" name="fluxograma" id="fluxograma" value="Fluxograma normal">Fluxograma normal</input>
+                        <br>
+                        <input type="radio" name="fluxograma" id="fluxograma" value="Fluxograma mais ultilizado">Fluxograma mais ultilizado</input>
+                        <br>
+                        <input type="radio" name="fluxograma" id="fluxograma" value="Fluxograma Novo">Fluxograma Novo</input>
+                </div>
+                </fieldset>
     			<fieldset id="actions">
         			<input id="submit" value="Cadastrar" type="submit">
     			</fieldset>

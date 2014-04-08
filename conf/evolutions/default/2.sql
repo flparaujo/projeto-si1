@@ -85,6 +85,21 @@ insert into disciplina values(69,'Análise de dados I',4,5,0);
 insert into disciplina values(70,'Arquitetura de Software',4,5,0);
 insert into disciplina values(71,'Desenvolvimento Dirigido a Modelos',4,5,0);
 insert into disciplina values(72,'Desenvolvimento de Aplicações Corporativas Avancadas',4,5,0);
+-- nova Grade
+insert into disciplina values(73,'Matemática Discreta I',4,5,-1);
+insert into disciplina values(74,'Matemática Discreta II',4,5,-1);
+insert into disciplina values(75,'Introdução à Probabilidade',4,5,-1);
+insert into disciplina values(76,'Projeto de Software',4,5,-1);
+insert into disciplina values(77,'Estatístia Aplicada',4,5,-1);
+insert into disciplina values(78,'Análise de Sistemas',4,5,-1);
+insert into disciplina values(79,'Engenharia de Software',4,5,-1);
+insert into disciplina values(80,'Programação Concorrente',4,5,-1);
+insert into disciplina values(81,'Inteligência Artificial',4,5,-1);
+insert into disciplina values(82,'Trabalho de Conclusão de Curso I',4,5,-1);
+insert into disciplina values(83,'Optativa 12',4,3,-1);
+insert into disciplina values(84,'Optativa 13',4,3,-1);
+insert into disciplina values(85,'Optativa 14',4,3,-1);
+insert into disciplina values(86,'Trabalho de Conclusão de Curso II',4,3,-1);
 
 -- relacionamentos
 insert into disciplina_requisito values(7,1);
@@ -161,6 +176,13 @@ insert into disciplina_requisito values(70,26);
 insert into disciplina_requisito values(70,27);
 insert into disciplina_requisito values(71,27);
 insert into disciplina_requisito values(72,31);
+insert into disciplina_requisito values(74,73);
+insert into disciplina_requisito values(75,74);
+insert into disciplina_requisito values(75,3);
+insert into disciplina_requisito values(77,75);
+insert into disciplina_requisito values(80,35);
+insert into disciplina_requisito values(81,18);
+insert into disciplina_requisito values(86,82);
 
 # --- !Downs
 

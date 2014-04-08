@@ -6,7 +6,7 @@ import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 
 /**
- * Classe que representa um usuario do sistema.
+ * Essa classe representa um usuario.
  */
 @Entity
 public class Usuario extends Model implements Comparable<Usuario> {
@@ -30,16 +30,6 @@ public class Usuario extends Model implements Comparable<Usuario> {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private PlanoDeCurso plano;
 
-	/**
-	 * Construtor de um Usuario.
-	 * 
-	 * @param nome
-	 *            O nome do usuario.
-	 * @param login
-	 *            O login do usuario
-	 * @param senha
-	 *            A senha do usuario.
-	 */
 	public Usuario(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
@@ -47,11 +37,15 @@ public class Usuario extends Model implements Comparable<Usuario> {
 		plano = new PlanoDeCurso();
 	}
 
+	public void distribuiCadeiras(Fluxograma fluxograma) {
+		plano.distribuiCaderas(fluxograma.getDisciplinas(), fluxograma.getNumeroDePeriodos());
+	}
+	
 	/**
 	 * Distribui as disciplinas em seus respectivos períodos.
 	 */
 	public void distribuiCadeiras() {
-		plano.distribuiCaderas(Disciplina.find.all());
+		plano.distribuiCaderas(Disciplina.find.all(), Periodo.find.all().size());
 	}
 
 	public static Finder<Long, Usuario> find = new Finder<Long, Usuario>(
@@ -70,57 +64,26 @@ public class Usuario extends Model implements Comparable<Usuario> {
 		user.update();
 	}
 
-	/**
-	 * Obtem o nome do usuario
-	 * 
-	 * @return o nome do usuario.
-	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * modifica o nome do usuario
-	 * 
-	 * @param nome
-	 *            O novo nome do usuario.
-	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * Obtem o login do usuario.
-	 * 
-	 * @return O login do usuario.
-	 */
 	public String getLogin() {
 		return login;
 	}
 
-	/**
-	 * Modifica o login
-	 * 
-	 * @param login
-	 *            O novo login
-	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
-	/**
-	 * Obtem a senha do usuario.
-	 */
 	public String getSenha() {
 		return senha;
 	}
 
-	/**
-	 * Modifica a senha do usuario
-	 * 
-	 * @param senha
-	 *            A nova senha
-	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -133,27 +96,14 @@ public class Usuario extends Model implements Comparable<Usuario> {
 		this.id = id;
 	}
 
-	/**
-	 * Formata o usuario como string
-	 */
-	@Override
 	public String toString() {
 		return "usuario: " + nome + " - " + login;
 	}
 
-	/**
-	 * Obtem o plano de curso referente ao usuario.
-	 * 
-	 * @return O objeto PlanoDeCurso do usuario.
-	 */
 	public PlanoDeCurso getPlano() {
 		return this.plano;
 	}
 
-	/**
-	 * Compara um usuario com outro pelo nome. Nao diferencia letras maiusculas
-	 * de minusculas na comparacao.
-	 */
 	@Override
 	public int compareTo(Usuario outro) {
 		return getNome().toLowerCase().compareTo(outro.getNome().toLowerCase());
